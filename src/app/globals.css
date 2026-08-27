@@ -40,6 +40,10 @@
     inset 0 1px 0 rgb(255 255 255 / 72%), 0 2px 5px rgb(32 32 29 / 10%),
     0 20px 42px rgb(32 32 29 / 12%);
 
+  --material-grid-minor: color-mix(in srgb, var(--blueprint) 9%, transparent);
+  --material-grid-major: color-mix(in srgb, var(--blueprint) 18%, transparent);
+  --material-vellum: color-mix(in srgb, var(--paper-raised) 82%, transparent);
+
   --font-interface: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
   --font-editorial: var(--font-newsreader), Georgia, serif;
   --font-editorial-italic: var(--font-newsreader-italic), Georgia, serif;
@@ -169,6 +173,99 @@ body {
   color: var(--graphite);
   font-family: var(--font-interface);
   -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+  content: "";
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+@layer components {
+  .material-sheet {
+    position: relative;
+    border: 1px solid var(--rule);
+    border-radius: var(--corner-paper);
+    background: var(--paper-base);
+  }
+
+  .material-sheet-raised {
+    background: var(--paper-raised);
+    box-shadow: var(--elevation-sheet);
+  }
+
+  .material-sheet-pinned {
+    background: var(--paper-raised);
+    box-shadow: var(--elevation-pinned);
+  }
+
+  .material-vellum {
+    border: 1px solid color-mix(in srgb, var(--rule) 76%, transparent);
+    border-radius: var(--corner-paper);
+    background: var(--material-vellum);
+  }
+
+  .material-blueprint {
+    border: 1px solid color-mix(in srgb, var(--blueprint) 28%, var(--rule));
+    border-radius: var(--corner-paper);
+    background-color: color-mix(in srgb, var(--paper-base) 92%, var(--blueprint));
+    background-image:
+      linear-gradient(var(--material-grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--material-grid-major) 1px, transparent 1px),
+      linear-gradient(var(--material-grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--material-grid-minor) 1px, transparent 1px);
+    background-position: -1px -1px;
+    background-size:
+      6rem 6rem,
+      6rem 6rem,
+      1.5rem 1.5rem,
+      1.5rem 1.5rem;
+  }
+
+  .material-tab {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    border: 1px solid var(--blueprint-strong);
+    border-bottom: 0;
+    border-radius: var(--corner-control) var(--corner-control) 0 0;
+    background: var(--blueprint);
+    color: var(--paper-raised);
+    padding-inline: 1rem;
+  }
+
+  .registration-mark {
+    position: relative;
+    display: block;
+    width: 1rem;
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--ink-muted) 74%, transparent);
+    border-radius: var(--corner-pill);
+  }
+
+  .registration-mark::before,
+  .registration-mark::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: color-mix(in srgb, var(--ink-muted) 74%, transparent);
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .registration-mark::before {
+    width: 1.5rem;
+    height: 1px;
+  }
+
+  .registration-mark::after {
+    width: 1px;
+    height: 1.5rem;
+  }
 }
 
 ::selection {
