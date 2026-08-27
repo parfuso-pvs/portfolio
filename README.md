@@ -33,8 +33,9 @@ Open [http://localhost:3000](http://localhost:3000).
 - `npm run lint` runs ESLint with the Next.js Core Web Vitals and TypeScript rules.
 - `npm run lint:fix` applies safe ESLint fixes.
 - `npm run typecheck` checks TypeScript without emitting files.
+- `npm test` runs the dependency-free scaffold smoke tests with Node.js.
 - `npm run build` creates a production build.
-- `npm run verify` runs linting, type checking, and a production build in sequence.
+- `npm run verify` runs linting, type checking, tests, and a production build in sequence.
 - `npm run start` serves a completed production build.
 
-Automated component and end-to-end testing will be introduced in their dedicated quality-foundation ticket.
+Component and end-to-end testing will be introduced in their dedicated quality-foundation ticket.
