@@ -54,6 +54,10 @@ test("the mobile navigation exposes disclosure and keyboard behavior", async () 
   assert.match(navigation, /toggleRef\.current\?\.focus\(\)/);
   assert.match(navigation, /firstLinkRef\.current\?\.focus\(\)/);
   assert.match(navigation, /min-h-11/);
+  assert.match(navigation, /<PathAwareNavigation key=\{pathname\} pathname=\{pathname\} \/>/);
+  assert.doesNotMatch(navigation, /openAtPath/);
+  assert.match(navigation, /addEventListener\("pageshow", closeRestoredMenu\)/);
+  assert.match(navigation, /addEventListener\("popstate", closeRestoredMenu\)/);
 });
 
 test("current destinations are conveyed semantically and visually", async () => {

@@ -17,10 +17,28 @@ function isCurrentPath(pathname: string, href: string) {
 
 export function PrimaryNavigation() {
   const pathname = usePathname();
-  const [openAtPath, setOpenAtPath] = useState<string | null>(null);
+
+  return <PathAwareNavigation key={pathname} pathname={pathname} />;
+}
+
+function PathAwareNavigation({ pathname }: { pathname: string }) {
+  const [isOpen, setIsOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
-  const isOpen = openAtPath === pathname;
+
+  useEffect(() => {
+    function closeRestoredMenu() {
+      setIsOpen(false);
+    }
+
+    window.addEventListener("pageshow", closeRestoredMenu);
+    window.addEventListener("popstate", closeRestoredMenu);
+
+    return () => {
+      window.removeEventListener("pageshow", closeRestoredMenu);
+      window.removeEventListener("popstate", closeRestoredMenu);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -30,7 +48,7 @@ export function PrimaryNavigation() {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key !== "Escape") return;
 
-      setOpenAtPath(null);
+      setIsOpen(false);
       requestAnimationFrame(() => toggleRef.current?.focus());
     }
 
@@ -72,7 +90,7 @@ export function PrimaryNavigation() {
           className="material-sheet material-sheet-raised relative grid size-11 place-items-center rounded-pill focus-visible:outline-offset-4"
           aria-controls="mobile-navigation"
           aria-expanded={isOpen}
-          onClick={() => setOpenAtPath(isOpen ? null : pathname)}
+          onClick={() => setIsOpen((open) => !open)}
         >
           <span className="sr-only">{isOpen ? "Close navigation" : "Open navigation"}</span>
           <span className="relative block h-3.5 w-4" aria-hidden="true">
@@ -101,7 +119,7 @@ export function PrimaryNavigation() {
                 href={item.href}
                 aria-current={current ? "page" : undefined}
                 className={`${mobileLinkClass} ${current ? "bg-paper-deep" : ""}`}
-                onClick={() => setOpenAtPath(null)}
+                onClick={() => setIsOpen(false)}
               >
                 <span>{item.label}</span>
                 <span

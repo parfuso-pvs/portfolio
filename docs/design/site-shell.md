@@ -34,7 +34,7 @@ The route files currently provide factual introductory compositions. Their compl
 - The desktop index is replaced below the large breakpoint with a 44px paper control.
 - Opening the menu moves focus to its first link.
 - Escape closes the menu and restores focus to the trigger.
-- Navigation closes on link activation and also derives closed state after pathname changes.
+- Navigation closes on link activation. The stateful leaf is keyed by pathname for App Router transitions and resets on history traversal or browser-cache restoration so every route entry starts closed.
 - Every destination is at least 44px tall, remains a real link, and exposes current-page state semantically.
 - The menu width remains inside the 20px minimum page gutter at 320px.
 
