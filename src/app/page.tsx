@@ -38,9 +38,7 @@ export default function Home() {
           I turn complex systems into products that feel simple.
         </p>
         <div className="material-vellum mt-12 max-w-xl px-5 py-4 sm:px-6">
-          <p className="type-mono text-muted">
-            Material system online. Structure and navigation come next.
-          </p>
+          <p className="type-mono text-muted">Navigation online. Selected work comes next.</p>
         </div>
       </MaterialSurface>
     </main>
