@@ -52,6 +52,6 @@ The ordered project hierarchy is MEMX, Domani, Iffer's Pictures, PixelVerse Stud
 - Add public figures only when their source, context, and snapshot date are defensible.
 - Put future functionality in `roadmap`, never `approvedFeatures`.
 - Keep media permissions and prohibitions explicit enough for later design tickets to consume without guessing.
-- Keep visible project-specific artifact copy in `artifactCopy`; do not hard-code factual labels in presentation components.
+- Keep visible project-specific artifact copy and its concise assistive-technology equivalent in `artifactCopy`; do not hard-code factual labels in presentation components.
 - Do not add page-layout or presentation concerns to the registry.
 - A supporting project cannot acquire a route without an explicit information-architecture decision.

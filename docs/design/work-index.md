@@ -14,7 +14,7 @@ PORT-303 replaces the `/work` route placeholder with the first complete editoria
 - MEMX uses an original abstract configuration diagram. It is not a reconstructed interface and contains no exchange data.
 - Domani uses a stylized planning-object composition built from approved product ideas. It is not presented as a screenshot.
 - Iffer's Pictures uses an abstract crop-frame study to suggest photographic composition without standing in for approved project photography.
-- All three artifacts are decorative and hidden from assistive technology; the project name and summary carry the meaning.
+- Artifact geometry is decorative and hidden from assistive technology. Each case-study link references a registry-backed text equivalent for the visible artifact evidence.
 
 ## Interaction and accessibility
 

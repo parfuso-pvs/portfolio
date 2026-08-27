@@ -20,6 +20,7 @@ export type ProjectMediaPolicy = {
 };
 
 export type ProjectArtifactCopy = {
+  accessibleDescription: string;
   primaryLabel: string;
   secondaryDetail?: string;
   secondaryLabel?: string;
@@ -70,6 +71,7 @@ export const projects = [
     navigationLabel: "MEMX",
     indexLabel: "Case 01",
     artifactCopy: {
+      accessibleDescription: "Eight market implementations supported from one evolving system.",
       primaryLabel: "08 / markets",
     },
     discipline: "Platform Engineering",
@@ -117,6 +119,7 @@ export const projects = [
     navigationLabel: "Domani",
     indexLabel: "Case 02",
     artifactCopy: {
+      accessibleDescription: "Plan tomorrow intentionally around one clear top-priority task.",
       primaryLabel: "Tomorrow / intentional",
       statement: "Plan the day before it begins.",
       secondaryLabel: "Top priority",
@@ -203,6 +206,8 @@ export const projects = [
     shortNavigationLabel: "Iffer's",
     indexLabel: "Case 03",
     artifactCopy: {
+      accessibleDescription:
+        "Full ownership across copy, visual design, and code, shaped around light, composition, and story.",
       primaryLabel: "Light / composition / story",
       secondaryLabel: "Full ownership",
       secondaryDetail: "Copy / design / code",

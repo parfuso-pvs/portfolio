@@ -38,10 +38,22 @@ test("project artifacts remain decorative and avoid prohibited media", async () 
 
 test("visible artifact copy is centralized with its project record", () => {
   assert.deepEqual(getProject("memx").artifactCopy, {
+    accessibleDescription: "Eight market implementations supported from one evolving system.",
     primaryLabel: "08 / markets",
   });
   assert.equal(getProject("domani").artifactCopy.secondaryLabel, "Top priority");
   assert.equal(getProject("iffers-pictures").artifactCopy.secondaryLabel, "Full ownership");
+});
+
+test("every hidden visual artifact has a registry-backed text equivalent", async () => {
+  const projectCard = await readFile(projectCardPath, "utf8");
+
+  assert.match(projectCard, /aria-describedby=\{artifactDescriptionId\}/);
+  assert.match(projectCard, /id=\{artifactDescriptionId\} className="sr-only"/);
+  assert.match(projectCard, /project\.artifactCopy\.accessibleDescription/);
+  ["memx", "domani", "iffers-pictures"].forEach((projectId) =>
+    assert.ok(getProject(projectId).artifactCopy.accessibleDescription),
+  );
 });
 
 test("keyboard focus receives the same artifact feedback as hover", async () => {

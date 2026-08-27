@@ -126,6 +126,8 @@ function ProjectArtifact({ project }: { project: FeaturedProjectRecord }) {
 }
 
 export function ProjectIndexCard({ project, sequence }: ProjectIndexCardProps) {
+  const artifactDescriptionId = `${project.id}-artifact-description`;
+
   return (
     <article
       className="work-index-entry group material-sheet material-sheet-raised relative overflow-hidden"
@@ -135,8 +137,12 @@ export function ProjectIndexCard({ project, sequence }: ProjectIndexCardProps) {
         href={project.href}
         className="grid h-full min-h-[34rem] grid-rows-[minmax(16rem,1fr)_auto] focus-visible:outline focus-visible:-outline-offset-4 lg:min-h-[38rem]"
         aria-label={`View ${project.name} case study`}
+        aria-describedby={artifactDescriptionId}
       >
         <ProjectArtifact project={project} />
+        <span id={artifactDescriptionId} className="sr-only">
+          {project.artifactCopy.accessibleDescription}
+        </span>
         <div className="px-sheet-inset relative border-t border-line py-7 sm:py-8">
           <div className="flex items-start justify-between gap-6">
             <div>
