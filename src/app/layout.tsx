@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, Instrument_Sans, Newsreader } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { SiteHeader } from "@/components/layout/site-header";
+
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -57,10 +59,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body>
         <a
           href="#main-content"
-          className="fixed top-4 left-4 z-50 -translate-y-24 bg-ink px-4 py-3 text-sm font-semibold text-canvas transition-transform focus:translate-y-0 motion-reduce:transition-none"
+          className="fixed top-4 left-4 z-[200] -translate-y-24 bg-ink px-4 py-3 text-sm font-semibold text-canvas transition-transform focus:translate-y-0 motion-reduce:transition-none"
         >
           Skip to main content
         </a>
+        <SiteHeader />
         {children}
       </body>
     </html>
