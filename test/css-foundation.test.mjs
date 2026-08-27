@@ -3,16 +3,14 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("the root layout provides a skip link to the main landmark", async () => {
-  const [layout, page, hero] = await Promise.all([
+  const [layout, page] = await Promise.all([
     readFile("src/app/layout.tsx", "utf8"),
     readFile("src/app/page.tsx", "utf8"),
-    readFile("src/components/home/home-hero.tsx", "utf8"),
   ]);
 
   assert.match(layout, /href="#main-content"/);
-  assert.match(page, /<HomeHero/);
-  assert.match(hero, /id="main-content"/);
-  assert.match(hero, /tabIndex=\{-1\}/);
+  assert.match(page, /id="main-content"/);
+  assert.match(page, /tabIndex=\{-1\}/);
 });
 
 test("the global stylesheet includes focus and reduced-motion baselines", async () => {

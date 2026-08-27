@@ -1,6 +1,12 @@
 import { HomeHero } from "@/components/home/home-hero";
+import { HomeFeaturedWork } from "@/components/home/home-featured-work";
 import { getProject } from "@/content/projects";
 
 export default function Home() {
-  return <HomeHero featuredProject={getProject("memx")} />;
+  return (
+    <main id="main-content" tabIndex={-1} className="overflow-hidden">
+      <HomeHero featuredProject={getProject("memx")} />
+      <HomeFeaturedWork projects={[getProject("domani"), getProject("iffers-pictures")]} />
+    </main>
+  );
 }
