@@ -4,6 +4,7 @@ import test from "node:test";
 
 const workPagePath = "src/app/work/page.tsx";
 const projectCardPath = "src/components/work/project-index-card.tsx";
+const { getProject } = await import("../src/content/projects.ts");
 
 test("the Work Index is generated from the featured project registry", async () => {
   const workPage = await readFile(workPagePath, "utf8");
@@ -29,5 +30,25 @@ test("project artifacts remain decorative and avoid prohibited media", async () 
 
   assert.equal(projectCard.match(/aria-hidden="true"/g)?.length, 4);
   assert.doesNotMatch(projectCard, /next\/image|<img|order book|matching engine/i);
-  assert.match(projectCard, /Light \/ composition \/ story/);
+  assert.doesNotMatch(
+    projectCard,
+    /08 \/ markets|Tomorrow \/ intentional|Top priority|Full ownership|Copy \/ design \/ code/,
+  );
+});
+
+test("visible artifact copy is centralized with its project record", () => {
+  assert.deepEqual(getProject("memx").artifactCopy, {
+    primaryLabel: "08 / markets",
+  });
+  assert.equal(getProject("domani").artifactCopy.secondaryLabel, "Top priority");
+  assert.equal(getProject("iffers-pictures").artifactCopy.secondaryLabel, "Full ownership");
+});
+
+test("keyboard focus receives the same artifact feedback as hover", async () => {
+  const projectCard = await readFile(projectCardPath, "utf8");
+
+  assert.match(projectCard, /group-focus-within:-translate-y-1/);
+  assert.match(projectCard, /group-focus-within:-translate-y-2/);
+  assert.match(projectCard, /group-focus-within:-rotate-1/);
+  assert.match(projectCard, /group-focus-within:translate-x-1/);
 });
