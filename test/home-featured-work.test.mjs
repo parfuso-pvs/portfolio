@@ -5,12 +5,18 @@ import test from "node:test";
 const homePagePath = "src/app/page.tsx";
 const featuredWorkPath = "src/components/home/home-featured-work.tsx";
 
-test("the homepage selects its two supporting features from the registry", async () => {
-  const homePage = await readFile(homePagePath, "utf8");
+test("the homepage selects its two secondary featured projects from the registry", async () => {
+  const [homePage, featuredWork] = await Promise.all([
+    readFile(homePagePath, "utf8"),
+    readFile(featuredWorkPath, "utf8"),
+  ]);
 
   assert.match(homePage, /getProject\("domani"\)/);
   assert.match(homePage, /getProject\("iffers-pictures"\)/);
   assert.doesNotMatch(homePage, /Domani|Iffer's Pictures/);
+  assert.match(featuredWork, /\{projects\[0\]\.name\}/);
+  assert.match(featuredWork, /\{projects\[1\]\.name\}/);
+  assert.doesNotMatch(featuredWork, />\s*Domani|Iffer(?:&apos;|')s Pictures/);
 });
 
 test("the featured-work sequence remains semantic and server rendered", async () => {

@@ -3,8 +3,11 @@ import Link from "next/link";
 import { ProjectIndexCard } from "@/components/work/project-index-card";
 import type { FeaturedProjectRecord } from "@/content/projects";
 
+type DomaniProjectRecord = Extract<FeaturedProjectRecord, { id: "domani" }>;
+type IffersProjectRecord = Extract<FeaturedProjectRecord, { id: "iffers-pictures" }>;
+
 type HomeFeaturedWorkProps = {
-  projects: readonly [FeaturedProjectRecord, FeaturedProjectRecord];
+  projects: readonly [DomaniProjectRecord, IffersProjectRecord];
 };
 
 export function HomeFeaturedWork({ projects }: HomeFeaturedWorkProps) {
@@ -27,8 +30,8 @@ export function HomeFeaturedWork({ projects }: HomeFeaturedWorkProps) {
               Built independently. Shaped end to end.
             </h2>
             <p className="type-body text-muted mt-7 max-w-2xl border-l border-accent pl-5">
-              Domani extends product engineering into mobile. Iffer&apos;s Pictures brings design,
-              copy, and code under one creative direction.
+              {projects[0].name} extends product engineering into mobile. {projects[1].name} brings
+              design, copy, and code under one creative direction.
             </p>
           </div>
         </header>
