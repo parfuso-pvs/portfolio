@@ -1,3 +1,5 @@
+import { featuredProjects } from "@/content/projects";
+
 export type NavigationItem = {
   href: string;
   label: string;
@@ -6,9 +8,13 @@ export type NavigationItem = {
 
 export const primaryNavigation = [
   { href: "/work", label: "Work" },
-  { href: "/work/memx", label: "MEMX" },
-  { href: "/work/domani", label: "Domani" },
-  { href: "/work/iffers-pictures", label: "Iffer's Pictures", shortLabel: "Iffer's" },
+  ...featuredProjects.map((project) => ({
+    href: project.href,
+    label: project.navigationLabel,
+    ...("shortNavigationLabel" in project
+      ? { shortLabel: project.shortNavigationLabel }
+      : undefined),
+  })),
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-] as const satisfies readonly NavigationItem[];
+] satisfies readonly NavigationItem[];

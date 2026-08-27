@@ -30,17 +30,18 @@ test("the root layout mounts a shared server-rendered site header", async () => 
 });
 
 test("navigation destinations are centralized and every approved route exists", async () => {
-  const navigationData = await readFile(navigationDataPath, "utf8");
-  const expectedPaths = [
-    "/work",
-    "/work/memx",
-    "/work/domani",
-    "/work/iffers-pictures",
-    "/about",
-    "/contact",
-  ];
+  const [navigationData, projectData] = await Promise.all([
+    readFile(navigationDataPath, "utf8"),
+    readFile("src/content/projects.ts", "utf8"),
+  ]);
 
-  expectedPaths.forEach((href) => assert.match(navigationData, new RegExp(`href: "${href}"`)));
+  ["/work", "/about", "/contact"].forEach((href) =>
+    assert.match(navigationData, new RegExp(`href: "${href}"`)),
+  );
+  ["/work/memx", "/work/domani", "/work/iffers-pictures"].forEach((href) =>
+    assert.match(projectData, new RegExp(`href: "${href}"`)),
+  );
+  assert.match(navigationData, /featuredProjects\.map/);
   await Promise.all(routeFiles.map((file) => access(file)));
 });
 

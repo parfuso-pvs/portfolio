@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
 
 import { RouteIntro } from "@/components/layout/route-intro";
+import { getProject } from "@/content/projects";
+
+const project = getProject("domani");
 
 export const metadata: Metadata = {
-  title: "Domani",
-  description: "Domani, an independent daily planning product designed and built by Phil Arfuso.",
+  title: project.name,
+  description: project.metaDescription,
 };
 
 export default function DomaniPage() {
   return (
     <RouteIntro
-      index="Case 02"
-      eyebrow="Domani / Independent Product"
-      title="Domani"
-      description="A focused planning product built to make tomorrow feel intentional instead of overwhelming."
+      index={project.indexLabel}
+      eyebrow={`${project.name} / ${project.discipline}`}
+      title={project.name}
+      description={project.summary}
     />
   );
 }
