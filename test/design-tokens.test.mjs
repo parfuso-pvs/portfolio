@@ -12,6 +12,7 @@ const requiredTokens = [
   "--graphite",
   "--ink-muted",
   "--blueprint",
+  "--blueprint-on-dark",
   "--rule",
   "--focus-ring",
   "--media-backdrop",
@@ -30,6 +31,7 @@ const colorPairs = [
   ["ink-muted", "paper-base"],
   ["blueprint", "paper-canvas"],
   ["blueprint", "paper-base"],
+  ["blueprint-on-dark", "media-backdrop"],
   ["media-foreground", "media-backdrop"],
 ];
 

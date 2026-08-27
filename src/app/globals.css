@@ -15,6 +15,7 @@
   --ink-muted: #625e56;
   --blueprint: #1259c3;
   --blueprint-strong: #0a3f99;
+  --blueprint-on-dark: #6f9fe8;
   --rule: #c9c2b5;
   --rule-strong: #9f9789;
   --focus-ring: var(--blueprint);
@@ -59,6 +60,7 @@
   --color-muted: var(--ink-muted);
   --color-accent: var(--blueprint);
   --color-accent-strong: var(--blueprint-strong);
+  --color-accent-on-dark: var(--blueprint-on-dark);
   --color-line: var(--rule);
   --color-line-strong: var(--rule-strong);
   --color-focus: var(--focus-ring);

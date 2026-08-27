@@ -25,6 +25,7 @@ next action after reading Phil's featured work and supporting experience.
 
 - The section has a labelled heading and remains fully server rendered.
 - Both links meet the 44px minimum target and provide hover, keyboard-focus, and active states.
+- The light cobalt accent is reserved for text on graphite and maintains normal-text contrast.
 - The decorative grid and registration tab are hidden from assistive technology.
 - Motion is limited to transform/color transitions and inherits the global reduced-motion override.
 

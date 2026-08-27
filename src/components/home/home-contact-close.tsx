@@ -18,7 +18,7 @@ export function HomeContactClose() {
 
         <div className="relative grid gap-16 lg:grid-cols-12 lg:gap-6">
           <header className="lg:col-span-3">
-            <p className="type-label text-accent">Open to the next hard problem</p>
+            <p className="type-label text-accent-on-dark">Open to the next hard problem</p>
             <p className="type-mono text-media-foreground/55 mt-3">Contact sheet / 01</p>
           </header>
 
@@ -50,7 +50,7 @@ export function HomeContactClose() {
 
               <Link
                 href="/about"
-                className="type-label border-media-foreground/45 text-media-foreground active:text-media-foreground/70 min-h-11 self-start border-b py-3 transition-colors hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent sm:self-auto"
+                className="type-label border-media-foreground/45 text-media-foreground active:text-media-foreground/70 hover:border-accent-on-dark hover:text-accent-on-dark focus-visible:border-accent-on-dark focus-visible:text-accent-on-dark min-h-11 self-start border-b py-3 transition-colors sm:self-auto"
               >
                 Read the profile
               </Link>

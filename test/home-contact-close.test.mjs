@@ -35,5 +35,8 @@ test("the contact close provides real internal paths and interaction states", as
   assert.match(contactClose, /hover:bg-media-foreground/);
   assert.match(contactClose, /focus-visible:bg-media-foreground/);
   assert.match(contactClose, /active:bg-paper-deep/);
+  assert.match(contactClose, /text-accent-on-dark/);
+  assert.match(contactClose, /hover:text-accent-on-dark/);
+  assert.match(contactClose, /focus-visible:text-accent-on-dark/);
   assert.doesNotMatch(contactClose, /mailto:|tel:|linkedin\.com|github\.com/);
 });
