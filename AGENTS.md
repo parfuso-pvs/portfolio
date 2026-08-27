@@ -392,7 +392,6 @@ A ticket is done when:
 - Prefer small reversible changes.
 - Stop and request direction when a choice materially expands scope, changes public claims, or introduces a new external service.
 
-
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

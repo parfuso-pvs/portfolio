@@ -15,8 +15,7 @@
   --line: #d8d2c7;
   --focus-ring: #155ec9;
   --font-interface:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 @theme inline {

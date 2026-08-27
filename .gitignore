@@ -15,6 +15,10 @@
 # test output
 /coverage
 
+# tool caches
+.eslintcache
+.prettier-cache
+
 # system and editor files
 .DS_Store
 *.pem
