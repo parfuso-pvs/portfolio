@@ -4,7 +4,7 @@ import test from "node:test";
 
 const globalCssPath = "src/app/globals.css";
 const componentPath = "src/components/ui/material-surface.tsx";
-const homePath = "src/app/page.tsx";
+const homePath = "src/components/home/home-hero.tsx";
 const documentationPath = "docs/design/material-system.md";
 const materialPrimitives = [
   "material-sheet",

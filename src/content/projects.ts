@@ -317,12 +317,14 @@ export const supportingProjects = projects.filter(
     project.prominence === "supporting",
 );
 
-export function getProject(projectId: ProjectId): ProjectRecord {
+export function getProject<TProjectId extends ProjectId>(
+  projectId: TProjectId,
+): Extract<ProjectRecord, { id: TProjectId }> {
   const project = projects.find(({ id }) => id === projectId);
 
   if (!project) {
     throw new Error(`Unknown portfolio project: ${projectId}`);
   }
 
-  return project;
+  return project as Extract<ProjectRecord, { id: TProjectId }>;
 }
