@@ -4,7 +4,7 @@ export const memxSystemDiagrams = {
     eyebrow: "Configuration architecture",
     title: "One active market shapes the full request path.",
     summary:
-      "The database and market-specific classes supplied different kinds of configuration. Phil's frontend system translated that context into reusable fields, market-correct behavior, and sanitized requests.",
+      "The database supplied configuration, while market-specific classes handled rules and methods that could not be shared. Phil's frontend system translated that context into reusable fields, market-correct behavior, and sanitized requests.",
     accessibleDescription:
       "The active market selects both database configuration and market-specific rules. Those inputs establish a shared platform context that feeds reusable UI components and utilities before a validated, sanitized request reaches a server endpoint.",
     activeMarket: {

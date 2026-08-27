@@ -69,7 +69,10 @@ export function MemxSystemDiagrams() {
             {configuration.accessibleDescription}
           </p>
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-6">
+          <div
+            className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-6"
+            aria-hidden="true"
+          >
             <div className="material-sheet material-sheet-raised px-5 py-6 lg:col-span-2 lg:self-center">
               <FlowNode index="01" {...configuration.activeMarket} />
             </div>
@@ -127,7 +130,10 @@ export function MemxSystemDiagrams() {
             {realtime.accessibleDescription}
           </p>
 
-          <ol className="relative mt-14 grid gap-8 lg:grid-cols-5 lg:gap-6">
+          <ol
+            className="relative mt-14 grid gap-8 lg:grid-cols-5 lg:gap-6"
+            aria-hidden="true"
+          >
             {realtime.steps.map((step) => (
               <li
                 key={step.index}

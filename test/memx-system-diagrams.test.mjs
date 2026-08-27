@@ -34,12 +34,14 @@ test("both figures provide visible context and registry-backed text equivalents"
   assert.match(diagrams, /aria-labelledby="memx-realtime-title"/);
   assert.match(diagrams, /aria-describedby="memx-realtime-summary memx-realtime-description"/);
   assert.match(diagrams, /className="sr-only"/);
+  assert.equal((diagrams.match(/aria-hidden="true"/g) ?? []).length, 3);
 });
 
 test("diagram content preserves ownership and confidentiality boundaries", async () => {
   const content = await readFile(contentPath, "utf8");
 
-  assert.match(content, /database and market-specific classes supplied different kinds/);
+  assert.match(content, /database supplied configuration/);
+  assert.match(content, /market-specific classes handled rules and methods that could not be shared/);
   assert.match(content, /Phil's frontend system translated that context/);
   assert.match(content, /missing or malformed values/);
   assert.doesNotMatch(
