@@ -4,7 +4,7 @@ import test from "node:test";
 
 const layoutPath = "src/app/layout.tsx";
 const globalCssPath = "src/app/globals.css";
-const homePath = "src/app/page.tsx";
+const homePath = "src/components/home/home-hero.tsx";
 const documentationPath = "docs/design/typography.md";
 
 const fontFamilies = ["Instrument_Sans", "Newsreader", "IBM_Plex_Mono"];
