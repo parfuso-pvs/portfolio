@@ -18,7 +18,7 @@ test("the homepage hero remains a server-rendered semantic composition", async (
   const hero = await readFile(heroPath, "utf8");
 
   assert.doesNotMatch(hero, /"use client"/);
-  assert.match(hero, /<main/);
+  assert.match(hero, /<section/);
   assert.match(hero, /<h1/);
   assert.match(hero, /<figure/);
   assert.match(hero, /<figcaption/);

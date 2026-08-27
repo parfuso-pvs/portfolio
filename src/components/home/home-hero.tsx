@@ -57,10 +57,9 @@ function SystemAssembly({ project }: { project: FeaturedProjectRecord }) {
 
 export function HomeHero({ featuredProject }: HomeHeroProps) {
   return (
-    <main
-      id="main-content"
-      tabIndex={-1}
+    <section
       className="px-page-gutter relative isolate flex min-h-[100dvh] items-center overflow-hidden pt-28 pb-10 sm:pt-32 sm:pb-14"
+      aria-labelledby="hero-title"
     >
       <div className="mx-auto grid w-full max-w-[90rem] gap-5 lg:grid-cols-[8.5rem_minmax(0,1fr)] lg:gap-7">
         <div className="home-assembly-name flex items-end border-b border-line-strong pb-4 lg:justify-center lg:border-r lg:border-b-0 lg:pb-0">
@@ -69,7 +68,7 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
           </p>
         </div>
 
-        <section className="relative isolate lg:min-h-[43rem]" aria-labelledby="hero-title">
+        <div className="relative isolate lg:min-h-[43rem]">
           <div
             className="material-blueprint home-assembly-backdrop absolute top-4 -left-3 -z-10 h-[72%] w-[62%] -rotate-2 max-lg:top-3 max-lg:left-2 max-lg:h-[38%] max-lg:w-[92%]"
             aria-hidden="true"
@@ -143,8 +142,8 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
               <SystemAssembly project={featuredProject} />
             </div>
           </MaterialSurface>
-        </section>
+        </div>
       </div>
-    </main>
+    </section>
   );
 }
