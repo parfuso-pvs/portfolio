@@ -1,0 +1,43 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+const componentPath = "src/components/case-study/case-study-navigation.tsx";
+const memxRoutePath = "src/app/work/memx/page.tsx";
+
+test("the completed MEMX story closes with shared case-study navigation", async () => {
+  const [component, route] = await Promise.all([
+    readFile(componentPath, "utf8"),
+    readFile(memxRoutePath, "utf8"),
+  ]);
+
+  assert.match(route, /const nextProject = getProject\("domani"\)/);
+  assert.match(
+    route,
+    /<CaseStudyNavigation currentProject=\{project\} nextProject=\{nextProject\} \/>/,
+  );
+  assert.doesNotMatch(component, /"use client"/);
+});
+
+test("the closing navigation uses centralized project paths and semantic labels", async () => {
+  const component = await readFile(componentPath, "utf8");
+
+  assert.match(component, /href=\{nextProject\.href\}/);
+  assert.match(component, /nextProject\.name/);
+  assert.match(component, /nextProject\.summary/);
+  assert.match(component, /currentProject\.indexLabel/);
+  assert.match(component, /href="\/work"/);
+  assert.match(component, /aria-labelledby=\{headingId\}/);
+  assert.match(component, /<h2/);
+});
+
+test("the closing navigation supports responsive and keyboard interaction states", async () => {
+  const component = await readFile(componentPath, "utf8");
+
+  assert.match(component, /lg:grid-cols-12/);
+  assert.match(component, /sm:grid-cols-/);
+  assert.equal((component.match(/min-h-11/g) ?? []).length, 2);
+  assert.match(component, /hover:border-accent-on-dark/);
+  assert.match(component, /focus-visible:border-accent-on-dark/);
+  assert.match(component, /active:text-media-foreground\/70/);
+});
