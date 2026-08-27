@@ -16,7 +16,7 @@ test("featured routes share one registry-driven case-study frame", async () => {
   ]);
 
   routes.forEach((route) => {
-    assert.match(route, /<CaseStudyFrame project=\{project\} \/>/);
+    assert.match(route, /<CaseStudyFrame project=\{project\}(?: \/>|>)/);
     assert.doesNotMatch(route, /<RouteIntro/);
   });
   assert.match(frame, /project\.name/);
