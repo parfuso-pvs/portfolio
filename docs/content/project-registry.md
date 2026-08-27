@@ -8,7 +8,8 @@ The registry uses a discriminated union:
 
 - `featured` projects have a canonical `/work/...` route, navigation label, case index, and case-study status;
 - `supporting` projects have no route and remain concise Home/About context in v1;
-- all projects carry approved features, proof points, ownership, attribution, media rules, roadmap items, and approved public metrics.
+- all projects carry approved features, proof points, ownership, attribution, media rules, roadmap items, and approved public metrics;
+- featured projects also carry the concise artifact copy used by visual index compositions.
 
 The ordered project hierarchy is MEMX, Domani, Iffer's Pictures, PixelVerse Studios, and EarthCam. Only the first three feed primary navigation.
 
@@ -51,5 +52,6 @@ The ordered project hierarchy is MEMX, Domani, Iffer's Pictures, PixelVerse Stud
 - Add public figures only when their source, context, and snapshot date are defensible.
 - Put future functionality in `roadmap`, never `approvedFeatures`.
 - Keep media permissions and prohibitions explicit enough for later design tickets to consume without guessing.
+- Keep visible project-specific artifact copy and its concise assistive-technology equivalent in `artifactCopy`; do not hard-code factual labels in presentation components.
 - Do not add page-layout or presentation concerns to the registry.
 - A supporting project cannot acquire a route without an explicit information-architecture decision.

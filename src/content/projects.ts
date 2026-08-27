@@ -19,6 +19,14 @@ export type ProjectMediaPolicy = {
     | "public-streaming-media";
 };
 
+export type ProjectArtifactCopy = {
+  accessibleDescription: string;
+  primaryLabel: string;
+  secondaryDetail?: string;
+  secondaryLabel?: string;
+  statement?: string;
+};
+
 type ProjectFoundation = {
   approvedFeatures: readonly string[];
   attribution: string;
@@ -37,6 +45,7 @@ type ProjectFoundation = {
 };
 
 export type FeaturedProject = ProjectFoundation & {
+  artifactCopy: ProjectArtifactCopy;
   caseStudyStatus: "intro" | "published";
   href: `/work/${string}`;
   navigationLabel: string;
@@ -61,6 +70,10 @@ export const projects = [
     href: "/work/memx",
     navigationLabel: "MEMX",
     indexLabel: "Case 01",
+    artifactCopy: {
+      accessibleDescription: "Eight market implementations supported from one evolving system.",
+      primaryLabel: "08 / markets",
+    },
     discipline: "Platform Engineering",
     role: "Full-Stack Software Engineer",
     summary:
@@ -105,6 +118,13 @@ export const projects = [
     href: "/work/domani",
     navigationLabel: "Domani",
     indexLabel: "Case 02",
+    artifactCopy: {
+      accessibleDescription: "Plan tomorrow intentionally around one clear top-priority task.",
+      primaryLabel: "Tomorrow / intentional",
+      statement: "Plan the day before it begins.",
+      secondaryLabel: "Top priority",
+      secondaryDetail: "One clear thing",
+    },
     discipline: "Independent Product",
     role: "Creator & Full-Stack Engineer",
     summary:
@@ -185,6 +205,13 @@ export const projects = [
     navigationLabel: "Iffer's Pictures",
     shortNavigationLabel: "Iffer's",
     indexLabel: "Case 03",
+    artifactCopy: {
+      accessibleDescription:
+        "Full ownership across copy, visual design, and code, shaped around light, composition, and story.",
+      primaryLabel: "Light / composition / story",
+      secondaryLabel: "Full ownership",
+      secondaryDetail: "Copy / design / code",
+    },
     discipline: "Creative Direction",
     role: "Designer & Developer",
     summary:
