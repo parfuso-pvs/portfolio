@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { RouteIntro } from "@/components/layout/route-intro";
+import { CaseStudyFrame } from "@/components/case-study/case-study-frame";
 import { getProject } from "@/content/projects";
 
 const project = getProject("iffers-pictures");
@@ -11,12 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function IffersPicturesPage() {
-  return (
-    <RouteIntro
-      index={project.indexLabel}
-      eyebrow={`${project.name} / ${project.discipline}`}
-      title={project.name}
-      description={project.summary}
-    />
-  );
+  return <CaseStudyFrame project={project} />;
 }
