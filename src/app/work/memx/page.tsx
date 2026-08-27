@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { CaseStudyFrame } from "@/components/case-study/case-study-frame";
+import { MemxNarrative } from "@/components/case-study/memx-narrative";
 import { getProject } from "@/content/projects";
 
 const project = getProject("memx");
@@ -11,5 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function MemxPage() {
-  return <CaseStudyFrame project={project} />;
+  return (
+    <CaseStudyFrame project={project}>
+      <MemxNarrative />
+    </CaseStudyFrame>
+  );
 }
