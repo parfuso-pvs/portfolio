@@ -41,7 +41,10 @@ test("diagram content preserves ownership and confidentiality boundaries", async
   const content = await readFile(contentPath, "utf8");
 
   assert.match(content, /database supplied configuration/);
-  assert.match(content, /market-specific classes handled rules and methods that could not be shared/);
+  assert.match(
+    content,
+    /market-specific classes handled rules and methods that could not be shared/,
+  );
   assert.match(content, /Phil's frontend system translated that context/);
   assert.match(content, /missing or malformed values/);
   assert.doesNotMatch(

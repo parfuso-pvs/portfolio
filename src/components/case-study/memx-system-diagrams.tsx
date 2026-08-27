@@ -130,10 +130,7 @@ export function MemxSystemDiagrams() {
             {realtime.accessibleDescription}
           </p>
 
-          <ol
-            className="relative mt-14 grid gap-8 lg:grid-cols-5 lg:gap-6"
-            aria-hidden="true"
-          >
+          <ol className="relative mt-14 grid gap-8 lg:grid-cols-5 lg:gap-6" aria-hidden="true">
             {realtime.steps.map((step) => (
               <li
                 key={step.index}
