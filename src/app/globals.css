@@ -7,30 +7,81 @@
  */
 :root {
   color-scheme: light;
-  --canvas: #f4f1ea;
-  --surface: #fbfaf6;
-  --ink: #171717;
-  --ink-muted: #5f5c56;
-  --accent: #155ec9;
-  --line: #d8d2c7;
-  --focus-ring: #155ec9;
+  --paper-canvas: #f1eee6;
+  --paper-base: #f8f5ed;
+  --paper-raised: #fcfaf5;
+  --paper-deep: #e7e1d6;
+  --graphite: #20201d;
+  --ink-muted: #625e56;
+  --blueprint: #1259c3;
+  --blueprint-strong: #0a3f99;
+  --rule: #c9c2b5;
+  --rule-strong: #9f9789;
+  --focus-ring: var(--blueprint);
+  --media-backdrop: #121722;
+  --media-foreground: #f8f5ed;
+
+  --layout-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --layout-section: clamp(5rem, 12vw, 11rem);
+  --layout-sheet-inset: clamp(1.25rem, 3vw, 3rem);
+  --layout-content-stack: clamp(2rem, 4vw, 4.5rem);
+  --layout-cluster: clamp(0.75rem, 1.5vw, 1.5rem);
+
+  --display-size: clamp(3.25rem, 1.5rem + 7vw, 8.5rem);
+  --display-leading: 0.88;
+  --display-tracking: -0.055em;
+
+  --corner-paper: 0.125rem;
+  --corner-control: 0.25rem;
+  --corner-pill: 999px;
+
+  --elevation-sheet: 0 1px 1px rgb(32 32 29 / 8%), 0 10px 28px rgb(32 32 29 / 10%);
+  --elevation-pinned:
+    inset 0 1px 0 rgb(255 255 255 / 72%), 0 2px 5px rgb(32 32 29 / 10%),
+    0 20px 42px rgb(32 32 29 / 12%);
+
   --font-interface:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 @theme inline {
-  --color-canvas: var(--canvas);
-  --color-surface: var(--surface);
-  --color-ink: var(--ink);
+  --color-canvas: var(--paper-canvas);
+  --color-paper: var(--paper-base);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--graphite);
   --color-muted: var(--ink-muted);
-  --color-accent: var(--accent);
-  --color-line: var(--line);
+  --color-accent: var(--blueprint);
+  --color-accent-strong: var(--blueprint-strong);
+  --color-line: var(--rule);
+  --color-line-strong: var(--rule-strong);
+  --color-focus: var(--focus-ring);
+  --color-media-backdrop: var(--media-backdrop);
+  --color-media-foreground: var(--media-foreground);
+
+  --spacing-page-gutter: var(--layout-gutter);
+  --spacing-section: var(--layout-section);
+  --spacing-sheet-inset: var(--layout-sheet-inset);
+  --spacing-content-stack: var(--layout-content-stack);
+  --spacing-cluster: var(--layout-cluster);
+
+  --text-display: var(--display-size);
+  --text-display--line-height: var(--display-leading);
+  --text-display--letter-spacing: var(--display-tracking);
+
+  --radius-paper: var(--corner-paper);
+  --radius-control: var(--corner-control);
+  --radius-pill: var(--corner-pill);
+
+  --shadow-sheet: var(--elevation-sheet);
+  --shadow-pinned: var(--elevation-pinned);
+
   --font-sans: var(--font-interface);
 }
 
 html {
   min-width: 320px;
-  background: var(--canvas);
+  background: var(--paper-canvas);
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -39,15 +90,15 @@ html {
 body {
   min-height: 100dvh;
   margin: 0;
-  background: var(--canvas);
-  color: var(--ink);
+  background: var(--paper-canvas);
+  color: var(--graphite);
   font-family: var(--font-interface);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--surface);
+  background: var(--blueprint);
+  color: var(--paper-raised);
 }
 
 :focus-visible {

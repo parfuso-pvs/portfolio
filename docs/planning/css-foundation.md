@@ -12,7 +12,7 @@ Runtime semantic values live in `src/app/globals.css` under `:root`. These varia
 
 Tailwind CSS 4's `@theme inline` block maps the runtime variables to utilities such as `bg-canvas`, `text-ink`, `text-muted`, `text-accent`, and `border-line`. Components should use these semantic utilities instead of hard-coded palette values.
 
-Spacing, radius, shadow, editorial type, and material-effect tokens remain deferred to PORT-201 through PORT-203.
+The finalized color, fluid spacing, radius, shadow, and display-scale tokens are documented in [`docs/design/design-tokens.md`](../design/design-tokens.md). Typography families and material effects remain deferred to PORT-202 and PORT-203.
 
 ### Global CSS
 

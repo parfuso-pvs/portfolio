@@ -3,7 +3,7 @@ export default function Home() {
     <main
       id="main-content"
       tabIndex={-1}
-      className="flex min-h-screen items-center px-6 py-16 sm:px-10 lg:px-16"
+      className="px-page-gutter py-section flex min-h-screen items-center"
     >
       <section className="mx-auto w-full max-w-6xl" aria-labelledby="page-title">
         <p className="text-accent text-sm font-semibold tracking-[0.16em] uppercase">
@@ -11,7 +11,7 @@ export default function Home() {
         </p>
         <h1
           id="page-title"
-          className="text-ink mt-5 max-w-4xl text-balance text-5xl font-semibold tracking-[-0.04em] sm:text-7xl lg:text-8xl"
+          className="text-display text-ink mt-5 max-w-5xl text-balance font-semibold"
         >
           Phil Arfuso
         </h1>
