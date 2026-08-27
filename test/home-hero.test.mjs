@@ -49,6 +49,7 @@ test("primary homepage actions cover hover, focus, active, and touch sizing", as
   assert.match(hero, /focus-visible:-translate-y-1/);
   assert.match(hero, /active:translate-y-0/);
   assert.equal(hero.match(/min-h-11/g)?.length, 2);
+  assert.doesNotMatch(hero, /aria-describedby="featured-project-summary"/);
 });
 
 test("the entrance sequence never gates the primary content sheet", async () => {

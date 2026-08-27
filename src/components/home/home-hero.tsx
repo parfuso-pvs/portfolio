@@ -105,7 +105,6 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
               <Link
                 href={featuredProject.href}
                 className="group material-vellum mt-9 block max-w-xl px-5 py-5 transition-transform duration-300 ease-out hover:-translate-y-1 focus-visible:-translate-y-1 active:translate-y-0 sm:px-6"
-                aria-describedby="featured-project-summary"
               >
                 <span className="type-label text-muted">Selected work</span>
                 <span className="mt-3 flex items-end justify-between gap-5 border-b border-line pb-2">
@@ -116,7 +115,7 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
                     <ArrowRight />
                   </span>
                 </span>
-                <span id="featured-project-summary" className="type-body-small text-ink mt-3 block">
+                <span className="type-body-small text-ink mt-3 block">
                   {featuredProject.summary}
                 </span>
               </Link>
