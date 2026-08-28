@@ -26,6 +26,9 @@ how Phil's responsibilities expanded while keeping concurrent after-hours work v
 - The chronology spine sits at the metadata/story boundary on desktop and fills in cobalt as the
   viewport advances through the list. A visible progress head travels continuously at the leading
   edge of the fill.
+- Progress is measured between the first and last milestone centers rather than the decorative ends
+  of the spine. Reaching the page end resolves the final milestone explicitly so Domani can enter
+  focus at every supported viewport height.
 - One chapter is in focus at a time. Its story lifts into a pinned paper sheet while the surrounding
   chapters stay readable but visually recede.
 - Full-time milestones use circular points; after-hours milestones use diamond points and retain an

@@ -75,6 +75,10 @@ test("the career journey advances its active chapter and progress spine on scrol
   assert.match(journey, /addEventListener\("scroll", scheduleUpdate, \{ passive: true \}\)/);
   assert.match(journey, /progress\.style\.transform = `scaleY/);
   assert.match(journey, /progressHead\.style\.transform = `translate/);
+  assert.match(journey, /const firstMilestone =/);
+  assert.match(journey, /const lastMilestone =/);
+  assert.match(journey, /const isAtPageEnd =/);
+  assert.match(journey, /const effectiveAnchor = isAtPageEnd \? lastMilestone : anchor/);
   assert.match(journey, /setActiveIndex\(nextActiveIndex\)/);
   assert.match(journey, /motion-reduce:transition-none/);
   assert.match(journey, /data-state=\{state\}/);

@@ -55,13 +55,29 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
 
       const anchor = window.innerHeight * 0.5;
       const listBounds = list.getBoundingClientRect();
+      const firstItem = itemRefs.current[0];
+      const lastItem = itemRefs.current.at(-1);
+
+      if (!firstItem || !lastItem) return;
+
+      const firstBounds = firstItem.getBoundingClientRect();
+      const lastBounds = lastItem.getBoundingClientRect();
+      const firstMilestone = firstBounds.top + firstBounds.height / 2;
+      const lastMilestone = lastBounds.top + lastBounds.height / 2;
+      const trackStart = firstMilestone - listBounds.top;
+      const trackLength = Math.max(1, lastMilestone - firstMilestone);
+      const isAtPageEnd =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1;
+      const effectiveAnchor = isAtPageEnd ? lastMilestone : anchor;
       const journeyProgress = Math.min(
         1,
-        Math.max(0, (anchor - listBounds.top) / listBounds.height),
+        Math.max(0, (effectiveAnchor - firstMilestone) / trackLength),
       );
 
+      progress.style.top = `${trackStart}px`;
+      progress.style.height = `${trackLength}px`;
       progress.style.transform = `scaleY(${journeyProgress})`;
-      progressHead.style.transform = `translate(-50%, ${journeyProgress * listBounds.height}px)`;
+      progressHead.style.transform = `translate(-50%, ${trackStart + journeyProgress * trackLength}px)`;
 
       let nextActiveIndex = 0;
 
@@ -71,7 +87,7 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
         const bounds = item.getBoundingClientRect();
         const milestone = bounds.top + bounds.height / 2;
 
-        if (milestone <= anchor) nextActiveIndex = index;
+        if (milestone <= effectiveAnchor) nextActiveIndex = index;
       });
 
       if (nextActiveIndex !== activeIndexRef.current) {
@@ -135,7 +151,7 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
         />
         <span
           ref={progressRef}
-          className="absolute top-0 bottom-0 left-[0.375rem] w-[3px] -translate-x-px origin-top bg-accent shadow-[0_0_12px_color-mix(in_srgb,var(--blueprint)_30%,transparent)] [transform:scaleY(0)] will-change-transform lg:left-1/4"
+          className="absolute top-0 left-[0.375rem] h-0 w-[3px] -translate-x-px origin-top bg-accent shadow-[0_0_12px_color-mix(in_srgb,var(--blueprint)_30%,transparent)] [transform:scaleY(0)] will-change-transform lg:left-1/4"
           aria-hidden="true"
         />
         <span
