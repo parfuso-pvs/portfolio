@@ -62,5 +62,20 @@ timeline, add page transitions, or change case-study content.
 - Browser inspection covered both figures at the default desktop viewport and at 320 x 720. The
   horizontal traces recompose into vertical mobile guides without clipping, content obstruction, or
   horizontal overflow.
-- `npm run verify` passes all 107 tests and the static production build. The existing production
-  motion probe also reports zero pointer frames over 20ms and zero long tasks after this change.
+- `npm run verify` passes all 108 tests and the static production build.
+
+The dedicated production probe scrolls through both MEMX figures while they draw, records animation
+frames and long tasks, then confirms every visible path reaches its settled state. It was run against
+the production build in Chrome 152 at 1280 x 720.
+
+| Frames | p50 frame | p95 frame | Worst frame | Frames >20 ms | Long tasks | Settled paths |
+| -----: | --------: | --------: | ----------: | ------------: | ---------: | ------------: |
+|    119 |   16.7 ms |   16.8 ms |     16.8 ms |             0 |          0 |           6/6 |
+
+To reproduce against a running production build:
+
+```bash
+MOTION_SCENARIO=memx-diagrams \
+MOTION_TEST_URL=http://localhost:3019/work/memx \
+npm run measure:motion
+```

@@ -6,6 +6,7 @@ const contentPath = "src/content/case-studies/memx-diagrams.ts";
 const diagramPath = "src/components/case-study/memx-system-diagrams.tsx";
 const diagramMotionPath = "src/components/motion/memx-diagram-trace.tsx";
 const diagramMotionStylesPath = "src/components/motion/memx-diagram-trace.module.css";
+const motionPerformancePath = "scripts/measure-motion-performance.mjs";
 const pagePath = "src/app/work/memx/page.tsx";
 
 test("the MEMX route includes two original system diagrams", async () => {
@@ -81,6 +82,7 @@ test("diagram drawing stays decorative and route-local", async () => {
   assert.match(motion, /viewport=\{\{ amount: 0\.35, once: true \}\}/);
   assert.match(motion, /aria-hidden="true"/);
   assert.doesNotMatch(motion, /memxSystemDiagrams|accessibleDescription|Exchange event/);
+  assert.doesNotMatch(diagrams, /<ol[^>]*>\s*<MemxDiagramTrace/);
 });
 
 test("diagram traces recompose and resolve immediately for reduced motion", async () => {
@@ -95,4 +97,15 @@ test("diagram traces recompose and resolve immediately for reduced motion", asyn
   assert.match(motionStyles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(motionStyles, /stroke-dasharray: none !important/);
   assert.match(motionStyles, /stroke-dashoffset: 0 !important/);
+});
+
+test("the runtime probe exercises the MEMX traces", async () => {
+  const performanceProbe = await readFile(motionPerformancePath, "utf8");
+
+  assert.match(performanceProbe, /MOTION_SCENARIO/);
+  assert.match(performanceProbe, /motionScenario === "memx-diagrams"/);
+  assert.match(performanceProbe, /\[data-diagram-trace\]/);
+  assert.match(performanceProbe, /diagramScroll/);
+  assert.match(performanceProbe, /settledPaths/);
+  assert.match(performanceProbe, /traceState\.settledPaths !== traceState\.visiblePaths/);
 });

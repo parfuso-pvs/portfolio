@@ -132,17 +132,19 @@ export function MemxSystemDiagrams() {
             {realtime.accessibleDescription}
           </p>
 
-          <ol className="relative mt-14 grid gap-8 lg:grid-cols-5 lg:gap-6" aria-hidden="true">
+          <div className="relative mt-14">
             <MemxDiagramTrace variant="realtime" tone="dark" />
-            {realtime.steps.map((step) => (
-              <li
-                key={step.index}
-                className="relative z-10 border-l border-accent-on-dark pl-6 lg:border-l-0 lg:pl-0"
-              >
-                <FlowNode {...step} tone="dark" />
-              </li>
-            ))}
-          </ol>
+            <ol className="relative z-10 grid gap-8 lg:grid-cols-5 lg:gap-6" aria-hidden="true">
+              {realtime.steps.map((step) => (
+                <li
+                  key={step.index}
+                  className="relative border-l border-accent-on-dark pl-6 lg:border-l-0 lg:pl-0"
+                >
+                  <FlowNode {...step} tone="dark" />
+                </li>
+              ))}
+            </ol>
+          </div>
         </figure>
       </div>
     </section>
