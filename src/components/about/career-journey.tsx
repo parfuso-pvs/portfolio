@@ -11,6 +11,7 @@ export type CareerJourneyEntry = {
   kind: "after-hours" | "full-time";
   name: string;
   roles: string;
+  seriesLabel?: string;
   start: { dateTime: string; label: string };
 };
 
@@ -37,6 +38,7 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
   const activeIndexRef = useRef(0);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
   const listRef = useRef<HTMLOListElement>(null);
+  const progressHeadRef = useRef<HTMLSpanElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -46,9 +48,10 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
       animationFrame = 0;
 
       const list = listRef.current;
+      const progressHead = progressHeadRef.current;
       const progress = progressRef.current;
 
-      if (!list || !progress) return;
+      if (!list || !progress || !progressHead) return;
 
       const anchor = window.innerHeight * 0.5;
       const listBounds = list.getBoundingClientRect();
@@ -58,6 +61,7 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
       );
 
       progress.style.transform = `scaleY(${journeyProgress})`;
+      progressHead.style.transform = `translate(-50%, ${journeyProgress * listBounds.height}px)`;
 
       let nextActiveIndex = 0;
 
@@ -91,14 +95,16 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
     };
   }, []);
 
+  const entryCount = String(entries.length).padStart(2, "0");
+
   return (
-    <div className="mt-16 lg:mt-24">
+    <div className="mt-12 lg:mt-16">
       <div className="grid gap-5 border-y border-line-strong py-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
         <div className="flex items-center gap-4">
           <span className="registration-mark" aria-hidden="true" />
           <div>
             <p className="type-label text-accent">One chronology</p>
-            <p className="type-mono text-muted mt-2">Career file / 01—04</p>
+            <p className="type-mono text-muted mt-2">Career file / 01—{entryCount}</p>
           </div>
         </div>
         <div className="sm:text-right">
@@ -129,7 +135,12 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
         />
         <span
           ref={progressRef}
-          className="absolute top-0 bottom-0 left-[0.375rem] w-px origin-top bg-accent [transform:scaleY(0)] will-change-transform lg:left-1/4"
+          className="absolute top-0 bottom-0 left-[0.375rem] w-[3px] -translate-x-px origin-top bg-accent shadow-[0_0_12px_color-mix(in_srgb,var(--blueprint)_30%,transparent)] [transform:scaleY(0)] will-change-transform lg:left-1/4"
+          aria-hidden="true"
+        />
+        <span
+          ref={progressHeadRef}
+          className="absolute top-0 left-[0.375rem] z-20 h-3.5 w-3.5 rounded-pill border-2 border-paper-raised bg-accent shadow-[0_0_0_2px_var(--blueprint),0_0_0_7px_var(--paper-canvas),0_0_20px_color-mix(in_srgb,var(--blueprint)_58%,transparent)] [transform:translate(-50%,0)] will-change-transform lg:left-1/4"
           aria-hidden="true"
         />
 
@@ -147,14 +158,14 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
               }}
               aria-current={isActive ? "step" : undefined}
               data-state={state}
-              className="relative isolate grid gap-8 border-b border-line py-16 pl-8 sm:pl-10 lg:min-h-[34rem] lg:grid-cols-12 lg:items-center lg:gap-6 lg:py-20 lg:pl-0"
+              className="relative isolate grid gap-6 border-b border-line py-11 pl-8 sm:pl-10 lg:min-h-[24rem] lg:grid-cols-12 lg:items-center lg:gap-6 lg:py-12 lg:pl-0"
             >
               <span
-                className={`absolute top-[4.35rem] left-[0.375rem] z-10 -translate-x-1/2 border-2 border-accent transition-[width,height,background-color,transform] duration-500 motion-reduce:transition-none lg:top-1/2 lg:left-1/4 lg:-translate-y-1/2 ${
+                className={`absolute top-[3.45rem] left-[0.375rem] z-10 -translate-x-1/2 border-2 border-accent transition-[width,height,background-color,transform] duration-500 motion-reduce:transition-none lg:top-1/2 lg:left-1/4 lg:-translate-y-1/2 ${
                   isAfterHours ? "rotate-45" : "rounded-pill"
                 } ${
                   isActive
-                    ? "h-4 w-4 bg-paper-raised shadow-[0_0_0_5px_var(--paper-canvas)]"
+                    ? "h-[1.125rem] w-[1.125rem] bg-accent shadow-[0_0_0_5px_var(--paper-canvas),0_0_0_7px_var(--blueprint)]"
                     : isPast
                       ? "h-2.5 w-2.5 bg-accent"
                       : "h-2.5 w-2.5 bg-canvas"
@@ -175,9 +186,9 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
               </div>
 
               <article
-                className={`relative overflow-hidden border px-6 py-8 transition-[transform,background-color,border-color,box-shadow] duration-700 motion-reduce:transition-none sm:px-8 lg:col-span-8 lg:col-start-5 lg:px-10 lg:py-12 ${
+                className={`relative overflow-hidden border px-6 py-7 transition-[transform,background-color,border-color,box-shadow] duration-500 motion-reduce:transition-none sm:px-8 lg:col-span-8 lg:col-start-5 lg:px-10 lg:py-9 ${
                   isActive
-                    ? "translate-x-0 border-line-strong bg-paper-raised shadow-pinned lg:translate-x-3"
+                    ? "translate-x-0 border-line-strong bg-paper-raised shadow-pinned lg:translate-x-4 lg:scale-[1.02]"
                     : "border-transparent bg-transparent shadow-none"
                 }`}
               >
@@ -190,7 +201,11 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
                       />
                     ) : null}
                     <span
-                      className="absolute top-8 bottom-8 left-0 w-1.5 bg-accent"
+                      className="absolute top-0 left-8 h-2 w-24 bg-accent lg:left-10"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="absolute top-7 bottom-7 left-0 w-1.5 bg-accent"
                       aria-hidden="true"
                     />
                   </>
@@ -201,10 +216,15 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
                     <p
                       className={`type-label mb-5 transition-colors duration-500 motion-reduce:transition-none ${isActive ? "text-accent" : "text-muted"}`}
                     >
-                      {isActive ? `In focus / ${entry.index} of 04` : `Chapter ${entry.index}`}
+                      {isActive
+                        ? `In focus / ${entry.index} of ${entryCount}`
+                        : `Chapter ${entry.index}`}
                     </p>
+                    {entry.seriesLabel ? (
+                      <p className="type-mono text-accent mb-3">{entry.seriesLabel}</p>
+                    ) : null}
                     <h3
-                      className={`type-heading text-[clamp(2.75rem,4.5vw,5rem)] transition-colors duration-500 motion-reduce:transition-none ${isActive ? "text-ink" : "text-muted"}`}
+                      className={`type-heading text-[clamp(2.5rem,4vw,4.25rem)] transition-colors duration-500 motion-reduce:transition-none ${isActive || isPast ? "text-ink" : "text-muted"}`}
                     >
                       {entry.name}
                     </h3>

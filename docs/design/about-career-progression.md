@@ -21,14 +21,17 @@ how Phil's responsibilities expanded while keeping concurrent after-hours work v
 ## Composition
 
 - A scroll-driven editorial journey carries all four entries in chronological start-date order.
+- Five milestones represent four organizations. MEMX is intentionally split into its frontend and
+  senior full-stack positions, with an explicit two-position sequence tying them together.
 - The chronology spine sits at the metadata/story boundary on desktop and fills in cobalt as the
-  viewport advances through the list.
+  viewport advances through the list. A visible progress head travels continuously at the leading
+  edge of the fill.
 - One chapter is in focus at a time. Its story lifts into a pinned paper sheet while the surrounding
   chapters stay readable but visually recede.
 - Full-time milestones use circular points; after-hours milestones use diamond points and retain an
   explicit label. When an after-hours chapter is active, its sheet reveals the blueprint material.
-- Each desktop chapter receives enough vertical space to feel like a deliberate stage rather than a
-  compact table row.
+- Desktop chapters use a compact 24rem stage: enough room for a focused transition without making
+  the chronology feel monumental or sparse.
 - On narrow screens, the spine moves left and every entry returns to the same
   metadata-project-detail order without horizontal overflow.
 
