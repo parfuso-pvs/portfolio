@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 
-import { RouteIntro } from "@/components/layout/route-intro";
+import { AboutNarrative } from "@/components/about/about-narrative";
+import { getProject } from "@/content/projects";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Phil Arfuso, a full-stack software engineer and product builder.",
+  description:
+    "About Phil Arfuso, a full-stack software engineer, systems thinker, and independent product builder.",
 };
 
+const workingContexts = [
+  getProject("memx"),
+  getProject("domani"),
+  getProject("pixelverse-studios"),
+  getProject("earthcam"),
+];
+
 export default function AboutPage() {
-  return (
-    <RouteIntro
-      index="Profile 01"
-      eyebrow="About Phil"
-      title="Engineer by craft."
-      description="Builder by curiosity. Product thinker by practice. Human by design."
-    />
-  );
+  return <AboutNarrative projects={workingContexts} />;
 }
