@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { CaseStudyFrame } from "@/components/case-study/case-study-frame";
+import { IffersPicturesMedia } from "@/components/case-study/iffers-pictures-media";
 import { IffersPicturesNarrative } from "@/components/case-study/iffers-pictures-narrative";
 import { getProject } from "@/content/projects";
 
@@ -15,6 +16,7 @@ export default function IffersPicturesPage() {
   return (
     <CaseStudyFrame project={project}>
       <IffersPicturesNarrative project={project} />
+      <IffersPicturesMedia />
     </CaseStudyFrame>
   );
 }
