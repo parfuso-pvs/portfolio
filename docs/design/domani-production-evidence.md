@@ -26,6 +26,7 @@ without turning early traction into an unsupported growth or conversion story.
 ## Accuracy boundaries
 
 - All figures are explicitly labelled as an August 26, 2026 snapshot.
+- The project registry owns that snapshot date once; the section heading, boundary label, and metric provenance rows derive their display formats from it.
 - Account totals exclude profiles recorded as deleted.
 - Activity metrics refer to identified production users, not shared anonymous identifiers.
 - Store evidence is limited to seven production-verified lifetime transactions.

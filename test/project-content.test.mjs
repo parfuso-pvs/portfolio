@@ -38,8 +38,9 @@ test("Domani metrics retain evidence and roadmap boundaries", () => {
   const domani = getProject("domani");
 
   assert.ok(domani.metrics.length > 0);
+  assert.equal(domani.snapshotDate, "2026-08-26");
   domani.metrics.forEach((metric) => {
-    assert.equal(metric.snapshotDate, "2026-08-26");
+    assert.equal("snapshotDate" in metric, false);
     assert.ok(metric.source);
     assert.ok(metric.detail);
   });

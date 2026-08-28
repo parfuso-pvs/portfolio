@@ -8,13 +8,20 @@ type DomaniProductionEvidenceProps = {
 };
 
 export function DomaniProductionEvidence({ project }: DomaniProductionEvidenceProps) {
+  const snapshotDate = new Date(`${project.snapshotDate}T00:00:00Z`);
+  const snapshotIndex = project.snapshotDate.replaceAll("-", ".");
+  const snapshotLabel = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+    timeZone: "UTC",
+  }).format(snapshotDate);
+
   return (
     <section className="px-page-gutter pb-section" aria-labelledby="domani-production-evidence">
       <div className="mx-auto w-full max-w-[90rem] border-t border-line-strong pt-6">
         <header className="grid gap-8 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-3">
             <p className="type-label text-accent">{domaniEvidence.eyebrow}</p>
-            <p className="type-mono text-muted mt-3">{domaniEvidence.index}</p>
+            <p className="type-mono text-muted mt-3">Snapshot / {snapshotIndex}</p>
           </div>
           <div className="lg:col-span-7 lg:col-start-5">
             <h2
@@ -54,7 +61,7 @@ export function DomaniProductionEvidence({ project }: DomaniProductionEvidencePr
                   <dd className="sm:pt-1">
                     <p className="type-body-small text-media-foreground/70">{metric.detail}</p>
                     <p className="type-mono text-media-foreground/50 mt-4">
-                      {domaniEvidence.sourceLabels[metric.source]} / {metric.snapshotDate}
+                      {domaniEvidence.sourceLabels[metric.source]} / {project.snapshotDate}
                     </p>
                   </dd>
                 </div>
@@ -68,7 +75,7 @@ export function DomaniProductionEvidence({ project }: DomaniProductionEvidencePr
           >
             <p className="type-label text-accent-on-dark">Snapshot boundary</p>
             <p className="type-heading text-media-foreground mt-6 text-[clamp(2rem,3vw,3.5rem)]">
-              {domaniEvidence.snapshotLabel}
+              {snapshotLabel}
             </p>
             <ul className="border-media-foreground/20 mt-9 divide-y divide-media-foreground/20 border-y">
               {domaniEvidence.caveats.map((caveat, index) => (

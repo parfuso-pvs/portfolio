@@ -3,7 +3,6 @@ export type MetricSource = "product-analytics" | "production-database" | "store-
 export type ProjectMetric = {
   detail: string;
   label: string;
-  snapshotDate: string;
   source: MetricSource;
   value: string;
 };
@@ -41,6 +40,7 @@ type ProjectFoundation = {
   proofPoints: readonly string[];
   roadmap: readonly string[];
   role: string;
+  snapshotDate: string | null;
   summary: string;
 };
 
@@ -60,6 +60,8 @@ export type SupportingProject = ProjectFoundation & {
 };
 
 export type PortfolioProject = FeaturedProject | SupportingProject;
+
+const domaniSnapshotDate = "2026-08-26";
 
 export const projects = [
   {
@@ -97,6 +99,7 @@ export const projects = [
     ],
     metrics: [],
     roadmap: [],
+    snapshotDate: null,
     mediaPolicy: {
       strategy: "original-diagrams-only",
       allowed: [
@@ -147,33 +150,30 @@ export const projects = [
       "19 of 28 task creators planned on multiple days.",
       "Task-creator retention proxies reached 39% across at least seven days and 32% across at least 30 days.",
     ],
+    snapshotDate: domaniSnapshotDate,
     metrics: [
       {
         value: "59",
         label: "active accounts",
         detail: "62 registered accounts; 59 remained active and non-deleted.",
-        snapshotDate: "2026-08-26",
         source: "production-database",
       },
       {
         value: "636",
         label: "tasks created",
         detail: "238 of those tasks were completed, a 37.4% completion rate.",
-        snapshotDate: "2026-08-26",
         source: "production-database",
       },
       {
         value: "15 / 6",
         label: "monthly / weekly active users",
         detail: "Identified active users in the production snapshot.",
-        snapshotDate: "2026-08-26",
         source: "product-analytics",
       },
       {
         value: "69",
         label: "sessions in 30 days",
         detail: "An average of 4.6 sessions per identified monthly active user.",
-        snapshotDate: "2026-08-26",
         source: "product-analytics",
       },
       {
@@ -181,7 +181,6 @@ export const projects = [
         label: "verified lifetime transactions",
         detail:
           "Three App Store and four Play Store production transactions, with no recorded refunds.",
-        snapshotDate: "2026-08-26",
         source: "store-verification",
       },
     ],
@@ -230,6 +229,7 @@ export const projects = [
     proofPoints: ["The complete public experience was designed and coded by Phil."],
     metrics: [],
     roadmap: [],
+    snapshotDate: null,
     mediaPolicy: {
       strategy: "approved-client-photography",
       allowed: ["Approved real photography from the Iffer's Pictures project"],
@@ -265,6 +265,7 @@ export const projects = [
     proofPoints: ["Public client work includes Iffer's Pictures and Jones Pressure Washing NJ."],
     metrics: [],
     roadmap: [],
+    snapshotDate: null,
     mediaPolicy: {
       strategy: "public-site-media",
       allowed: ["Approved public client-site imagery and code-native page compositions"],
@@ -296,6 +297,7 @@ export const projects = [
     proofPoints: ["Led and mentored a five-person frontend team during a high-turnover period."],
     metrics: [],
     roadmap: [],
+    snapshotDate: null,
     mediaPolicy: {
       strategy: "public-streaming-media",
       allowed: ["Public player imagery and original diagrams of frontend component systems"],

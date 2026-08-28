@@ -2,8 +2,6 @@ import type { MetricSource } from "@/content/projects";
 
 export const domaniEvidence = {
   eyebrow: "Production evidence",
-  index: "Snapshot / 2026.08.26",
-  snapshotLabel: "August 26, 2026",
   title: "Early traction, measured without pretending certainty.",
   body: "The useful signal is not scale alone. Accounts, planning behavior, repeat use, and production store transactions can each be examined—but only within the limits of the system that recorded them.",
   sourceLabels: {
