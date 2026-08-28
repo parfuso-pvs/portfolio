@@ -66,7 +66,7 @@ export const projects = [
     id: "memx",
     name: "MEMX",
     prominence: "featured",
-    caseStudyStatus: "intro",
+    caseStudyStatus: "published",
     href: "/work/memx",
     navigationLabel: "MEMX",
     indexLabel: "Case 01",

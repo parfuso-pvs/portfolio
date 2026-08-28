@@ -25,6 +25,7 @@ test("the registry preserves unique project identity, hierarchy, and route owner
 test("MEMX content protects confidentiality and ownership attribution", () => {
   const memx = getProject("memx");
 
+  assert.equal(memx.caseStudyStatus, "published");
   assert.equal(memx.mediaPolicy.strategy, "original-diagrams-only");
   ["Private screenshots", "Reconstructed interfaces", "Fake exchange data"].forEach((rule) =>
     assert.ok(memx.mediaPolicy.prohibited.includes(rule)),
