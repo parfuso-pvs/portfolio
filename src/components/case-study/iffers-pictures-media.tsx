@@ -4,7 +4,7 @@ import { iffersPicturesMedia } from "@/content/case-studies/iffers-pictures-medi
 
 const layoutClasses = {
   maternity: "lg:col-span-8 lg:row-start-1",
-  family: "lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:mt-24",
+  family: "lg:z-10 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:mt-24",
   engagement: "lg:col-span-5 lg:col-start-2 lg:row-start-2 lg:-mt-8",
   event: "lg:col-span-3 lg:col-start-7 lg:row-start-2 lg:mt-10",
 } as const;

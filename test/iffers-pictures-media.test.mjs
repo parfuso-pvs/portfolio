@@ -51,6 +51,7 @@ test("the gallery is a responsive, static editorial composition", async () => {
   assert.doesNotMatch(component, /"use client"/);
   assert.match(component, /lg:grid-cols-12/);
   assert.match(component, /lg:row-span-2/);
+  assert.match(component, /family: "lg:z-10/);
   assert.match(component, /h-auto w-full/);
   assert.match(component, /<figure/);
   assert.match(component, /<figcaption/);
