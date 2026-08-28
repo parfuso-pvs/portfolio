@@ -5,6 +5,7 @@ import test from "node:test";
 const contentPath = "src/content/case-studies/domani-evidence.ts";
 const componentPath = "src/components/case-study/domani-production-evidence.tsx";
 const pagePath = "src/app/work/domani/page.tsx";
+const projectsPath = "src/content/projects.ts";
 
 test("the Domani route composes production evidence from the project registry", async () => {
   const [page, component] = await Promise.all([
@@ -32,13 +33,14 @@ test("the evidence ledger exposes value, label, detail, source, and snapshot dat
 });
 
 test("the evidence copy preserves analytics and commercial boundaries", async () => {
-  const [content, component] = await Promise.all([
+  const [content, component, projects] = await Promise.all([
     readFile(contentPath, "utf8"),
     readFile(componentPath, "utf8"),
+    readFile(projectsPath, "utf8"),
   ]);
-  const source = `${content}\n${component}`;
+  const source = `${content}\n${component}\n${projects}`;
 
-  assert.doesNotMatch(content, /August 26, 2026|2026\.08\.26/);
+  assert.doesNotMatch(source, /August 26, 2026|2026\.08\.26/);
   assert.match(content, /identified production users rather than shared anonymous identifiers/);
   assert.match(content, /revenue was not retrieved/);
   assert.match(content, /No conversion rate is shown/);

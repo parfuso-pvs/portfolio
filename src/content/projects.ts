@@ -146,7 +146,7 @@ export const projects = [
       "Progress analytics",
     ],
     proofPoints: [
-      "62 accounts registered since December 12, 2025; 59 remained active and non-deleted at the August 26, 2026 snapshot.",
+      "62 accounts registered since December 12, 2025; 59 remained active and non-deleted.",
       "19 of 28 task creators planned on multiple days.",
       "Task-creator retention proxies reached 39% across at least seven days and 32% across at least 30 days.",
     ],
