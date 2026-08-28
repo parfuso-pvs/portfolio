@@ -5,6 +5,7 @@ import test from "node:test";
 const globalCssPath = "src/app/globals.css";
 const componentPath = "src/components/ui/material-surface.tsx";
 const homePath = "src/components/home/home-hero.tsx";
+const homeMotionPath = "src/components/motion/home-assembly-motion.tsx";
 const documentationPath = "docs/design/material-system.md";
 const materialPrimitives = [
   "material-sheet",
@@ -49,14 +50,20 @@ test("MaterialSurface provides semantic elements and bounded elevation variants"
 });
 
 test("the homepage demonstrates the system without exposing decorative artifacts", async () => {
-  const home = await readFile(homePath, "utf8");
+  const [home, motion] = await Promise.all([
+    readFile(homePath, "utf8"),
+    readFile(homeMotionPath, "utf8"),
+  ]);
 
   assert.match(home, /<MaterialSurface/);
   assert.match(home, /<RegistrationMark/);
   assert.match(home, /material-blueprint/);
   assert.match(home, /material-vellum/);
-  assert.match(home, /className="material-blueprint[^"]*"\s+aria-hidden="true"/);
-  assert.match(home, /className="material-sheet material-sheet-raised[^"]*"\s+aria-hidden="true"/);
+  assert.match(motion, /className="material-blueprint[^"]*"\s+aria-hidden="true"/);
+  assert.match(
+    motion,
+    /className="material-sheet material-sheet-raised[^"]*"\s+aria-hidden="true"/,
+  );
   assert.match(home, /className="material-tab[\s\S]*?aria-hidden="true"/);
 });
 

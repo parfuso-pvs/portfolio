@@ -4,7 +4,7 @@ import test from "node:test";
 
 const homePagePath = "src/app/page.tsx";
 const heroPath = "src/components/home/home-hero.tsx";
-const globalStylesPath = "src/app/globals.css";
+const heroMotionPath = "src/components/motion/home-assembly-motion.tsx";
 
 test("the homepage hero selects MEMX from the project registry", async () => {
   const homePage = await readFile(homePagePath, "utf8");
@@ -52,14 +52,14 @@ test("primary homepage actions cover hover, focus, active, and touch sizing", as
   assert.doesNotMatch(hero, /aria-describedby="featured-project-summary"/);
 });
 
-test("the entrance sequence never gates the primary content sheet", async () => {
-  const styles = await readFile(globalStylesPath, "utf8");
-  const motionRules = styles.match(
-    /\.home-assembly-backdrop,[\s\S]*?animation: home-assembly-enter[^}]+}/,
-  )?.[0];
+test("the motion leaf never gates or takes ownership of primary hero content", async () => {
+  const [hero, motion] = await Promise.all([
+    readFile(heroPath, "utf8"),
+    readFile(heroMotionPath, "utf8"),
+  ]);
 
-  assert.ok(motionRules);
-  assert.doesNotMatch(motionRules, /\.home-assembly-sheet/);
-  assert.match(styles, /translate: 0 1rem/);
-  assert.match(styles, /scale: 0\.992/);
+  assert.match(hero, /<HomeAssemblyMotion>/);
+  assert.match(motion, /\{children\}/);
+  assert.equal((motion.match(/<m\.div/g) ?? []).length, 2);
+  assert.doesNotMatch(motion, /<h1|<Link|MaterialSurface/);
 });
