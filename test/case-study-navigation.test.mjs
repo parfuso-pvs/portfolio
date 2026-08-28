@@ -39,5 +39,8 @@ test("the closing navigation supports responsive and keyboard interaction states
   assert.equal((component.match(/min-h-11/g) ?? []).length, 2);
   assert.match(component, /hover:border-accent-on-dark/);
   assert.match(component, /focus-visible:border-accent-on-dark/);
+  assert.match(component, /active:border-accent-on-dark/);
+  assert.match(component, /group-active:text-accent-on-dark/);
+  assert.match(component, /group-active:translate-x-1/);
   assert.match(component, /active:text-media-foreground\/70/);
 });

@@ -42,10 +42,10 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
               <p className="type-mono text-accent-on-dark">Next / {nextProject.indexLabel}</p>
               <Link
                 href={nextProject.href}
-                className="border-media-foreground/25 hover:border-accent-on-dark focus-visible:border-accent-on-dark group mt-5 grid min-h-11 gap-8 border-b pb-7 transition-colors sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"
+                className="border-media-foreground/25 hover:border-accent-on-dark focus-visible:border-accent-on-dark active:border-accent-on-dark group mt-5 grid min-h-11 gap-8 border-b pb-7 transition-colors sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"
               >
                 <span>
-                  <span className="type-heading text-media-foreground group-hover:text-accent-on-dark group-focus-visible:text-accent-on-dark block transition-colors">
+                  <span className="type-heading text-media-foreground group-hover:text-accent-on-dark group-focus-visible:text-accent-on-dark group-active:text-accent-on-dark block transition-colors">
                     {nextProject.name}
                   </span>
                   <span className="type-body-small text-media-foreground/65 mt-4 block max-w-xl">
@@ -53,7 +53,7 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
                   </span>
                 </span>
                 <span
-                  className="type-mono text-accent-on-dark flex items-center gap-3 transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1"
+                  className="type-mono text-accent-on-dark flex items-center gap-3 transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1 group-active:translate-x-1"
                   aria-hidden="true"
                 >
                   Open case <span className="text-lg">→</span>
