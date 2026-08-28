@@ -37,6 +37,7 @@ test("MEMX content protects confidentiality and ownership attribution", () => {
 test("Domani metrics retain evidence and roadmap boundaries", () => {
   const domani = getProject("domani");
 
+  assert.equal(domani.caseStudyStatus, "published");
   assert.ok(domani.metrics.length > 0);
   assert.equal(domani.snapshotDate, "2026-08-26");
   domani.metrics.forEach((metric) => {

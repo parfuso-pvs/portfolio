@@ -35,7 +35,7 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
               id={headingId}
               className="type-heading text-media-foreground max-w-[12ch] text-pretty"
             >
-              One system clarified. Another story ahead.
+              One case complete. Another story ahead.
             </h2>
 
             <div className="border-media-foreground/20 mt-12 border-t pt-6 sm:mt-16">

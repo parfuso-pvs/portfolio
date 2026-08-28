@@ -4,6 +4,7 @@ import test from "node:test";
 
 const componentPath = "src/components/case-study/case-study-navigation.tsx";
 const memxRoutePath = "src/app/work/memx/page.tsx";
+const domaniRoutePath = "src/app/work/domani/page.tsx";
 
 test("the completed MEMX story closes with shared case-study navigation", async () => {
   const [component, route] = await Promise.all([
@@ -19,6 +20,16 @@ test("the completed MEMX story closes with shared case-study navigation", async 
   assert.doesNotMatch(component, /"use client"/);
 });
 
+test("the completed Domani story continues to Iffer's Pictures", async () => {
+  const route = await readFile(domaniRoutePath, "utf8");
+
+  assert.match(route, /const nextProject = getProject\("iffers-pictures"\)/);
+  assert.match(
+    route,
+    /<CaseStudyNavigation currentProject=\{project\} nextProject=\{nextProject\} \/>/,
+  );
+});
+
 test("the closing navigation uses centralized project paths and semantic labels", async () => {
   const component = await readFile(componentPath, "utf8");
 
@@ -29,6 +40,7 @@ test("the closing navigation uses centralized project paths and semantic labels"
   assert.match(component, /href="\/work"/);
   assert.match(component, /aria-labelledby=\{headingId\}/);
   assert.match(component, /<h2/);
+  assert.match(component, /One case complete\. Another story ahead\./);
 });
 
 test("the closing navigation supports responsive and keyboard interaction states", async () => {
