@@ -157,78 +157,80 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
             </div>
           </header>
 
-          <div className="mt-16 grid lg:mt-24 lg:grid-cols-12 lg:gap-6">
-            <MaterialSurface
-              elevation="raised"
-              className="relative px-6 py-9 sm:px-10 sm:py-12 lg:col-span-11 lg:col-start-2 lg:px-14 lg:py-16"
-            >
-              <RegistrationMark className="top-4 right-4" />
-              <div className="grid gap-5 border-b border-line-strong pb-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+          <div className="mt-16 lg:mt-24">
+            <div className="grid gap-5 border-y border-line-strong py-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+              <div className="flex items-center gap-4">
+                <RegistrationMark />
                 <div>
                   <p className="type-label text-accent">One chronology</p>
-                  <p className="type-mono text-muted mt-3">Career file / 01—04</p>
+                  <p className="type-mono text-muted mt-2">Career file / 01—04</p>
                 </div>
-                <ul
-                  className="type-mono text-muted flex flex-wrap gap-x-6 gap-y-3"
-                  aria-label="Timeline key"
-                >
-                  <li className="flex items-center gap-2">
-                    <span
-                      className="border-accent h-2.5 w-2.5 rounded-pill border-2"
-                      aria-hidden="true"
-                    />
-                    Full-time
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="bg-accent h-2.5 w-2.5 rounded-pill" aria-hidden="true" />
-                    After hours
-                  </li>
-                </ul>
               </div>
+              <ul
+                className="type-mono text-muted flex flex-wrap gap-x-6 gap-y-3 sm:justify-end"
+                aria-label="Timeline key"
+              >
+                <li className="flex items-center gap-2">
+                  <span
+                    className="border-accent h-2.5 w-2.5 rounded-pill border-2"
+                    aria-hidden="true"
+                  />
+                  Full-time
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-accent h-2.5 w-2.5 rounded-pill" aria-hidden="true" />
+                  After hours
+                </li>
+              </ul>
+            </div>
 
-              <ol className="relative mt-3 before:absolute before:top-10 before:bottom-10 before:left-[0.3125rem] before:w-px before:bg-line-strong">
-                {aboutContent.career.entries.map((entry) => {
-                  const project = resolveCareerProject(projects, entry);
-                  const isAfterHours = entry.kind === "after-hours";
+            <ol className="relative before:absolute before:top-12 before:bottom-12 before:left-[0.3125rem] before:w-px before:bg-line-strong">
+              {aboutContent.career.entries.map((entry) => {
+                const project = resolveCareerProject(projects, entry);
+                const isAfterHours = entry.kind === "after-hours";
 
-                  return (
-                    <li
-                      key={entry.projectId}
-                      className="relative grid gap-5 border-b border-line py-10 pl-8 last:border-b-0 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:gap-8 sm:pl-10 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] lg:gap-12"
-                    >
+                return (
+                  <li
+                    key={entry.projectId}
+                    className="relative isolate grid gap-7 border-b border-line py-10 pl-8 sm:pl-10 lg:grid-cols-12 lg:gap-6 lg:py-12"
+                  >
+                    {isAfterHours ? (
                       <span
-                        className={`border-accent absolute top-[2.55rem] left-0 h-3 w-3 rounded-pill border-2 ${isAfterHours ? "bg-accent" : "bg-paper-raised"}`}
+                        className="material-blueprint pointer-events-none absolute inset-y-3 right-0 left-6 -z-10 border-x-0 opacity-55 sm:left-8 lg:inset-y-5"
                         aria-hidden="true"
                       />
-                      <div>
-                        <p className="type-mono text-accent">
-                          {entry.index} / {project.indexLabel}
-                        </p>
-                        <CareerPeriod entry={entry} />
-                        <p
-                          className={`type-label mt-5 ${isAfterHours ? "text-accent" : "text-muted"}`}
-                        >
-                          {entry.context}
-                        </p>
-                      </div>
-                      <div
-                        className={
-                          isAfterHours
-                            ? "material-blueprint -my-4 px-5 py-7 sm:px-7 lg:-mr-8 lg:px-9"
-                            : "py-3"
-                        }
+                    ) : null}
+                    <span
+                      className={`border-accent absolute top-[2.85rem] left-0 h-3 w-3 rounded-pill border-2 lg:top-[3.35rem] ${isAfterHours ? "bg-accent" : "bg-canvas"}`}
+                      aria-hidden="true"
+                    />
+
+                    <div className="lg:col-span-3">
+                      <p className="type-mono text-accent">
+                        {entry.index} / {project.indexLabel}
+                      </p>
+                      <CareerPeriod entry={entry} />
+                      <p
+                        className={`type-label mt-4 ${isAfterHours ? "text-accent" : "text-muted"}`}
                       >
-                        <h3 className="type-heading text-ink text-[clamp(2.25rem,4vw,4rem)]">
-                          {project.name}
-                        </h3>
-                        <p className="type-label text-muted mt-4">{entry.roles}</p>
-                        <p className="type-body-small text-ink mt-6 max-w-2xl">{entry.body}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ol>
-            </MaterialSurface>
+                        {entry.context}
+                      </p>
+                    </div>
+
+                    <div className="lg:col-span-3">
+                      <h3 className="type-heading text-ink text-[clamp(2.25rem,3.5vw,3.5rem)]">
+                        {project.name}
+                      </h3>
+                    </div>
+
+                    <div className="lg:col-span-5 lg:col-start-8 lg:pt-1">
+                      <p className="type-label text-muted leading-[1.5]">{entry.roles}</p>
+                      <p className="type-body-small text-ink mt-5 max-w-[58ch]">{entry.body}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
         </div>
       </section>

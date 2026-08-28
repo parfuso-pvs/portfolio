@@ -20,11 +20,30 @@ how Phil's responsibilities expanded while keeping concurrent after-hours work v
 
 ## Composition
 
-- One raised paper surface carries all four entries in chronological start-date order.
-- One continuous rule and four registration points make the work read as one career story.
-- EarthCam and MEMX remain plain paper entries; PixelVerse and Domani receive inset blueprint
-  surfaces, filled registration points, and explicit after-hours labels.
-- On narrow screens, every entry returns to the same single-column date-then-story order.
+- A borderless editorial ledger carries all four entries in chronological start-date order.
+- One continuous rule and four registration points make the work read as one career story without
+  enclosing the entire section in a large card.
+- Every desktop row shares the same metadata, project, and role/detail columns for predictable
+  scanning.
+- EarthCam and MEMX remain plain paper entries; PixelVerse and Domani receive a quiet blueprint wash,
+  filled registration points, and explicit after-hours labels without changing row geometry.
+- Project titles use a restrained local scale so dates, role progression, and descriptions remain
+  visible in the same scan.
+- On narrow screens, every entry returns to the same single-column metadata-project-detail order.
+
+## Research decisions
+
+- [Nielsen Norman Group's company-information research](https://media.nngroup.com/media/reports/free/Presenting_Company_Information_on_Corporate_Websites_3rd_Edition.pdf)
+  favors a simple vertical chronology with short, informative milestones because it matches normal
+  page scrolling and improves scanning.
+- Its [layer-cake scanning research](https://www.nngroup.com/articles/layer-cake-pattern-scanning/)
+  supports consistent, descriptive headings with tightly associated body copy rather than wide gaps
+  between a title and its explanation.
+- [Material Design's print-derived layout guidance](https://m1.material.io/layout/principles.html)
+  reinforces the use of a repeated grid, baseline alignment, restrained paper language, and scalable
+  spacing.
+- Current editorial portfolio references were used for restraint rather than copied literally: large
+  type remains characterful, but the chronology now uses one repeatable ledger system.
 
 ## Semantics and states
 

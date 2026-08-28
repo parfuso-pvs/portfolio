@@ -52,6 +52,8 @@ test("the career chapter keeps verified full-time and after-hours work on one ch
   assert.match(component, /aboutContent\.career\.entries\.map/);
   assert.doesNotMatch(component, /parallelTrack/);
   assert.match(component, /aria-label="Timeline key"/);
+  assert.match(component, /lg:grid-cols-12/);
+  assert.match(component, /material-blueprint pointer-events-none absolute/);
   assert.equal((component.match(/<ol/g) ?? []).length, 2);
 });
 
@@ -76,5 +78,5 @@ test("the About narrative is semantic, responsive, and server rendered", async (
   assert.match(component, /<ol/);
   assert.match(component, /lg:grid-cols-12/);
   assert.match(component, /max-w-\[90rem\]/);
-  assert.match(component, /sm:grid-cols-\[minmax\(0,11rem\)_minmax\(0,1fr\)\]/);
+  assert.match(component, /lg:col-span-5 lg:col-start-8/);
 });
