@@ -13,8 +13,9 @@ runtime.
 - The newly current desktop destination registers its persistent bottom rule with the same transform
   language. The cobalt plane and `aria-current="page"` remain the primary state indicators.
 - Opening the mobile disclosure assembles the paper sheet with a six-pixel vertical settle and a
-  restrained opacity change. The current row's square registration mark resolves at the end of that
-  entrance.
+  restrained scale change while remaining fully visible. The current row's square registration mark
+  resolves at the end of that entrance, then releases its animation transform so hover and focus
+  feedback remain available.
 - Closing is immediate. Escape, link activation, history restoration, and route changes never wait
   for an exit animation.
 
@@ -26,7 +27,7 @@ runtime.
   no orchestration, measurement, or React render state.
 - The ticket does not add Motion's layout-animation feature bundle to the shared header. Motion 13
   remains the only JavaScript animation engine elsewhere in the site.
-- Every continuous effect uses transform; the bounded mobile entrance combines transform and opacity.
+- Every continuous effect and the bounded mobile entrance use transform only.
 - Hover treatments are restricted to fine pointers. Keyboard focus receives equivalent feedback,
   while touch input retains the existing 44px targets without sticky hover-dependent state.
 
@@ -38,7 +39,8 @@ runtime.
 - Current-page state continues to use `aria-current="page"`, a cobalt plane, and a persistent bottom
   rule so meaning is not color-only or motion-only.
 - The closed mobile navigation remains absent through the native `hidden` attribute. Opening still
-  moves focus to the first link; Escape still closes and restores focus to the trigger.
+  moves focus to the first link, which remains visible throughout the entrance; Escape still closes
+  and restores focus to the trigger.
 - Navigation remains a collection of real, immediately actionable links.
 
 ## Production verification
@@ -52,8 +54,8 @@ referenced by each prerendered route.
 | PORT-903 navigation motion  |       208,432 B |          180,865 B |      229,430 B |
 
 The shared navigation's CSS-module class wiring adds 256 bytes gzip to referenced JavaScript without
-adding a runtime or dependency. The completed build references 13,023 bytes gzip of CSS on Home and
-12,776 bytes on Contact; all emitted CSS is 13,023 bytes gzip.
+adding a runtime or dependency. The completed build references 13,021 bytes gzip of CSS on Home and
+12,774 bytes on Contact; all emitted CSS is 13,021 bytes gzip.
 
 ## Scope boundary
 

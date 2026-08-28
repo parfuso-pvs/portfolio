@@ -85,5 +85,7 @@ test("navigation motion is bounded, input-aware, and reduced-motion safe", async
   assert.match(navigationStyles, /@media \(prefers-reduced-motion: no-preference\)/);
   assert.match(navigationStyles, /animation: assemble-mobile-sheet/);
   assert.match(navigationStyles, /animation: register-current-tab/);
+  assert.match(navigationStyles, /animation: register-current-marker[^;]+backwards;/);
+  assert.doesNotMatch(navigationStyles, /opacity/);
   assert.doesNotMatch(navigationStyles, /transition-property:.*(?:top|left|width|height)/);
 });

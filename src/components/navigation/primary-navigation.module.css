@@ -77,12 +77,10 @@
 
 @keyframes assemble-mobile-sheet {
   from {
-    opacity: 0;
     transform: translateY(-0.375rem) scale(0.985);
   }
 
   to {
-    opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
@@ -97,6 +95,6 @@
   }
 
   .currentMobileMarker {
-    animation: register-current-marker 360ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+    animation: register-current-marker 360ms cubic-bezier(0.16, 1, 0.3, 1) 80ms backwards;
   }
 }
