@@ -50,6 +50,7 @@ export type FeaturedProject = ProjectFoundation & {
   href: `/work/${string}`;
   navigationLabel: string;
   prominence: "featured";
+  publicUrl?: `https://${string}`;
   shortNavigationLabel?: string;
 };
 
@@ -201,6 +202,7 @@ export const projects = [
     prominence: "featured",
     caseStudyStatus: "intro",
     href: "/work/iffers-pictures",
+    publicUrl: "https://ifferspictures.com",
     navigationLabel: "Iffer's Pictures",
     shortNavigationLabel: "Iffer's",
     indexLabel: "Case 03",
