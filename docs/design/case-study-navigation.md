@@ -28,4 +28,5 @@ disabled, and asynchronous states do not apply.
 
 ## Deferred
 
-Domani and Iffer's Pictures receive the component when their case-study narratives are completed.
+PORT-504 mounts the shared component on Domani after its narrative, product media, and production
+evidence are complete. Iffer's Pictures receives it when its own case-study sequence is completed.

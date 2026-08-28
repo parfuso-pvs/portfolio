@@ -41,5 +41,5 @@ disabled, and active states do not apply.
 
 ## Deferred
 
-Closing navigation, Domani's published status, and any additional approved production evidence remain
-follow-up work.
+PORT-504 owns closing navigation and Domani's published status. Any additional approved production
+evidence remains follow-up work.

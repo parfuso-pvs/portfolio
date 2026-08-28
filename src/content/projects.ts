@@ -117,7 +117,7 @@ export const projects = [
     id: "domani",
     name: "Domani",
     prominence: "featured",
-    caseStudyStatus: "intro",
+    caseStudyStatus: "published",
     href: "/work/domani",
     navigationLabel: "Domani",
     indexLabel: "Case 02",
