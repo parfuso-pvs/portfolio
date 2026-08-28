@@ -5,6 +5,7 @@ import test from "node:test";
 const componentPath = "src/components/case-study/case-study-navigation.tsx";
 const memxRoutePath = "src/app/work/memx/page.tsx";
 const domaniRoutePath = "src/app/work/domani/page.tsx";
+const iffersRoutePath = "src/app/work/iffers-pictures/page.tsx";
 
 test("the completed MEMX story closes with shared case-study navigation", async () => {
   const [component, route] = await Promise.all([
@@ -24,6 +25,16 @@ test("the completed Domani story continues to Iffer's Pictures", async () => {
   const route = await readFile(domaniRoutePath, "utf8");
 
   assert.match(route, /const nextProject = getProject\("iffers-pictures"\)/);
+  assert.match(
+    route,
+    /<CaseStudyNavigation currentProject=\{project\} nextProject=\{nextProject\} \/>/,
+  );
+});
+
+test("the completed Iffer's Pictures story cycles to flagship Case 01", async () => {
+  const route = await readFile(iffersRoutePath, "utf8");
+
+  assert.match(route, /const nextProject = getProject\("memx"\)/);
   assert.match(
     route,
     /<CaseStudyNavigation currentProject=\{project\} nextProject=\{nextProject\} \/>/,
