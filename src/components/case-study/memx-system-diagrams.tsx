@@ -1,4 +1,5 @@
 import { memxSystemDiagrams } from "@/content/case-studies/memx-diagrams";
+import { MemxDiagramTrace } from "@/components/motion/memx-diagram-trace";
 
 type FlowNodeProps = {
   detail: string;
@@ -70,20 +71,21 @@ export function MemxSystemDiagrams() {
           </p>
 
           <div
-            className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-6"
+            className="relative mt-14 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-6"
             aria-hidden="true"
           >
-            <div className="material-sheet material-sheet-raised px-5 py-6 lg:col-span-2 lg:self-center">
+            <MemxDiagramTrace variant="configuration" tone="light" />
+            <div className="material-sheet material-sheet-raised relative z-10 px-5 py-6 lg:col-span-2 lg:self-center">
               <FlowNode index="01" {...configuration.activeMarket} />
             </div>
 
-            <div className="grid gap-6 border-l border-accent pl-6 lg:col-span-3">
+            <div className="relative z-10 grid gap-6 border-l border-accent pl-6 lg:col-span-3">
               {configuration.inputs.map((step) => (
                 <FlowNode key={step.index} {...step} />
               ))}
             </div>
 
-            <ol className="grid gap-6 lg:col-span-7 lg:grid-cols-3">
+            <ol className="relative z-10 grid gap-6 lg:col-span-7 lg:grid-cols-3">
               {configuration.output.map((step) => (
                 <li
                   key={step.index}
@@ -131,10 +133,11 @@ export function MemxSystemDiagrams() {
           </p>
 
           <ol className="relative mt-14 grid gap-8 lg:grid-cols-5 lg:gap-6" aria-hidden="true">
+            <MemxDiagramTrace variant="realtime" tone="dark" />
             {realtime.steps.map((step) => (
               <li
                 key={step.index}
-                className="relative border-l border-accent-on-dark pl-6 lg:border-l-0 lg:pl-0"
+                className="relative z-10 border-l border-accent-on-dark pl-6 lg:border-l-0 lg:pl-0"
               >
                 <FlowNode {...step} tone="dark" />
               </li>

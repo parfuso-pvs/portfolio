@@ -27,8 +27,9 @@ flow understandable without depicting a private interface or exposing exchange d
 - Both diagrams are semantic `figure` elements with visible captions and separate concise text
   equivalents.
 - Desktop paths use wide ruled compositions; mobile paths become vertical, preserving source order.
-- The figures are static Server Components, so loading, empty, error, success, hover, focus,
-  disabled, and active states do not apply.
+- The figures remain Server Components. PORT-904 adds a small route-local Client Component containing
+  only decorative path traces; loading, empty, error, success, hover, focus, disabled, and active
+  states still do not apply.
 
 ## Visual direction
 
@@ -36,3 +37,5 @@ flow understandable without depicting a private interface or exposing exchange d
 - The real-time path uses graphite and accessible light cobalt to distinguish movement through a
   live channel.
 - Neither view resembles an exchange dashboard, trading screen, or reconstructed MEMX product.
+- PORT-904 draws only the approved relationships over the fully visible static diagrams. Its desktop
+  and mobile traces recompose independently and reduced-motion users receive the completed paths.
