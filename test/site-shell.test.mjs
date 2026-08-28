@@ -5,6 +5,7 @@ import test from "node:test";
 const layoutPath = "src/app/layout.tsx";
 const headerPath = "src/components/layout/site-header.tsx";
 const navigationPath = "src/components/navigation/primary-navigation.tsx";
+const navigationStylesPath = "src/components/navigation/primary-navigation.module.css";
 const navigationDataPath = "src/content/navigation.ts";
 
 const routeFiles = [
@@ -67,4 +68,24 @@ test("current destinations are conveyed semantically and visually", async () => 
   assert.match(navigation, /aria-current=\{current \? "page" : undefined\}/);
   assert.match(navigation, /bg-accent-strong/);
   assert.match(navigation, /aria-hidden="true"/);
+});
+
+test("navigation motion is bounded, input-aware, and reduced-motion safe", async () => {
+  const [navigation, navigationStyles] = await Promise.all([
+    readFile(navigationPath, "utf8"),
+    readFile(navigationStylesPath, "utf8"),
+  ]);
+
+  assert.match(navigation, /styles\.tabRegistration/);
+  assert.match(navigation, /styles\.mobileSheet/);
+  assert.match(navigation, /hover:bg-accent-strong.*: "hover:bg-paper-deep"/);
+  assert.match(navigation, /hidden=\{!isOpen\}/);
+  assert.doesNotMatch(navigation, /motion\/react|AnimatePresence|setTimeout/);
+  assert.match(navigationStyles, /@media \(hover: hover\) and \(pointer: fine\)/);
+  assert.match(navigationStyles, /@media \(prefers-reduced-motion: no-preference\)/);
+  assert.match(navigationStyles, /animation: assemble-mobile-sheet/);
+  assert.match(navigationStyles, /animation: register-current-tab/);
+  assert.match(navigationStyles, /animation: register-current-marker[^;]+backwards;/);
+  assert.doesNotMatch(navigationStyles, /opacity/);
+  assert.doesNotMatch(navigationStyles, /transition-property:.*(?:top|left|width|height)/);
 });

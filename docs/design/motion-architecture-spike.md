@@ -111,7 +111,8 @@ requirement Motion cannot cover. It must not be added alongside Motion.
 ## Deferred work
 
 - PORT-902 completes the bounded homepage hero sequence while preserving this architecture.
-- Navigation-tab motion belongs to the navigation-motion ticket.
+- PORT-903 adds bounded navigation-tab and mobile-sheet motion without expanding the JavaScript
+  animation boundary.
 - Diagram drawing and timeline migration belong to their respective editorial-motion tickets.
 - Page transitions require a focused progressive-enhancement spike; the global route trace is not
   part of the selected architecture.
