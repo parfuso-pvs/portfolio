@@ -4,10 +4,16 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const targetUrl = process.env.MOTION_TEST_URL ?? "http://localhost:3000/";
+const motionScenario = process.env.MOTION_SCENARIO ?? "home";
 const chromePath =
   process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const profileDirectory = await mkdtemp(join(tmpdir(), "portfolio-motion-probe-"));
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+if (!new Set(["home", "memx-diagrams"]).has(motionScenario)) {
+  throw new Error(`Unknown motion scenario: ${motionScenario}`);
+}
+
+const profileDirectory = await mkdtemp(join(tmpdir(), "portfolio-motion-probe-"));
 
 let chrome;
 let socket;
@@ -127,6 +133,54 @@ async function measureScroll(client) {
   );
 }
 
+async function measureMemxDiagrams(client) {
+  const range = await evaluate(
+    client,
+    `(() => {
+      const traces = [...document.querySelectorAll('[data-diagram-trace]')];
+      if (traces.length !== 2) throw new Error('Expected two MEMX diagram traces.');
+
+      const firstTop = traces[0].getBoundingClientRect().top + window.scrollY;
+      const lastBottom = traces.at(-1).getBoundingClientRect().bottom + window.scrollY;
+      const maximumScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      return {
+        start: Math.max(0, firstTop - window.innerHeight * 0.9),
+        end: Math.min(maximumScroll, lastBottom - window.innerHeight * 0.2),
+      };
+    })()`,
+  );
+
+  await evaluate(client, `window.scrollTo(0, ${range.start})`);
+  const frames = await runFrameSample(
+    client,
+    `const progress = frame / (frameCount - 1);
+     window.scrollTo(0, ${range.start} + (${range.end} - ${range.start}) * progress);`,
+  );
+
+  await delay(1_500);
+  const traceState = await evaluate(
+    client,
+    `(() => {
+      const paths = [...document.querySelectorAll('[data-diagram-trace] svg')]
+        .filter((svg) => getComputedStyle(svg).display !== 'none')
+        .flatMap((svg) => [...svg.querySelectorAll('path')]);
+      const settledPaths = paths.filter((path) => {
+        const offset = Number.parseFloat(getComputedStyle(path).strokeDashoffset);
+        return Number.isFinite(offset) && Math.abs(offset) < 0.01;
+      }).length;
+      return { settledPaths, visiblePaths: paths.length };
+    })()`,
+  );
+
+  if (traceState.visiblePaths === 0 || traceState.settledPaths !== traceState.visiblePaths) {
+    throw new Error(
+      `MEMX traces did not settle: ${traceState.settledPaths}/${traceState.visiblePaths} paths.`,
+    );
+  }
+
+  return { ...frames, ...traceState };
+}
+
 async function runFrameSample(client, interaction) {
   return evaluate(
     client,
@@ -204,10 +258,14 @@ try {
   }
   await delay(1_000);
 
+  const measurements =
+    motionScenario === "memx-diagrams"
+      ? { diagramScroll: await measureMemxDiagrams(client) }
+      : { pointer: await measurePointer(client), scroll: await measureScroll(client) };
   const result = {
     chrome: await evaluate(client, "navigator.userAgent"),
-    pointer: await measurePointer(client),
-    scroll: await measureScroll(client),
+    scenario: motionScenario,
+    ...measurements,
     url: targetUrl,
     viewport: "1280x720",
   };

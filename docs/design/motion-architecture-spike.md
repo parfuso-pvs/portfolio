@@ -113,6 +113,7 @@ requirement Motion cannot cover. It must not be added alongside Motion.
 - PORT-902 completes the bounded homepage hero sequence while preserving this architecture.
 - PORT-903 adds bounded navigation-tab and mobile-sheet motion without expanding the JavaScript
   animation boundary.
-- Diagram drawing and timeline migration belong to their respective editorial-motion tickets.
+- PORT-904 adds route-local drawing to the two MEMX editorial diagrams while preserving their Server
+  Component content. Timeline migration remains a separate editorial-motion ticket.
 - Page transitions require a focused progressive-enhancement spike; the global route trace is not
   part of the selected architecture.
