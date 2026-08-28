@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { HomeAssemblyMotion } from "@/components/motion/home-assembly-motion";
 import { MaterialSurface, RegistrationMark } from "@/components/ui/material-surface";
 import type { FeaturedProjectRecord } from "@/content/projects";
 
@@ -68,16 +69,7 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
           </p>
         </div>
 
-        <div className="relative isolate lg:min-h-[43rem]">
-          <div
-            className="material-blueprint home-assembly-backdrop absolute top-4 -left-3 -z-10 h-[72%] w-[62%] -rotate-2 max-lg:top-3 max-lg:left-2 max-lg:h-[38%] max-lg:w-[92%]"
-            aria-hidden="true"
-          />
-          <div
-            className="material-sheet material-sheet-raised home-assembly-backsheet absolute right-1 bottom-2 -z-10 h-[58%] w-[68%] rotate-2 max-lg:right-2 max-lg:bottom-0 max-lg:h-[44%] max-lg:w-[88%]"
-            aria-hidden="true"
-          />
-
+        <HomeAssemblyMotion>
           <MaterialSurface
             as="div"
             elevation="pinned"
@@ -142,7 +134,7 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
               <SystemAssembly project={featuredProject} />
             </div>
           </MaterialSurface>
-        </div>
+        </HomeAssemblyMotion>
       </div>
     </section>
   );
