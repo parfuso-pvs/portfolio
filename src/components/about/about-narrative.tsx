@@ -7,9 +7,7 @@ type AboutNarrativeProps = {
   projects: readonly ProjectRecord[];
 };
 
-type CareerEntry =
-  | (typeof aboutContent.career.primaryTrack.entries)[number]
-  | (typeof aboutContent.career.parallelTrack.entries)[number];
+type CareerEntry = (typeof aboutContent.career.entries)[number];
 
 function resolveCareerProject(projects: readonly ProjectRecord[], entry: CareerEntry) {
   const project = projects.find(({ id }) => id === entry.projectId);
@@ -159,32 +157,47 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
             </div>
           </header>
 
-          <div className="mt-16 grid items-start gap-8 lg:mt-24 lg:grid-cols-12 lg:gap-6">
+          <div className="mt-16 grid lg:mt-24 lg:grid-cols-12 lg:gap-6">
             <MaterialSurface
               elevation="raised"
-              role="group"
-              aria-labelledby="about-primary-career"
-              className="relative px-6 py-9 sm:px-10 sm:py-12 lg:col-span-8 lg:px-14 lg:py-16"
+              className="relative px-6 py-9 sm:px-10 sm:py-12 lg:col-span-11 lg:col-start-2 lg:px-14 lg:py-16"
             >
               <RegistrationMark className="top-4 right-4" />
-              <div className="flex items-end justify-between gap-6 border-b border-line-strong pb-5">
-                <p id="about-primary-career" className="type-label text-accent">
-                  {aboutContent.career.primaryTrack.label}
-                </p>
-                <p className="type-mono text-muted hidden sm:block">Primary / 01—02</p>
+              <div className="grid gap-5 border-b border-line-strong pb-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+                <div>
+                  <p className="type-label text-accent">One chronology</p>
+                  <p className="type-mono text-muted mt-3">Career file / 01—04</p>
+                </div>
+                <ul
+                  className="type-mono text-muted flex flex-wrap gap-x-6 gap-y-3"
+                  aria-label="Timeline key"
+                >
+                  <li className="flex items-center gap-2">
+                    <span
+                      className="border-accent h-2.5 w-2.5 rounded-pill border-2"
+                      aria-hidden="true"
+                    />
+                    Full-time
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="bg-accent h-2.5 w-2.5 rounded-pill" aria-hidden="true" />
+                    After hours
+                  </li>
+                </ul>
               </div>
 
-              <ol className="relative mt-3 before:absolute before:top-9 before:bottom-9 before:left-[0.3125rem] before:w-px before:bg-line-strong">
-                {aboutContent.career.primaryTrack.entries.map((entry) => {
+              <ol className="relative mt-3 before:absolute before:top-10 before:bottom-10 before:left-[0.3125rem] before:w-px before:bg-line-strong">
+                {aboutContent.career.entries.map((entry) => {
                   const project = resolveCareerProject(projects, entry);
+                  const isAfterHours = entry.kind === "after-hours";
 
                   return (
                     <li
                       key={entry.projectId}
-                      className="relative grid gap-5 py-9 pl-8 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:gap-8 sm:pl-10"
+                      className="relative grid gap-5 border-b border-line py-10 pl-8 last:border-b-0 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:gap-8 sm:pl-10 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] lg:gap-12"
                     >
                       <span
-                        className="bg-paper-raised border-accent absolute top-[2.55rem] left-0 h-3 w-3 rounded-pill border-2"
+                        className={`border-accent absolute top-[2.55rem] left-0 h-3 w-3 rounded-pill border-2 ${isAfterHours ? "bg-accent" : "bg-paper-raised"}`}
                         aria-hidden="true"
                       />
                       <div>
@@ -192,8 +205,19 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
                           {entry.index} / {project.indexLabel}
                         </p>
                         <CareerPeriod entry={entry} />
+                        <p
+                          className={`type-label mt-5 ${isAfterHours ? "text-accent" : "text-muted"}`}
+                        >
+                          {entry.context}
+                        </p>
                       </div>
-                      <div>
+                      <div
+                        className={
+                          isAfterHours
+                            ? "material-blueprint -my-4 px-5 py-7 sm:px-7 lg:-mr-8 lg:px-9"
+                            : "py-3"
+                        }
+                      >
                         <h3 className="type-heading text-ink text-[clamp(2.25rem,4vw,4rem)]">
                           {project.name}
                         </h3>
@@ -205,38 +229,6 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
                 })}
               </ol>
             </MaterialSurface>
-
-            <aside
-              className="material-blueprint relative px-6 py-9 sm:px-8 sm:py-10 lg:col-span-4 lg:mt-20 lg:-ml-10"
-              aria-label="Concurrent after-hours work"
-            >
-              <div className="border-b border-accent/40 pb-5">
-                <p className="type-label text-accent">{aboutContent.career.parallelTrack.label}</p>
-                <p className="type-mono text-muted mt-3">
-                  {aboutContent.career.parallelTrack.note}
-                </p>
-              </div>
-
-              <ol className="divide-y divide-line-strong/60">
-                {aboutContent.career.parallelTrack.entries.map((entry) => {
-                  const project = resolveCareerProject(projects, entry);
-
-                  return (
-                    <li key={entry.projectId} className="py-8">
-                      <div className="flex items-start justify-between gap-5">
-                        <p className="type-mono text-accent">{entry.index} / parallel</p>
-                        <CareerPeriod entry={entry} />
-                      </div>
-                      <h3 className="type-heading text-ink mt-7 text-[clamp(2rem,3.5vw,3.5rem)]">
-                        {project.name}
-                      </h3>
-                      <p className="type-label text-muted mt-4">{entry.roles}</p>
-                      <p className="type-body-small text-ink mt-6">{entry.body}</p>
-                    </li>
-                  );
-                })}
-              </ol>
-            </aside>
           </div>
         </div>
       </section>

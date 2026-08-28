@@ -2,9 +2,8 @@
 
 ## Objective
 
-Turn the About page's selected-context ledger into a resume-verified career chapter that shows how
-Phil's responsibilities expanded while keeping concurrent after-hours work distinct from his
-full-time path.
+Turn the About page's selected-context ledger into one resume-verified career chronology that shows
+how Phil's responsibilities expanded while keeping concurrent after-hours work visibly distinct.
 
 ## Source boundary
 
@@ -21,15 +20,16 @@ full-time path.
 
 ## Composition
 
-- One raised paper surface carries the primary EarthCam-to-MEMX path.
-- A blueprint sheet overlaps it only at the desktop breakpoint and carries PixelVerse and Domani as
-  explicitly parallel practice.
-- The primary track uses one continuous rule with registration points rather than separate cards.
-- On narrow screens, both tracks return to source-order columns and the overlap is removed.
+- One raised paper surface carries all four entries in chronological start-date order.
+- One continuous rule and four registration points make the work read as one career story.
+- EarthCam and MEMX remain plain paper entries; PixelVerse and Domani receive inset blueprint
+  surfaces, filled registration points, and explicit after-hours labels.
+- On narrow screens, every entry returns to the same single-column date-then-story order.
 
 ## Semantics and states
 
-- Both tracks are ordered lists and every bounded date is represented by a semantic `time` element.
+- The career chapter is one ordered list and every bounded date is represented by a semantic `time`
+  element.
 - The timeline remains a Server Component with no new dependency or client JavaScript.
 - Loading, empty, error, success, hover, focus, active, and disabled states do not apply to this
   static chronology.

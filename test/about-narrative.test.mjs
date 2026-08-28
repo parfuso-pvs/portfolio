@@ -33,7 +33,7 @@ test("the profile narrative reflects the approved working philosophy", async () 
   assert.match(content, /after-hours client work/);
 });
 
-test("the career chapter preserves verified progression and concurrent work", async () => {
+test("the career chapter keeps verified full-time and after-hours work on one chronology", async () => {
   const [content, component] = await Promise.all([
     readFile(contentPath, "utf8"),
     readFile(componentPath, "utf8"),
@@ -44,12 +44,15 @@ test("the career chapter preserves verified progression and concurrent work", as
   );
   assert.match(content, /Front-End Developer → Lead Front-End Developer/);
   assert.match(content, /Front-End Engineer → Senior Full Stack Engineer/);
-  assert.match(content, /side work runs alongside the full-time path/);
-  assert.match(content, /Concurrent practice/);
+  assert.equal((content.match(/kind: "full-time"/g) ?? []).length, 2);
+  assert.equal((content.match(/kind: "after-hours"/g) ?? []).length, 2);
+  assert.match(content, /Everything belongs to one chronology/);
   assert.match(component, /<time dateTime=/);
   assert.match(component, /resolveCareerProject/);
-  assert.match(component, /aria-labelledby="about-primary-career"/);
-  assert.match(component, /aria-label="Concurrent after-hours work"/);
+  assert.match(component, /aboutContent\.career\.entries\.map/);
+  assert.doesNotMatch(component, /parallelTrack/);
+  assert.match(component, /aria-label="Timeline key"/);
+  assert.equal((component.match(/<ol/g) ?? []).length, 2);
 });
 
 test("the About page protects personal and unsupported resume details", async () => {
