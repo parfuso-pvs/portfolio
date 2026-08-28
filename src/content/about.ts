@@ -78,7 +78,7 @@ export const aboutContent = {
         context: "Independent / after hours",
         start: { dateTime: "2025-12", label: "December 2025" },
         end: null,
-        roles: "Co-Founder & Sole Developer",
+        roles: "Creator & Full-Stack Engineer",
         body: "Turned a personal frustration with productivity tools into a production iOS and Android product, expanding the practice into mobile development and product operations.",
       },
     ],

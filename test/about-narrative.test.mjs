@@ -44,6 +44,8 @@ test("the career chapter keeps verified full-time and after-hours work on one ch
   );
   assert.match(content, /Front-End Developer → Lead Front-End Developer/);
   assert.match(content, /Front-End Engineer → Senior Full Stack Engineer/);
+  assert.match(content, /Creator & Full-Stack Engineer/);
+  assert.doesNotMatch(content, /Co-Founder & Sole Developer/);
   assert.equal((content.match(/kind: "full-time"/g) ?? []).length, 2);
   assert.equal((content.match(/kind: "after-hours"/g) ?? []).length, 2);
   assert.match(content, /Everything belongs to one chronology/);
