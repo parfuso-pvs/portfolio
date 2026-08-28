@@ -5,6 +5,7 @@ import test from "node:test";
 const packagePath = "package.json";
 const motionPath = "src/components/motion/home-assembly-motion.tsx";
 const featuresPath = "src/components/motion/dom-animation-features.ts";
+const performancePath = "scripts/measure-motion-performance.mjs";
 
 test("Motion is the single versioned animation dependency", async () => {
   const packageSource = await readFile(packagePath, "utf8");
@@ -38,4 +39,26 @@ test("pointer and scroll values bypass React render state", async () => {
   assert.match(motion, /shouldReduceMotion/);
   assert.doesNotMatch(motion, /useState/);
   assert.doesNotMatch(motion, /addEventListener/);
+});
+
+test("pointer tracking measures layout once per pointer entry", async () => {
+  const motion = await readFile(motionPath, "utf8");
+
+  assert.match(motion, /pointerBoundsRef/);
+  assert.match(motion, /onPointerEnter=\{capturePointerBounds\}/);
+  assert.equal(motion.match(/getBoundingClientRect\(\)/g)?.length, 1);
+  assert.match(motion, /const bounds = pointerBoundsRef\.current/);
+});
+
+test("the production motion probe records animation frames and long tasks", async () => {
+  const [packageSource, performanceSource] = await Promise.all([
+    readFile(packagePath, "utf8"),
+    readFile(performancePath, "utf8"),
+  ]);
+  const packageJson = JSON.parse(packageSource);
+
+  assert.equal(packageJson.scripts["measure:motion"], `node ${performancePath}`);
+  assert.match(performanceSource, /requestAnimationFrame/);
+  assert.match(performanceSource, /PerformanceObserver/);
+  assert.match(performanceSource, /Input\.dispatchMouseEvent/);
 });

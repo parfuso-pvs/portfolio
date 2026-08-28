@@ -23,6 +23,8 @@ const loadDomAnimation = () =>
 
 export function HomeAssemblyMotion({ children }: HomeAssemblyMotionProps) {
   const stageRef = useRef<HTMLDivElement>(null);
+  const pointerBoundsRef = useRef<DOMRect | null>(null);
+  const pointerScrollOriginRef = useRef({ x: 0, y: 0 });
   const shouldReduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -42,15 +44,27 @@ export function HomeAssemblyMotion({ children }: HomeAssemblyMotionProps) {
   const composedBlueprintY = useTransform(() => blueprintY.get() + blueprintScroll.get());
   const composedBacksheetY = useTransform(() => backsheetY.get() + backsheetScroll.get());
 
+  function capturePointerBounds(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== "mouse" || shouldReduceMotion) return;
+
+    pointerBoundsRef.current = event.currentTarget.getBoundingClientRect();
+    pointerScrollOriginRef.current = { x: window.scrollX, y: window.scrollY };
+  }
+
   function updatePointer(event: PointerEvent<HTMLDivElement>) {
     if (event.pointerType !== "mouse" || shouldReduceMotion) return;
 
-    const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 2);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 2);
+    const bounds = pointerBoundsRef.current;
+    if (!bounds) return;
+
+    const left = bounds.left - (window.scrollX - pointerScrollOriginRef.current.x);
+    const top = bounds.top - (window.scrollY - pointerScrollOriginRef.current.y);
+    pointerX.set(((event.clientX - left) / bounds.width - 0.5) * 2);
+    pointerY.set(((event.clientY - top) / bounds.height - 0.5) * 2);
   }
 
   function resetPointer() {
+    pointerBoundsRef.current = null;
     pointerX.set(0);
     pointerY.set(0);
   }
@@ -62,6 +76,7 @@ export function HomeAssemblyMotion({ children }: HomeAssemblyMotionProps) {
           ref={stageRef}
           className="relative isolate lg:min-h-[43rem]"
           data-motion-probe="home-assembly"
+          onPointerEnter={capturePointerBounds}
           onPointerMove={updatePointer}
           onPointerLeave={resetPointer}
         >

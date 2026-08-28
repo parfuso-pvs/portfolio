@@ -47,6 +47,32 @@ The route-local architecture keeps an unrelated static route effectively at base
 27,258 bytes gzip to the homepage's initial referenced chunks. The lazy feature chunk accounts for
 the remainder of the 36,695-byte emitted-build delta and loads after the initial render.
 
+## Runtime frame measurement
+
+The production prototype was measured on an arm64 Mac running macOS 26.5.2 and Chrome
+152.0.7977.64 at a 1280 × 720 viewport. Each probe drives 120 consecutive animation frames after a
+one-second page warmup and records `requestAnimationFrame` intervals plus browser long-task entries.
+Pointer movement crosses and oscillates through the hero; scrolling traverses the full homepage.
+
+| Interaction | Frames | p50 frame | p95 frame | Worst frame | Frames >20 ms | Long tasks |
+| ----------- | -----: | --------: | --------: | ----------: | ------------: | ---------: |
+| Pointer     |    119 |   16.7 ms |   16.7 ms |     16.8 ms |             0 |          0 |
+| Scroll      |    119 |   16.7 ms |   16.8 ms |     16.8 ms |             0 |          0 |
+
+The trace was captured from a clean `next build` served by `next start`, not the development server.
+It validates a sustained 60 fps cadence in this test environment without observed main-thread long
+tasks. The pointer handler also caches its hero rectangle once per pointer entry; continuous pointer
+events update Motion values without repeating layout measurement.
+
+To reproduce against a running production build:
+
+```bash
+MOTION_TEST_URL=http://localhost:3017/ npm run measure:motion
+```
+
+`CHROME_PATH` can override the default macOS Chrome executable. The probe prints JSON so later motion
+tickets can compare frame percentiles, dropped-frame counts, and long tasks under the same scenario.
+
 ## Alternatives evaluated
 
 ### Global Motion boundary and route trace — rejected
