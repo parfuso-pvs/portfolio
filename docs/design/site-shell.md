@@ -44,4 +44,6 @@ The route files currently provide factual introductory compositions. Their compl
 - There is one labeled primary navigation at each responsive mode; CSS ensures only one is displayed.
 - Focus appearance comes from the established global focus token and is pulled inside tightly bounded navigation sheets.
 - The page and header remain Server Components; only the small navigation leaf ships client JavaScript.
-- The menu uses no focus-trap dependency or animation library. Its two-line icon uses transform-only transitions and honors the global reduced-motion rule.
+- The menu uses no focus-trap dependency or animation library. PORT-903 adds colocated CSS motion for
+  desktop tab registration and the mobile sheet entrance; its two-line icon continues to use
+  transform-only transitions. Every sequence honors the global reduced-motion rule.

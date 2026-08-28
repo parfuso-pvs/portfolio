@@ -6,8 +6,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { primaryNavigation } from "@/content/navigation";
 
+import styles from "./primary-navigation.module.css";
+
 const desktopLinkClass =
-  "type-label text-ink relative flex min-h-11 items-center border-r border-line px-4 transition-colors last:border-r-0 hover:bg-paper-deep focus-visible:z-10 focus-visible:outline-offset-[-3px]";
+  "type-label text-ink relative isolate flex min-h-11 items-center overflow-hidden border-r border-line px-4 transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-offset-[-3px]";
 const mobileLinkClass =
   "type-label text-ink relative flex min-h-11 items-center justify-between border-b border-line px-5 py-3 last:border-b-0 hover:bg-paper-deep focus-visible:z-10 focus-visible:outline-offset-[-3px]";
 
@@ -68,15 +70,15 @@ function PathAwareNavigation({ pathname }: { pathname: string }) {
                 key={item.href}
                 href={item.href}
                 aria-current={current ? "page" : undefined}
-                className={`${desktopLinkClass} ${current ? "bg-accent text-paper-raised hover:bg-accent-strong" : ""}`}
+                className={`${desktopLinkClass} ${styles.desktopTab} ${current ? `${styles.currentDesktopTab} bg-accent text-paper-raised hover:bg-accent-strong` : "hover:bg-paper-deep"}`}
               >
-                {"shortLabel" in item ? item.shortLabel : item.label}
-                {current ? (
-                  <span
-                    className="bg-accent-strong absolute inset-x-3 bottom-0 h-0.5"
-                    aria-hidden="true"
-                  />
-                ) : null}
+                <span className={`${styles.tabLabel} relative z-10`}>
+                  {"shortLabel" in item ? item.shortLabel : item.label}
+                </span>
+                <span
+                  className={`${styles.tabRegistration} ${current ? "bg-accent-strong" : "bg-accent"} absolute inset-x-3 bottom-0 z-10 h-0.5`}
+                  aria-hidden="true"
+                />
               </Link>
             );
           })}
@@ -106,7 +108,7 @@ function PathAwareNavigation({ pathname }: { pathname: string }) {
         <nav
           id="mobile-navigation"
           aria-label="Primary"
-          className="material-sheet material-sheet-pinned absolute top-14 right-0 w-[min(21rem,calc(100vw-2.5rem))] overflow-hidden"
+          className={`${styles.mobileSheet} material-sheet material-sheet-pinned absolute top-14 right-0 w-[min(21rem,calc(100vw-2.5rem))] overflow-hidden`}
           hidden={!isOpen}
         >
           {primaryNavigation.map((item, index) => {
@@ -118,12 +120,12 @@ function PathAwareNavigation({ pathname }: { pathname: string }) {
                 key={item.href}
                 href={item.href}
                 aria-current={current ? "page" : undefined}
-                className={`${mobileLinkClass} ${current ? "bg-paper-deep" : ""}`}
+                className={`${mobileLinkClass} ${styles.mobileLink} ${current ? "bg-paper-deep" : ""}`}
                 onClick={() => setIsOpen(false)}
               >
-                <span>{item.label}</span>
+                <span className={styles.mobileLabel}>{item.label}</span>
                 <span
-                  className={`${current ? "bg-accent" : "border border-line-strong"} size-1.5`}
+                  className={`${styles.mobileMarker} ${current ? `${styles.currentMobileMarker} bg-accent` : "border border-line-strong"} size-1.5`}
                   aria-hidden="true"
                 />
               </Link>
