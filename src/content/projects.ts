@@ -200,7 +200,7 @@ export const projects = [
     id: "iffers-pictures",
     name: "Iffer's Pictures",
     prominence: "featured",
-    caseStudyStatus: "intro",
+    caseStudyStatus: "published",
     href: "/work/iffers-pictures",
     publicUrl: "https://ifferspictures.com",
     navigationLabel: "Iffer's Pictures",

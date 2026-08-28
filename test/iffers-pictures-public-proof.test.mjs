@@ -37,7 +37,7 @@ test("the live-project link communicates external navigation and interaction sta
   assert.match(component, /min-h-44/);
 });
 
-test("the public proof remains static, responsive, and separate from case completion", async () => {
+test("the public proof remains static, responsive, and precedes case completion", async () => {
   const [component, page, projects] = await Promise.all([
     readFile(componentPath, "utf8"),
     readFile(pagePath, "utf8"),
@@ -48,6 +48,6 @@ test("the public proof remains static, responsive, and separate from case comple
   assert.match(component, /lg:grid-cols-12/);
   assert.match(component, /lg:col-start-9/);
   assert.match(component, /lg:-mt-12/);
-  assert.doesNotMatch(page, /CaseStudyNavigation/);
-  assert.match(projects, /id: "iffers-pictures"[\s\S]*?caseStudyStatus: "intro"/);
+  assert.ok(page.indexOf("<IffersPicturesPublicProof") < page.indexOf("<CaseStudyNavigation"));
+  assert.match(projects, /id: "iffers-pictures"[\s\S]*?caseStudyStatus: "published"/);
 });

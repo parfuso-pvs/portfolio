@@ -54,6 +54,8 @@ test("Iffer's and PixelVerse attribution remain explicit", () => {
   const iffers = getProject("iffers-pictures");
   const pixelverse = getProject("pixelverse-studios");
 
+  assert.equal(iffers.caseStudyStatus, "published");
+  assert.equal(iffers.publicUrl, "https://ifferspictures.com");
   assert.match(iffers.ownership, /independently owned discovery, copy, visual design/);
   assert.match(pixelverse.summary, /after-hours studio/);
   assert.match(pixelverse.attribution, /Sami leads design and Phil leads development/);
