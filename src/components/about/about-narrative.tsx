@@ -7,6 +7,34 @@ type AboutNarrativeProps = {
   projects: readonly ProjectRecord[];
 };
 
+type CareerEntry =
+  | (typeof aboutContent.career.primaryTrack.entries)[number]
+  | (typeof aboutContent.career.parallelTrack.entries)[number];
+
+function resolveCareerProject(projects: readonly ProjectRecord[], entry: CareerEntry) {
+  const project = projects.find(({ id }) => id === entry.projectId);
+
+  if (!project) {
+    throw new Error(`Missing About career project: ${entry.projectId}`);
+  }
+
+  return project;
+}
+
+function CareerPeriod({ entry }: { entry: CareerEntry }) {
+  return (
+    <p className="type-mono text-muted mt-3">
+      <time dateTime={entry.start.dateTime}>{entry.start.label}</time>
+      <span aria-hidden="true"> — </span>
+      {entry.end ? (
+        <time dateTime={entry.end.dateTime}>{entry.end.label}</time>
+      ) : (
+        <span>Present</span>
+      )}
+    </p>
+  );
+}
+
 export function AboutNarrative({ projects }: AboutNarrativeProps) {
   return (
     <main id="main-content" tabIndex={-1} className="overflow-hidden">
@@ -116,42 +144,100 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
         </div>
       </section>
 
-      <section className="px-page-gutter pb-section" aria-labelledby="about-contexts">
+      <section className="px-page-gutter pb-section" aria-labelledby="about-career">
         <div className="mx-auto w-full max-w-[90rem] border-t border-line-strong pt-6">
           <header className="grid gap-8 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-3">
-              <p className="type-label text-accent">{aboutContent.contexts.eyebrow}</p>
-              <p className="type-mono text-muted mt-3">{aboutContent.contexts.index}</p>
+              <p className="type-label text-accent">{aboutContent.career.eyebrow}</p>
+              <p className="type-mono text-muted mt-3">{aboutContent.career.index}</p>
             </div>
             <div className="lg:col-span-7 lg:col-start-5">
-              <h2 id="about-contexts" className="type-heading text-ink max-w-[12ch] text-pretty">
-                {aboutContent.contexts.title}
+              <h2 id="about-career" className="type-heading text-ink max-w-[12ch] text-pretty">
+                {aboutContent.career.title}
               </h2>
-              <p className="type-body text-muted mt-7 max-w-2xl">{aboutContent.contexts.body}</p>
+              <p className="type-body text-muted mt-7 max-w-2xl">{aboutContent.career.body}</p>
             </div>
           </header>
 
-          <ol className="mt-16 divide-y divide-line border-y border-line-strong lg:mt-24">
-            {projects.map((project, index) => (
-              <li
-                key={project.id}
-                className="grid gap-5 py-8 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-6"
-              >
-                <p className="type-mono text-accent lg:col-span-2">
-                  {String(index + 1).padStart(2, "0")} / {project.indexLabel}
+          <div className="mt-16 grid items-start gap-8 lg:mt-24 lg:grid-cols-12 lg:gap-6">
+            <MaterialSurface
+              elevation="raised"
+              role="group"
+              aria-labelledby="about-primary-career"
+              className="relative px-6 py-9 sm:px-10 sm:py-12 lg:col-span-8 lg:px-14 lg:py-16"
+            >
+              <RegistrationMark className="top-4 right-4" />
+              <div className="flex items-end justify-between gap-6 border-b border-line-strong pb-5">
+                <p id="about-primary-career" className="type-label text-accent">
+                  {aboutContent.career.primaryTrack.label}
                 </p>
-                <div className="lg:col-span-3">
-                  <h3 className="type-heading text-ink text-[clamp(2rem,3vw,3.5rem)]">
-                    {project.name}
-                  </h3>
-                  <p className="type-label text-muted mt-3">{project.role}</p>
-                </div>
-                <p className="type-body-small text-ink max-w-2xl lg:col-span-5 lg:col-start-8">
-                  {project.summary}
+                <p className="type-mono text-muted hidden sm:block">Primary / 01—02</p>
+              </div>
+
+              <ol className="relative mt-3 before:absolute before:top-9 before:bottom-9 before:left-[0.3125rem] before:w-px before:bg-line-strong">
+                {aboutContent.career.primaryTrack.entries.map((entry) => {
+                  const project = resolveCareerProject(projects, entry);
+
+                  return (
+                    <li
+                      key={entry.projectId}
+                      className="relative grid gap-5 py-9 pl-8 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:gap-8 sm:pl-10"
+                    >
+                      <span
+                        className="bg-paper-raised border-accent absolute top-[2.55rem] left-0 h-3 w-3 rounded-pill border-2"
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <p className="type-mono text-accent">
+                          {entry.index} / {project.indexLabel}
+                        </p>
+                        <CareerPeriod entry={entry} />
+                      </div>
+                      <div>
+                        <h3 className="type-heading text-ink text-[clamp(2.25rem,4vw,4rem)]">
+                          {project.name}
+                        </h3>
+                        <p className="type-label text-muted mt-4">{entry.roles}</p>
+                        <p className="type-body-small text-ink mt-6 max-w-2xl">{entry.body}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </MaterialSurface>
+
+            <aside
+              className="material-blueprint relative px-6 py-9 sm:px-8 sm:py-10 lg:col-span-4 lg:mt-20 lg:-ml-10"
+              aria-label="Concurrent after-hours work"
+            >
+              <div className="border-b border-accent/40 pb-5">
+                <p className="type-label text-accent">{aboutContent.career.parallelTrack.label}</p>
+                <p className="type-mono text-muted mt-3">
+                  {aboutContent.career.parallelTrack.note}
                 </p>
-              </li>
-            ))}
-          </ol>
+              </div>
+
+              <ol className="divide-y divide-line-strong/60">
+                {aboutContent.career.parallelTrack.entries.map((entry) => {
+                  const project = resolveCareerProject(projects, entry);
+
+                  return (
+                    <li key={entry.projectId} className="py-8">
+                      <div className="flex items-start justify-between gap-5">
+                        <p className="type-mono text-accent">{entry.index} / parallel</p>
+                        <CareerPeriod entry={entry} />
+                      </div>
+                      <h3 className="type-heading text-ink mt-7 text-[clamp(2rem,3.5vw,3.5rem)]">
+                        {project.name}
+                      </h3>
+                      <p className="type-label text-muted mt-4">{entry.roles}</p>
+                      <p className="type-body-small text-ink mt-6">{entry.body}</p>
+                    </li>
+                  );
+                })}
+              </ol>
+            </aside>
+          </div>
         </div>
       </section>
     </main>

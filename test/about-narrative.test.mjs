@@ -16,10 +16,9 @@ test("the About route composes grounded content and project records", async () =
   ["memx", "domani", "pixelverse-studios", "earthcam"].forEach((projectId) =>
     assert.match(page, new RegExp(`getProject\\("${projectId}"\\)`)),
   );
-  assert.match(component, /projects\.map/);
+  assert.match(component, /projects\.find/);
   assert.match(component, /project\.name/);
-  assert.match(component, /project\.role/);
-  assert.match(component, /project\.summary/);
+  assert.match(component, /project\.indexLabel/);
 });
 
 test("the profile narrative reflects the approved working philosophy", async () => {
@@ -32,6 +31,25 @@ test("the profile narrative reflects the approved working philosophy", async () 
   assert.match(content, /Product partner/);
   assert.match(content, /Continuous learner/);
   assert.match(content, /after-hours client work/);
+});
+
+test("the career chapter preserves verified progression and concurrent work", async () => {
+  const [content, component] = await Promise.all([
+    readFile(contentPath, "utf8"),
+    readFile(componentPath, "utf8"),
+  ]);
+
+  ["March 2018", "December 2019", "January 2024", "December 2025"].forEach((date) =>
+    assert.match(content, new RegExp(date)),
+  );
+  assert.match(content, /Front-End Developer → Lead Front-End Developer/);
+  assert.match(content, /Front-End Engineer → Senior Full Stack Engineer/);
+  assert.match(content, /side work runs alongside the full-time path/);
+  assert.match(content, /Concurrent practice/);
+  assert.match(component, /<time dateTime=/);
+  assert.match(component, /resolveCareerProject/);
+  assert.match(component, /aria-labelledby="about-primary-career"/);
+  assert.match(component, /aria-label="Concurrent after-hours work"/);
 });
 
 test("the About page protects personal and unsupported resume details", async () => {
@@ -55,4 +73,5 @@ test("the About narrative is semantic, responsive, and server rendered", async (
   assert.match(component, /<ol/);
   assert.match(component, /lg:grid-cols-12/);
   assert.match(component, /max-w-\[90rem\]/);
+  assert.match(component, /sm:grid-cols-\[minmax\(0,11rem\)_minmax\(0,1fr\)\]/);
 });

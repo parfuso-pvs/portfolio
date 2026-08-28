@@ -35,10 +35,53 @@ export const aboutContent = {
       body: "Independent products and client work give me room to test new platforms, tools, and disciplines, then bring the useful lessons back to larger systems.",
     },
   ],
-  contexts: {
-    eyebrow: "One evolving practice",
-    index: "Selected contexts / 01—04",
-    title: "Different scales. The same standard of care.",
-    body: "These contexts show how the same working principles travel across platform engineering, product ownership, client delivery, and earlier team leadership.",
+  career: {
+    eyebrow: "Career progression",
+    index: "March 2018 — present",
+    title: "A frontend foundation that kept widening.",
+    body: "The through line is cumulative: interface craft became team leadership, platform architecture, full-stack ownership, and an independent product practice. The side work runs alongside the full-time path, not in place of it.",
+    primaryTrack: {
+      label: "Full-time path",
+      entries: [
+        {
+          index: "01",
+          projectId: "earthcam",
+          start: { dateTime: "2018-03", label: "March 2018" },
+          end: { dateTime: "2019-12", label: "December 2019" },
+          roles: "Front-End Developer → Lead Front-End Developer",
+          body: "Built a foundation in live-media interfaces, then stepped into product planning, architecture, delegation, and mentorship for a five-person frontend team.",
+        },
+        {
+          index: "02",
+          projectId: "memx",
+          start: { dateTime: "2019-12", label: "December 2019" },
+          end: null,
+          roles: "Front-End Engineer → Senior Full Stack Engineer",
+          body: "Joined at the beginning of the member portal and grew from founding frontend implementation into reusable platform architecture, end-to-end features, and production support across eight market implementations.",
+        },
+      ],
+    },
+    parallelTrack: {
+      label: "Built after hours",
+      note: "Concurrent practice",
+      entries: [
+        {
+          index: "A",
+          projectId: "pixelverse-studios",
+          start: { dateTime: "2024-01", label: "January 2024" },
+          end: null,
+          roles: "Co-Founder & Full Stack Engineer",
+          body: "Co-founded a part-time studio for helping local businesses while experimenting with client delivery, web platforms, analytics, and search-oriented systems.",
+        },
+        {
+          index: "B",
+          projectId: "domani",
+          start: { dateTime: "2025-12", label: "December 2025" },
+          end: null,
+          roles: "Co-Founder & Sole Developer",
+          body: "Turned a personal frustration with productivity tools into a production iOS and Android product, expanding the practice into mobile development and product operations.",
+        },
+      ],
+    },
   },
 } as const;
