@@ -28,9 +28,10 @@ The ticket deliberately stops after the first viewport. Broader career narrative
 ## Interaction and performance
 
 - The hero, diagram, navigation, and primary content remain Server Components. PORT-901 adds one
-  route-local Client Component around the two decorative back layers only.
+  route-local Client Component around the assembly. PORT-902 passes the identity rail and primary
+  sheet through that boundary as rendered slots so their source remains in the server graph.
 - Links are real Next.js links with hover, visible focus, active, and 44px touch behavior.
 - The primary content sheet renders immediately; only supporting paper layers fade into place.
-- Assembly motion uses transform and opacity, preserves the layers' authored rotation, and resolves
-  immediately when reduced motion is requested.
+- Assembly motion uses transform and opacity, preserves the layers' authored rotation, keeps primary
+  content visible throughout, and resolves immediately when reduced motion is requested.
 - The hero uses `min-height: 100dvh` and contains every layer to prevent horizontal overflow.

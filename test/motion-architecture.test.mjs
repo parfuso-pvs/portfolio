@@ -50,6 +50,19 @@ test("pointer tracking measures layout once per pointer entry", async () => {
   assert.match(motion, /const bounds = pointerBoundsRef\.current/);
 });
 
+test("the hero sequence keeps primary content visible while wrappers settle", async () => {
+  const motion = await readFile(motionPath, "utf8");
+  const identitySequence = motion.match(/className="home-assembly-name[\s\S]*?<\/m\.div>/)?.[0];
+  const sheetSequence = motion.match(/className="relative z-0"[\s\S]*?<\/m\.div>/)?.[0];
+
+  assert.match(motion, /initial=\{shouldReduceMotion \? false : \{ y: 14 \}\}/);
+  assert.match(motion, /initial=\{shouldReduceMotion \? false : \{ y: 10 \}\}/);
+  assert.ok(identitySequence);
+  assert.ok(sheetSequence);
+  assert.doesNotMatch(identitySequence, /opacity: 0/);
+  assert.doesNotMatch(sheetSequence, /opacity: 0/);
+});
+
 test("the production motion probe records animation frames and long tasks", async () => {
   const [packageSource, performanceSource] = await Promise.all([
     readFile(packagePath, "utf8"),

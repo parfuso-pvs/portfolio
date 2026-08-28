@@ -15,13 +15,14 @@ import { useRef } from "react";
 
 type HomeAssemblyMotionProps = {
   children: ReactNode;
+  identityRail: ReactNode;
 };
 
 const spring = { damping: 24, mass: 0.45, stiffness: 180 };
 const loadDomAnimation = () =>
   import("@/components/motion/dom-animation-features").then((module) => module.default);
 
-export function HomeAssemblyMotion({ children }: HomeAssemblyMotionProps) {
+export function HomeAssemblyMotion({ children, identityRail }: HomeAssemblyMotionProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const pointerBoundsRef = useRef<DOMRect | null>(null);
   const pointerScrollOriginRef = useRef({ x: 0, y: 0 });
@@ -72,31 +73,49 @@ export function HomeAssemblyMotion({ children }: HomeAssemblyMotionProps) {
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadDomAnimation} strict>
-        <div
-          ref={stageRef}
-          className="relative isolate lg:min-h-[43rem]"
-          data-motion-probe="home-assembly"
-          onPointerEnter={capturePointerBounds}
-          onPointerMove={updatePointer}
-          onPointerLeave={resetPointer}
-        >
+        <div className="mx-auto grid w-full max-w-[90rem] gap-5 lg:grid-cols-[8.5rem_minmax(0,1fr)] lg:gap-7">
           <m.div
-            className="material-blueprint absolute top-4 -left-3 -z-10 h-[72%] w-[62%] -rotate-2 max-lg:top-3 max-lg:left-2 max-lg:h-[38%] max-lg:w-[92%]"
-            aria-hidden="true"
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.992 }}
-            animate={{ opacity: 1, scale: 1 }}
-            style={shouldReduceMotion ? undefined : { x: blueprintX, y: composedBlueprintY }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          />
-          <m.div
-            className="material-sheet material-sheet-raised absolute right-1 bottom-2 -z-10 h-[58%] w-[68%] rotate-2 max-lg:right-2 max-lg:bottom-0 max-lg:h-[44%] max-lg:w-[88%]"
-            aria-hidden="true"
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.992 }}
-            animate={{ opacity: 1, scale: 1 }}
-            style={shouldReduceMotion ? undefined : { x: backsheetX, y: composedBacksheetY }}
-            transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          />
-          {children}
+            className="home-assembly-name flex items-end border-b border-line-strong pb-4 lg:justify-center lg:border-r lg:border-b-0 lg:pb-0"
+            initial={shouldReduceMotion ? false : { y: 14 }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {identityRail}
+          </m.div>
+
+          <div
+            ref={stageRef}
+            className="relative isolate lg:min-h-[43rem]"
+            data-motion-probe="home-assembly"
+            onPointerEnter={capturePointerBounds}
+            onPointerMove={updatePointer}
+            onPointerLeave={resetPointer}
+          >
+            <m.div
+              className="material-blueprint absolute top-4 -left-3 -z-10 h-[72%] w-[62%] -rotate-2 max-lg:top-3 max-lg:left-2 max-lg:h-[38%] max-lg:w-[92%]"
+              aria-hidden="true"
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.992 }}
+              animate={{ opacity: 1, scale: 1 }}
+              style={shouldReduceMotion ? undefined : { x: blueprintX, y: composedBlueprintY }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            />
+            <m.div
+              className="material-sheet material-sheet-raised absolute right-1 bottom-2 -z-10 h-[58%] w-[68%] rotate-2 max-lg:right-2 max-lg:bottom-0 max-lg:h-[44%] max-lg:w-[88%]"
+              aria-hidden="true"
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.992 }}
+              animate={{ opacity: 1, scale: 1 }}
+              style={shouldReduceMotion ? undefined : { x: backsheetX, y: composedBacksheetY }}
+              transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            />
+            <m.div
+              className="relative z-0"
+              initial={shouldReduceMotion ? false : { y: 10 }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.14, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {children}
+            </m.div>
+          </div>
         </div>
       </LazyMotion>
     </MotionConfig>
