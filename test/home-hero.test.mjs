@@ -61,6 +61,6 @@ test("the motion leaf never gates or takes ownership of primary hero content", a
   assert.match(hero, /<HomeAssemblyMotion[\s\S]*?identityRail=/);
   assert.match(motion, /\{identityRail\}/);
   assert.match(motion, /\{children\}/);
-  assert.equal((motion.match(/<m\.div/g) ?? []).length, 4);
+  assert.equal((motion.match(/<m\.div/g) ?? []).length, 2);
   assert.doesNotMatch(motion, /<h1|<Link|MaterialSurface/);
 });

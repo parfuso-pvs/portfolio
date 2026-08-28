@@ -4,6 +4,7 @@ import test from "node:test";
 
 const packagePath = "package.json";
 const motionPath = "src/components/motion/home-assembly-motion.tsx";
+const motionStylesPath = "src/components/motion/home-assembly-motion.module.css";
 const featuresPath = "src/components/motion/dom-animation-features.ts";
 const performancePath = "scripts/measure-motion-performance.mjs";
 
@@ -50,17 +51,19 @@ test("pointer tracking measures layout once per pointer entry", async () => {
   assert.match(motion, /const bounds = pointerBoundsRef\.current/);
 });
 
-test("the hero sequence keeps primary content visible while wrappers settle", async () => {
-  const motion = await readFile(motionPath, "utf8");
-  const identitySequence = motion.match(/className="home-assembly-name[\s\S]*?<\/m\.div>/)?.[0];
-  const sheetSequence = motion.match(/className="relative z-0"[\s\S]*?<\/m\.div>/)?.[0];
+test("the hero sequence keeps server-rendered primary content in its final position", async () => {
+  const [motion, motionStyles] = await Promise.all([
+    readFile(motionPath, "utf8"),
+    readFile(motionStylesPath, "utf8"),
+  ]);
 
-  assert.match(motion, /initial=\{shouldReduceMotion \? false : \{ y: 14 \}\}/);
-  assert.match(motion, /initial=\{shouldReduceMotion \? false : \{ y: 10 \}\}/);
-  assert.ok(identitySequence);
-  assert.ok(sheetSequence);
-  assert.doesNotMatch(identitySequence, /opacity: 0/);
-  assert.doesNotMatch(sheetSequence, /opacity: 0/);
+  assert.match(motion, /home-assembly-name \$\{styles\.identity\}/);
+  assert.match(motion, /home-assembly-sheet-settle \$\{styles\.sheet\}/);
+  assert.doesNotMatch(motion, /initial=.*?\{ y: (?:10|14) \}/);
+  assert.match(motionStyles, /@media \(prefers-reduced-motion: no-preference\)/);
+  assert.match(motionStyles, /\.identity[\s\S]*?animation: settle/);
+  assert.match(motionStyles, /\.sheet[\s\S]*?animation: settle/);
+  assert.doesNotMatch(motionStyles, /opacity/);
 });
 
 test("the production motion probe records animation frames and long tasks", async () => {

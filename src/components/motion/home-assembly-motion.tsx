@@ -13,6 +13,8 @@ import * as m from "motion/react-m";
 import type { PointerEvent, ReactNode } from "react";
 import { useRef } from "react";
 
+import styles from "./home-assembly-motion.module.css";
+
 type HomeAssemblyMotionProps = {
   children: ReactNode;
   identityRail: ReactNode;
@@ -74,14 +76,11 @@ export function HomeAssemblyMotion({ children, identityRail }: HomeAssemblyMotio
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadDomAnimation} strict>
         <div className="mx-auto grid w-full max-w-[90rem] gap-5 lg:grid-cols-[8.5rem_minmax(0,1fr)] lg:gap-7">
-          <m.div
-            className="home-assembly-name flex items-end border-b border-line-strong pb-4 lg:justify-center lg:border-r lg:border-b-0 lg:pb-0"
-            initial={shouldReduceMotion ? false : { y: 14 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          <div
+            className={`home-assembly-name ${styles.identity} flex items-end border-b border-line-strong pb-4 lg:justify-center lg:border-r lg:border-b-0 lg:pb-0`}
           >
             {identityRail}
-          </m.div>
+          </div>
 
           <div
             ref={stageRef}
@@ -107,14 +106,9 @@ export function HomeAssemblyMotion({ children, identityRail }: HomeAssemblyMotio
               style={shouldReduceMotion ? undefined : { x: backsheetX, y: composedBacksheetY }}
               transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             />
-            <m.div
-              className="relative z-0"
-              initial={shouldReduceMotion ? false : { y: 10 }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.14, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <div className={`home-assembly-sheet-settle ${styles.sheet} relative z-0`}>
               {children}
-            </m.div>
+            </div>
           </div>
         </div>
       </LazyMotion>
