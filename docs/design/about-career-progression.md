@@ -20,16 +20,17 @@ how Phil's responsibilities expanded while keeping concurrent after-hours work v
 
 ## Composition
 
-- A borderless editorial ledger carries all four entries in chronological start-date order.
-- One continuous rule and four registration points make the work read as one career story without
-  enclosing the entire section in a large card.
-- Every desktop row shares the same metadata, project, and role/detail columns for predictable
-  scanning.
-- EarthCam and MEMX remain plain paper entries; PixelVerse and Domani receive a quiet blueprint wash,
-  filled registration points, and explicit after-hours labels without changing row geometry.
-- Project titles use a restrained local scale so dates, role progression, and descriptions remain
-  visible in the same scan.
-- On narrow screens, every entry returns to the same single-column metadata-project-detail order.
+- A scroll-driven editorial journey carries all four entries in chronological start-date order.
+- The chronology spine sits at the metadata/story boundary on desktop and fills in cobalt as the
+  viewport advances through the list.
+- One chapter is in focus at a time. Its story lifts into a pinned paper sheet while the surrounding
+  chapters stay readable but visually recede.
+- Full-time milestones use circular points; after-hours milestones use diamond points and retain an
+  explicit label. When an after-hours chapter is active, its sheet reveals the blueprint material.
+- Each desktop chapter receives enough vertical space to feel like a deliberate stage rather than a
+  compact table row.
+- On narrow screens, the spine moves left and every entry returns to the same
+  metadata-project-detail order without horizontal overflow.
 
 ## Research decisions
 
@@ -49,9 +50,14 @@ how Phil's responsibilities expanded while keeping concurrent after-hours work v
 
 - The career chapter is one ordered list and every bounded date is represented by a semantic `time`
   element.
-- The timeline remains a Server Component with no new dependency or client JavaScript.
-- Loading, empty, error, success, hover, focus, active, and disabled states do not apply to this
-  static chronology.
+- The About narrative remains server rendered; only the isolated career journey is a Client
+  Component.
+- Scroll work is throttled through `requestAnimationFrame`. The progress transform is updated
+  directly so continuous scrolling does not trigger React renders; React state changes only when the
+  active chapter changes.
+- The focused list item exposes `aria-current="step"`. The progress line is decorative, and all
+  content remains present and readable without relying on animation.
+- Reduced-motion users receive effectively instant state changes through the global motion baseline.
 
 ## Deferred
 
