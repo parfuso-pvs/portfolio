@@ -5,7 +5,9 @@ import test from "node:test";
 const pagePath = "src/app/about/page.tsx";
 const componentPath = "src/components/about/about-narrative.tsx";
 const journeyPath = "src/components/about/career-journey.tsx";
+const journeyStylesPath = "src/components/about/career-journey.module.css";
 const contentPath = "src/content/about.ts";
+const performancePath = "scripts/measure-motion-performance.mjs";
 
 test("the About route composes grounded content and project records", async () => {
   const [page, component, journey] = await Promise.all([
@@ -68,13 +70,22 @@ test("the career chapter keeps verified full-time and after-hours work on one ch
 });
 
 test("the career journey advances its active chapter and progress spine on scroll", async () => {
-  const journey = await readFile(journeyPath, "utf8");
+  const [journey, journeyStyles] = await Promise.all([
+    readFile(journeyPath, "utf8"),
+    readFile(journeyStylesPath, "utf8"),
+  ]);
 
   assert.match(journey, /^"use client";/);
-  assert.match(journey, /window\.requestAnimationFrame/);
-  assert.match(journey, /addEventListener\("scroll", scheduleUpdate, \{ passive: true \}\)/);
-  assert.match(journey, /progress\.style\.transform = `scaleY/);
-  assert.match(journey, /progressHead\.style\.transform = `translate/);
+  assert.match(journey, /<LazyMotion features=\{loadDomAnimation\} strict>/);
+  assert.match(journey, /<MotionConfig reducedMotion="user">/);
+  assert.match(journey, /useScroll\(\)/);
+  assert.match(journey, /useMotionValueEvent\(scrollY, "change", updateJourney\)/);
+  assert.match(journey, /useMotionValue\(0\)/);
+  assert.match(journey, /<m\.span/);
+  assert.match(journey, /new ResizeObserver\(measureJourney\)/);
+  assert.doesNotMatch(journey, /window\.requestAnimationFrame|window\.cancelAnimationFrame/);
+  assert.doesNotMatch(journey, /addEventListener\("scroll"/);
+  assert.doesNotMatch(journey, /\.style\.transform/);
   assert.match(journey, /const firstMilestone =/);
   assert.match(journey, /const lastMilestone =/);
   assert.match(journey, /const isAtPageEnd =/);
@@ -82,6 +93,27 @@ test("the career journey advances its active chapter and progress spine on scrol
   assert.match(journey, /setActiveIndex\(nextActiveIndex\)/);
   assert.match(journey, /motion-reduce:transition-none/);
   assert.match(journey, /data-state=\{state\}/);
+  assert.doesNotMatch(journey, /<ol[^>]*>\s*<(?:m\.)?span/);
+  assert.match(journeyStyles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(journeyStyles, /transform: translateX\(-1px\) scaleY\(1\) !important/);
+  assert.match(journeyStyles, /display: none/);
+});
+
+test("the production motion probe exercises the About career journey", async () => {
+  const [journey, performanceProbe] = await Promise.all([
+    readFile(journeyPath, "utf8"),
+    readFile(performancePath, "utf8"),
+  ]);
+
+  assert.match(journey, /data-career-journey/);
+  assert.match(journey, /data-career-progress/);
+  assert.match(journey, /data-career-index/);
+  assert.match(performanceProbe, /motionScenario === "about-career"/);
+  assert.match(performanceProbe, /MOTION_REDUCED/);
+  assert.match(performanceProbe, /measureAboutCareer/);
+  assert.match(performanceProbe, /directListChildrenValid/);
+  assert.match(performanceProbe, /finalStepActive/);
+  assert.match(performanceProbe, /progressHeadHidden/);
 });
 
 test("the About page protects personal and unsupported resume details", async () => {

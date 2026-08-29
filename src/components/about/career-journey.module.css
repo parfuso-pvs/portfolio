@@ -1,0 +1,15 @@
+.progress,
+.progressHead {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress {
+    transform: translateX(-1px) scaleY(1) !important;
+    will-change: auto;
+  }
+
+  .progressHead {
+    display: none;
+  }
+}
