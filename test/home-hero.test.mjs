@@ -3,64 +3,43 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const homePagePath = "src/app/page.tsx";
-const heroPath = "src/components/home/home-hero.tsx";
-const heroMotionPath = "src/components/motion/home-assembly-motion.tsx";
+const introductionPath = "src/components/home/home-introduction.tsx";
+const careerPath = "src/components/home/career-thread.tsx";
 
-test("the homepage hero selects MEMX from the project registry", async () => {
-  const homePage = await readFile(homePagePath, "utf8");
-
-  assert.match(homePage, /getProject\("memx"\)/);
-  assert.match(homePage, /featuredProject=\{getProject\("memx"\)\}/);
-  assert.doesNotMatch(homePage, /MEMX|\/work\/memx/);
-});
-
-test("the homepage hero remains a server-rendered semantic composition", async () => {
-  const hero = await readFile(heroPath, "utf8");
-
-  assert.doesNotMatch(hero, /"use client"/);
-  assert.match(hero, /<section/);
-  assert.match(hero, /<h1/);
-  assert.match(hero, /<figure/);
-  assert.match(hero, /<figcaption/);
-  assert.match(hero, /min-h-\[100dvh\]/);
-});
-
-test("the homepage exposes its three approved navigation paths", async () => {
-  const hero = await readFile(heroPath, "utf8");
-
-  assert.match(hero, /href=\{featuredProject\.href\}/);
-  assert.match(hero, /href="\/work"/);
-  assert.match(hero, /href="\/contact"/);
-  assert.match(hero, /aria-label="Homepage actions"/);
-});
-
-test("the MEMX diagram uses registry content and preserves confidentiality", async () => {
-  const hero = await readFile(heroPath, "utf8");
-
-  assert.match(hero, /project\.approvedFeatures\.slice\(0, 4\)/);
-  assert.match(hero, /Original diagram of four connected MEMX platform layers/);
-  assert.doesNotMatch(hero, /private screenshot|order book|matching engine|fake exchange data/i);
-});
-
-test("primary homepage actions cover hover, focus, active, and touch sizing", async () => {
-  const hero = await readFile(heroPath, "utf8");
-
-  assert.match(hero, /hover:-translate-y-1/);
-  assert.match(hero, /focus-visible:-translate-y-1/);
-  assert.match(hero, /active:translate-y-0/);
-  assert.equal(hero.match(/min-h-11/g)?.length, 2);
-  assert.doesNotMatch(hero, /aria-describedby="featured-project-summary"/);
-});
-
-test("the motion leaf never gates or takes ownership of primary hero content", async () => {
-  const [hero, motion] = await Promise.all([
-    readFile(heroPath, "utf8"),
-    readFile(heroMotionPath, "utf8"),
+test("the homepage is a navigation-free career-led composition", async () => {
+  const [homePage, introduction] = await Promise.all([
+    readFile(homePagePath, "utf8"),
+    readFile(introductionPath, "utf8"),
   ]);
 
-  assert.match(hero, /<HomeAssemblyMotion[\s\S]*?identityRail=/);
-  assert.match(motion, /\{identityRail\}/);
-  assert.match(motion, /\{children\}/);
-  assert.equal((motion.match(/<m\.div/g) ?? []).length, 2);
-  assert.doesNotMatch(motion, /<h1|<Link|MaterialSurface/);
+  assert.match(homePage, /<HomeIntroduction \/>/);
+  assert.match(homePage, /<CareerThread \/>/);
+  assert.match(homePage, /<HomeContact \/>/);
+  assert.doesNotMatch(homePage, /HomeHero|HomeFeaturedWork|HomePracticeContext|HomeContactClose/);
+  assert.doesNotMatch(introduction, /<nav|href="\/(?:work|about|contact)"/);
+});
+
+test("the introduction is plain, semantic, and server rendered", async () => {
+  const introduction = await readFile(introductionPath, "utf8");
+
+  assert.doesNotMatch(introduction, /"use client"/);
+  assert.match(introduction, /<section/);
+  assert.match(introduction, /<header/);
+  assert.match(introduction, /<h1/);
+  assert.match(introduction, /I started in frontend and gradually took on more of the stack/);
+  assert.match(introduction, /Senior[\s\S]*Full Stack Engineer at MEMX/);
+  assert.match(introduction, /Frontend, full-stack web, or mobile roles/i);
+  assert.doesNotMatch(introduction, /passion|innovative|seamless|cutting-edge/i);
+});
+
+test("the introduction leads directly to the career journey", async () => {
+  const [introduction, career] = await Promise.all([
+    readFile(introductionPath, "utf8"),
+    readFile(careerPath, "utf8"),
+  ]);
+
+  assert.match(introduction, /href="#experience"/);
+  assert.match(introduction, /min-h-11/);
+  assert.match(career, /id="experience"/);
+  assert.match(career, /aria-labelledby="experience-title"/);
 });

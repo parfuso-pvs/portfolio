@@ -1,0 +1,155 @@
+.motionShell {
+  position: relative;
+}
+
+.thread {
+  position: absolute;
+  z-index: 0;
+  top: 2rem;
+  bottom: 2rem;
+  left: 0;
+  width: 3rem;
+  height: calc(100% - 4rem);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.threadBase,
+.threadProgress {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.threadBase {
+  stroke: color-mix(in srgb, var(--rule-strong) 58%, transparent);
+  stroke-width: 1.25;
+}
+
+.threadProgress {
+  stroke: var(--blueprint);
+  stroke-width: 2.5;
+}
+
+.timeline {
+  position: relative;
+  z-index: 1;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  column-gap: 1.25rem;
+  min-height: 18rem;
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+}
+
+.entryLarge {
+  min-height: 42rem;
+}
+
+.meta,
+.content {
+  grid-column: 2;
+}
+
+.meta {
+  align-self: start;
+  margin-bottom: 1.75rem;
+}
+
+.content {
+  align-self: center;
+}
+
+.marker {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: start;
+  justify-self: center;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+  border: 3px solid var(--paper-canvas);
+  border-radius: 999px;
+  background: var(--blueprint);
+  box-shadow: 0 0 0 2px var(--blueprint);
+}
+
+.roleList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.role {
+  border: 1px solid color-mix(in srgb, var(--rule) 72%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--paper-raised) 90%, transparent);
+  box-shadow: var(--elevation-sheet);
+}
+
+.branch {
+  position: relative;
+  margin-top: clamp(3rem, 7vw, 6rem);
+  border-radius: 1.5rem;
+  background: color-mix(in srgb, var(--blueprint) 7%, var(--paper-base));
+}
+
+.branch::before {
+  position: absolute;
+  top: -2rem;
+  left: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-top: 2px solid var(--blueprint);
+  border-left: 2px solid var(--blueprint);
+  border-radius: 1.5rem 0 0;
+  content: "";
+}
+
+@media (min-width: 64rem) {
+  .thread {
+    left: 25%;
+    width: 8.333333%;
+  }
+
+  .entry {
+    grid-template-columns: 3fr 1fr 8fr;
+    column-gap: 0;
+  }
+
+  .meta {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+    padding-right: 2rem;
+    text-align: right;
+  }
+
+  .marker {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+  }
+
+  .content {
+    grid-column: 3;
+    grid-row: 1;
+    padding-left: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .branch::before {
+    left: -2.75rem;
+    width: 3.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .threadProgress {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}

@@ -3,40 +3,37 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const homePagePath = "src/app/page.tsx";
-const contactClosePath = "src/components/home/home-contact-close.tsx";
+const contactPath = "src/components/home/home-contact.tsx";
 
-test("the homepage ends with a dedicated contact close", async () => {
-  const [homePage, contactClose] = await Promise.all([
+test("the homepage ends with a concise role-focused contact close", async () => {
+  const [homePage, contact] = await Promise.all([
     readFile(homePagePath, "utf8"),
-    readFile(contactClosePath, "utf8"),
+    readFile(contactPath, "utf8"),
   ]);
 
-  assert.match(homePage, /<HomeContactClose \/>/);
-  assert.match(contactClose, /Open to the next hard problem/);
-  assert.match(contactClose, /Let&apos;s make the complex feel clear/);
+  assert.match(homePage, /<HomeContact \/>/);
+  assert.match(contact, /frontend, full-stack web, or mobile development roles/);
+  assert.doesNotMatch(contact, /hard problem|complexity with consequences|refuses to stay simple/i);
 });
 
-test("the contact close is semantic and server rendered", async () => {
-  const contactClose = await readFile(contactClosePath, "utf8");
+test("the contact close is semantic, direct, and server rendered", async () => {
+  const contact = await readFile(contactPath, "utf8");
 
-  assert.doesNotMatch(contactClose, /"use client"/);
-  assert.match(contactClose, /<section/);
-  assert.match(contactClose, /aria-labelledby="home-contact-title"/);
-  assert.match(contactClose, /<h2/);
-  assert.match(contactClose, /<footer/);
+  assert.doesNotMatch(contact, /"use client"/);
+  assert.match(contact, /<section/);
+  assert.match(contact, /aria-labelledby="home-contact-title"/);
+  assert.match(contact, /<h2/);
+  assert.match(contact, /contactContent\.channels\[0\]/);
+  assert.match(contact, /contactContent\.channels\[1\]/);
+  assert.match(contact, /target="_blank"/);
+  assert.equal((contact.match(/min-h-11/g) ?? []).length, 2);
 });
 
-test("the contact close provides real internal paths and interaction states", async () => {
-  const contactClose = await readFile(contactClosePath, "utf8");
+test("the unpublished resume is not exposed as a broken or private asset", async () => {
+  const contact = await readFile(contactPath, "utf8");
 
-  assert.match(contactClose, /href="\/contact"/);
-  assert.match(contactClose, /href="\/about"/);
-  assert.match(contactClose, /min-h-11/);
-  assert.match(contactClose, /hover:bg-media-foreground/);
-  assert.match(contactClose, /focus-visible:bg-media-foreground/);
-  assert.match(contactClose, /active:bg-paper-deep/);
-  assert.match(contactClose, /text-accent-on-dark/);
-  assert.match(contactClose, /hover:text-accent-on-dark/);
-  assert.match(contactClose, /focus-visible:text-accent-on-dark/);
-  assert.doesNotMatch(contactClose, /mailto:|tel:|linkedin\.com|github\.com/);
+  assert.doesNotMatch(contact, /href="\/resume\.pdf"/);
+  assert.match(contact, /private contact details are removed/);
+  assert.match(contact, /text-paper-raised\/55/);
+  assert.doesNotMatch(contact, /text-paper-raised\/(?:[0-4]\d)/);
 });
