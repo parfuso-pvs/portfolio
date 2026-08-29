@@ -14,6 +14,7 @@ import * as m from "motion/react-m";
 import styles from "./career-journey.module.css";
 
 export type CareerJourneyEntry = {
+  anchorId: string;
   body: string;
   context: string;
   end: { dateTime: string; label: string } | null;
@@ -215,6 +216,7 @@ export function CareerJourney({ entries }: CareerJourneyProps) {
                 return (
                   <li
                     key={entry.index}
+                    id={entry.anchorId}
                     ref={(item) => {
                       itemRefs.current[index] = item;
                     }}

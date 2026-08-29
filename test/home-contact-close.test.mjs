@@ -3,17 +3,18 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const homePagePath = "src/app/page.tsx";
-const contactClosePath = "src/components/home/home-contact-close.tsx";
+const contactClosePath = "src/components/home/simple-contact.tsx";
 
-test("the homepage ends with a dedicated contact close", async () => {
+test("the homepage ends with a simple role-focused contact close", async () => {
   const [homePage, contactClose] = await Promise.all([
     readFile(homePagePath, "utf8"),
     readFile(contactClosePath, "utf8"),
   ]);
 
-  assert.match(homePage, /<HomeContactClose \/>/);
-  assert.match(contactClose, /Open to the next hard problem/);
-  assert.match(contactClose, /Let&apos;s make the complex feel clear/);
+  assert.match(homePage, /<SimpleContact \/>/);
+  assert.match(contactClose, /What I&apos;m looking for/);
+  assert.match(contactClose, /Frontend, full-stack web, or mobile development roles/);
+  assert.doesNotMatch(contactClose, /hard problem|make the complex feel clear/i);
 });
 
 test("the contact close is semantic and server rendered", async () => {
@@ -23,7 +24,7 @@ test("the contact close is semantic and server rendered", async () => {
   assert.match(contactClose, /<section/);
   assert.match(contactClose, /aria-labelledby="home-contact-title"/);
   assert.match(contactClose, /<h2/);
-  assert.match(contactClose, /<footer/);
+  assert.doesNotMatch(contactClose, /material-blueprint|bg-media-backdrop/);
 });
 
 test("the contact close provides real internal paths and interaction states", async () => {
@@ -32,11 +33,8 @@ test("the contact close provides real internal paths and interaction states", as
   assert.match(contactClose, /href="\/contact"/);
   assert.match(contactClose, /href="\/about"/);
   assert.match(contactClose, /min-h-11/);
-  assert.match(contactClose, /hover:bg-media-foreground/);
-  assert.match(contactClose, /focus-visible:bg-media-foreground/);
-  assert.match(contactClose, /active:bg-paper-deep/);
-  assert.match(contactClose, /text-accent-on-dark/);
-  assert.match(contactClose, /hover:text-accent-on-dark/);
-  assert.match(contactClose, /focus-visible:text-accent-on-dark/);
+  assert.match(contactClose, /hover:text-accent/);
+  assert.match(contactClose, /focus-visible:text-accent/);
+  assert.match(contactClose, /active:text-accent-strong/);
   assert.doesNotMatch(contactClose, /mailto:|tel:|linkedin\.com|github\.com/);
 });

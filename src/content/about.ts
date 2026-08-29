@@ -43,6 +43,7 @@ export const aboutContent = {
     entries: [
       {
         index: "01",
+        anchorId: "earthcam",
         projectId: "earthcam",
         kind: "full-time",
         context: "Full-time path",
@@ -53,6 +54,7 @@ export const aboutContent = {
       },
       {
         index: "02",
+        anchorId: "memx",
         projectId: "memx",
         kind: "full-time",
         context: "Full-time path",
@@ -64,17 +66,19 @@ export const aboutContent = {
       },
       {
         index: "03",
+        anchorId: "memx-senior",
         projectId: "memx",
         kind: "full-time",
         context: "Full-time path / promoted",
         start: { dateTime: "2023-01", label: "January 2023" },
-        end: null,
+        end: { dateTime: "2026-08", label: "August 2026" },
         roles: "Senior Full Stack Engineer",
         seriesLabel: "MEMX / position 2 of 2",
         body: "Expanded into server and database work, production support, and end-to-end feature ownership across eight market implementations, including real-time WebSocket delivery.",
       },
       {
         index: "04",
+        anchorId: "pixelverse-studios",
         projectId: "pixelverse-studios",
         kind: "after-hours",
         context: "Part-time / after hours",
@@ -85,6 +89,7 @@ export const aboutContent = {
       },
       {
         index: "05",
+        anchorId: "domani",
         projectId: "domani",
         kind: "after-hours",
         context: "Independent / after hours",

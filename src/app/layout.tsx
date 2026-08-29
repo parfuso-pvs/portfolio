@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     template: "%s — Phil Arfuso",
   },
   description:
-    "The portfolio of Phil Arfuso, a full-stack software engineer who turns complex systems into products that feel simple.",
+    "Phil Arfuso is a full-stack software engineer with frontend, backend, and mobile product experience.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

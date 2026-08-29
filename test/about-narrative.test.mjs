@@ -45,9 +45,14 @@ test("the career chapter keeps verified full-time and after-hours work on one ch
     readFile(journeyPath, "utf8"),
   ]);
 
-  ["March 2018", "December 2019", "January 2023", "January 2024", "December 2025"].forEach((date) =>
-    assert.match(content, new RegExp(date)),
-  );
+  [
+    "March 2018",
+    "December 2019",
+    "January 2023",
+    "August 2026",
+    "January 2024",
+    "December 2025",
+  ].forEach((date) => assert.match(content, new RegExp(date)));
   assert.match(content, /Front-End Developer → Lead Front-End Developer/);
   assert.match(content, /roles: "Front-End Engineer"/);
   assert.match(content, /roles: "Senior Full Stack Engineer"/);
@@ -60,6 +65,7 @@ test("the career chapter keeps verified full-time and after-hours work on one ch
   assert.equal((content.match(/kind: "after-hours"/g) ?? []).length, 2);
   assert.match(content, /Everything belongs to one chronology/);
   assert.match(journey, /<time dateTime=/);
+  assert.match(journey, /id=\{entry\.anchorId\}/);
   assert.match(component, /aboutContent\.career\.entries\.map/);
   assert.doesNotMatch(journey, /parallelTrack/);
   assert.match(journey, /aria-label="Timeline key"/);
