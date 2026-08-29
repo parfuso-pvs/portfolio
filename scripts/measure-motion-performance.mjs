@@ -5,11 +5,12 @@ import { join } from "node:path";
 
 const targetUrl = process.env.MOTION_TEST_URL ?? "http://localhost:3000/";
 const motionScenario = process.env.MOTION_SCENARIO ?? "home";
+const forceReducedMotion = process.env.MOTION_REDUCED === "1";
 const chromePath =
   process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
-if (!new Set(["home", "memx-diagrams"]).has(motionScenario)) {
+if (!new Set(["home", "memx-diagrams", "about-career"]).has(motionScenario)) {
   throw new Error(`Unknown motion scenario: ${motionScenario}`);
 }
 
@@ -181,6 +182,59 @@ async function measureMemxDiagrams(client) {
   return { ...frames, ...traceState };
 }
 
+async function measureAboutCareer(client) {
+  const range = await evaluate(
+    client,
+    `(() => {
+      const journey = document.querySelector('[data-career-journey]');
+      if (!journey) throw new Error('Expected the About career journey.');
+
+      const top = journey.getBoundingClientRect().top + window.scrollY;
+      return {
+        start: Math.max(0, top - window.innerHeight * 0.9),
+        end: Math.max(0, document.documentElement.scrollHeight - window.innerHeight),
+      };
+    })()`,
+  );
+
+  await evaluate(client, `window.scrollTo(0, ${range.start})`);
+  const frames = await runFrameSample(
+    client,
+    `const progress = frame / (frameCount - 1);
+     window.scrollTo(0, ${range.start} + (${range.end} - ${range.start}) * progress);`,
+  );
+
+  await delay(600);
+  const journeyState = await evaluate(
+    client,
+    `(() => {
+      const journey = document.querySelector('[data-career-journey]');
+      const list = journey?.querySelector('ol');
+      const items = list ? [...list.children] : [];
+      const activeItem = items.find((item) => item.getAttribute('aria-current') === 'step');
+      const progressHead = journey?.querySelector('[data-career-progress-head]');
+      return {
+        activeStep: activeItem?.querySelector('[data-career-index]')?.textContent?.trim() ?? null,
+        directListChildrenValid: items.length > 0 && items.every((item) => item.tagName === 'LI'),
+        finalStepActive: activeItem === items.at(-1),
+        listItems: items.length,
+        progressHeadHidden: progressHead ? getComputedStyle(progressHead).display === 'none' : false,
+      };
+    })()`,
+  );
+
+  if (
+    journeyState.listItems !== 5 ||
+    !journeyState.directListChildrenValid ||
+    !journeyState.finalStepActive ||
+    (forceReducedMotion && !journeyState.progressHeadHidden)
+  ) {
+    throw new Error(`About career journey did not settle: ${JSON.stringify(journeyState)}`);
+  }
+
+  return { ...frames, ...journeyState };
+}
+
 async function runFrameSample(client, interaction) {
   return evaluate(
     client,
@@ -234,6 +288,7 @@ try {
       "--disable-default-apps",
       "--disable-extensions",
       "--disable-sync",
+      ...(forceReducedMotion ? ["--force-prefers-reduced-motion=reduce"] : []),
       "--hide-scrollbars",
       "--no-first-run",
       "--remote-debugging-port=0",
@@ -261,9 +316,15 @@ try {
   const measurements =
     motionScenario === "memx-diagrams"
       ? { diagramScroll: await measureMemxDiagrams(client) }
-      : { pointer: await measurePointer(client), scroll: await measureScroll(client) };
+      : motionScenario === "about-career"
+        ? { careerScroll: await measureAboutCareer(client) }
+        : { pointer: await measurePointer(client), scroll: await measureScroll(client) };
   const result = {
     chrome: await evaluate(client, "navigator.userAgent"),
+    reducedMotion: await evaluate(
+      client,
+      "window.matchMedia('(prefers-reduced-motion: reduce)').matches",
+    ),
     scenario: motionScenario,
     ...measurements,
     url: targetUrl,

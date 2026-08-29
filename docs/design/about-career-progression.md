@@ -57,13 +57,16 @@ how Phil's responsibilities expanded while keeping concurrent after-hours work v
 - The career chapter is one ordered list and every bounded date is represented by a semantic `time`
   element.
 - The About narrative remains server rendered; only the isolated career journey is a Client
-  Component.
-- Scroll work is throttled through `requestAnimationFrame`. The progress transform is updated
-  directly so continuous scrolling does not trigger React renders; React state changes only when the
-  active chapter changes.
+  Component. PORT-905 keeps that boundary and lazy-loads the selected Motion feature bundle locally.
+- Motion's scroll value schedules the journey updates. Cached milestone measurements feed Motion
+  values for the progress transform, so continuous scrolling does not trigger React renders; React
+  state changes only when the active chapter changes.
+- Decorative spine layers are siblings of the ordered list, leaving every direct list child as a
+  semantic list item.
 - The focused list item exposes `aria-current="step"`. The progress line is decorative, and all
   content remains present and readable without relying on animation.
-- Reduced-motion users receive effectively instant state changes through the global motion baseline.
+- Reduced-motion users receive effectively instant chapter-state changes, a complete static progress
+  line, and no traveling progress head.
 
 ## Deferred
 

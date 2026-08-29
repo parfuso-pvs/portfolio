@@ -114,6 +114,8 @@ requirement Motion cannot cover. It must not be added alongside Motion.
 - PORT-903 adds bounded navigation-tab and mobile-sheet motion without expanding the JavaScript
   animation boundary.
 - PORT-904 adds route-local drawing to the two MEMX editorial diagrams while preserving their Server
-  Component content. Timeline migration remains a separate editorial-motion ticket.
+  Component content.
+- PORT-905 migrates the About career chronology from bespoke scroll scheduling to route-local Motion
+  values while preserving its milestone-center and page-end behavior.
 - Page transitions require a focused progressive-enhancement spike; the global route trace is not
   part of the selected architecture.
