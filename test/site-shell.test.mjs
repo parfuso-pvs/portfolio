@@ -9,6 +9,11 @@ const routeFiles = [
   "src/app/work/domani/page.tsx",
   "src/app/work/iffers-pictures/page.tsx",
 ];
+const standaloneRouteFiles = [
+  "src/components/about/about-narrative.tsx",
+  "src/components/contact/contact-narrative.tsx",
+  "src/app/work/page.tsx",
+];
 
 test("the root layout is navigation-free and keeps its accessibility baseline", async () => {
   const layout = await readFile(layoutPath, "utf8");
@@ -38,4 +43,10 @@ test("detail pages provide a real return link to the career journey", async () =
   assert.match(backLink, /Back to the journey/);
   assert.match(backLink, /min-h-11/);
   assert.match(frame, /<BackToJourney \/>/);
+});
+
+test("standalone legacy routes retain a route back to the homepage journey", async () => {
+  const routes = await Promise.all(standaloneRouteFiles.map((file) => readFile(file, "utf8")));
+
+  routes.forEach((route) => assert.match(route, /<BackToJourney \/>/));
 });

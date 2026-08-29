@@ -1,14 +1,20 @@
 import { RegistrationMark } from "@/components/ui/material-surface";
+import { BackToJourney } from "@/components/layout/back-to-journey";
 import { contactContent } from "@/content/contact";
 
 export function ContactNarrative() {
   return (
     <main id="main-content" tabIndex={-1} className="overflow-hidden">
       <section
-        className="px-page-gutter pt-[clamp(9rem,16vw,14rem)] pb-[clamp(4rem,8vw,7rem)]"
+        className="px-page-gutter pt-7 pb-[clamp(4rem,8vw,7rem)] sm:pt-9"
         aria-labelledby="contact-title"
       >
-        <div className="mx-auto w-full max-w-[90rem] border-t border-line-strong pt-6">
+        <div className="mx-auto flex min-h-11 w-full max-w-[90rem] items-center justify-between gap-6">
+          <p className="type-label text-ink">Phil Arfuso</p>
+          <BackToJourney />
+        </div>
+
+        <div className="mx-auto mt-[clamp(4rem,9vw,8rem)] w-full max-w-[90rem] border-t border-line-strong pt-6">
           <header className="grid gap-12 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-3">
               <p className="type-label text-accent">{contactContent.hero.eyebrow}</p>

@@ -1,6 +1,7 @@
 import type { ProjectRecord } from "@/content/projects";
 
 import { CareerJourney } from "@/components/about/career-journey";
+import { BackToJourney } from "@/components/layout/back-to-journey";
 import { MaterialSurface, RegistrationMark } from "@/components/ui/material-surface";
 import { aboutContent } from "@/content/about";
 
@@ -26,7 +27,7 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
   return (
     <main id="main-content" tabIndex={-1} className="overflow-hidden">
       <section
-        className="px-page-gutter pt-[clamp(9rem,16vw,14rem)] pb-section relative isolate"
+        className="px-page-gutter pt-7 pb-section relative isolate sm:pt-9"
         aria-labelledby="about-title"
       >
         <div
@@ -34,7 +35,12 @@ export function AboutNarrative({ projects }: AboutNarrativeProps) {
           aria-hidden="true"
         />
 
-        <div className="mx-auto w-full max-w-[90rem] border-t border-line-strong pt-6">
+        <div className="mx-auto flex min-h-11 w-full max-w-[90rem] items-center justify-between gap-6">
+          <p className="type-label text-ink">Phil Arfuso</p>
+          <BackToJourney />
+        </div>
+
+        <div className="mx-auto mt-[clamp(4rem,9vw,8rem)] w-full max-w-[90rem] border-t border-line-strong pt-6">
           <header className="grid gap-12 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-3">
               <p className="type-label text-accent">{aboutContent.hero.eyebrow}</p>

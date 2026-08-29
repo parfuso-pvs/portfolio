@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { BackToJourney } from "@/components/layout/back-to-journey";
 import { ProjectIndexCard } from "@/components/work/project-index-card";
 import { featuredProjects } from "@/content/projects";
 
@@ -13,9 +14,17 @@ export default function WorkPage() {
     <main
       id="main-content"
       tabIndex={-1}
-      className="px-page-gutter overflow-hidden pt-32 pb-section sm:pt-40"
+      className="px-page-gutter overflow-hidden pt-7 pb-section sm:pt-9"
     >
-      <section className="mx-auto w-full max-w-[90rem]" aria-labelledby="work-index-title">
+      <header className="mx-auto flex min-h-11 w-full max-w-[90rem] items-center justify-between gap-6">
+        <p className="type-label text-ink">Phil Arfuso</p>
+        <BackToJourney />
+      </header>
+
+      <section
+        className="mx-auto mt-[clamp(4rem,9vw,8rem)] w-full max-w-[90rem]"
+        aria-labelledby="work-index-title"
+      >
         <header className="grid gap-8 border-t border-line-strong pt-6 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-3">
             <p className="type-label text-accent">Selected work / 01—03</p>

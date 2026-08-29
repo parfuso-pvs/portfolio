@@ -39,11 +39,14 @@ test("the thread maps scroll progress directly to the decorative path", async ()
 
   assert.match(motion, /useScroll\(\{/);
   assert.match(motion, /target: containerRef/);
-  assert.match(motion, /style=\{\{ pathLength: shouldReduceMotion \? 1 : scrollYProgress \}\}/);
+  assert.match(motion, /style=\{\{ pathLength: scrollYProgress \}\}/);
+  assert.doesNotMatch(motion, /useReducedMotion|shouldReduceMotion/);
   assert.match(motion, /preserveAspectRatio="none"/);
   assert.doesNotMatch(motion, /useState|addEventListener|requestAnimationFrame/);
   assert.match(styles, /vector-effect: non-scaling-stroke/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(styles, /stroke-dasharray: none !important/);
+  assert.match(styles, /stroke-dashoffset: 0 !important/);
   assert.doesNotMatch(styles, /animation-iteration-count:\s*infinite/);
 });
 

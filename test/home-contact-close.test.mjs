@@ -34,4 +34,6 @@ test("the unpublished resume is not exposed as a broken or private asset", async
 
   assert.doesNotMatch(contact, /href="\/resume\.pdf"/);
   assert.match(contact, /private contact details are removed/);
+  assert.match(contact, /text-paper-raised\/55/);
+  assert.doesNotMatch(contact, /text-paper-raised\/(?:[0-4]\d)/);
 });

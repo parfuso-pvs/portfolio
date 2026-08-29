@@ -42,7 +42,7 @@ export function HomeContact() {
                 </span>
               </a>
             </div>
-            <p className="type-mono mt-10 text-paper-raised/45">
+            <p className="type-mono mt-10 text-paper-raised/55">
               Résumé link coming after private contact details are removed.
             </p>
           </div>
