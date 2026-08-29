@@ -53,7 +53,8 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
             </div>
 
             <Link
-              href="/#experience"
+              href={`/#experience-${currentProject.id}`}
+              transitionTypes={["career-return"]}
               className="type-label border-media-foreground/45 text-media-foreground hover:border-accent-on-dark hover:text-accent-on-dark focus-visible:border-accent-on-dark focus-visible:text-accent-on-dark active:text-media-foreground/70 mt-8 inline-flex min-h-11 items-center border-b py-3 transition-colors"
             >
               Return to the journey

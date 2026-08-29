@@ -10,7 +10,7 @@ const chromePath =
   process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
-if (!new Set(["home", "memx-diagrams", "about-career"]).has(motionScenario)) {
+if (!new Set(["home", "memx-diagrams", "about-career", "career-navigation"]).has(motionScenario)) {
   throw new Error(`Unknown motion scenario: ${motionScenario}`);
 }
 
@@ -235,6 +235,52 @@ async function measureAboutCareer(client) {
   return { ...frames, ...journeyState };
 }
 
+async function measureCareerNavigation(client) {
+  await evaluate(
+    client,
+    `document.querySelector('#experience-earthcam')?.scrollIntoView({ block: 'center' })`,
+  );
+  await delay(1_000);
+
+  const support = await evaluate(
+    client,
+    `({
+      viewTransitionApi: typeof document.startViewTransition === 'function',
+      transitionClass: CSS.supports('view-transition-class: career-chapter'),
+    })`,
+  );
+  const frames = await runFrameSample(
+    client,
+    `if (frame === 0) {
+       const link = document.querySelector('a[href="/work/earthcam"]');
+       if (!link) throw new Error('Expected the EarthCam career chapter link.');
+       link.click();
+     }`,
+  );
+
+  await delay(350);
+  const routeState = await evaluate(
+    client,
+    `(() => ({
+      heading: document.querySelector('h1')?.textContent?.trim() ?? null,
+      mainLandmarks: document.querySelectorAll('main#main-content').length,
+      pathname: window.location.pathname,
+      returnHref: document.querySelector('a[href="/#experience-earthcam"]')?.getAttribute('href') ?? null,
+    }))()`,
+  );
+
+  if (
+    routeState.pathname !== "/work/earthcam" ||
+    routeState.heading !== "EarthCam" ||
+    routeState.mainLandmarks !== 1 ||
+    routeState.returnHref !== "/#experience-earthcam"
+  ) {
+    throw new Error(`Career chapter transition did not settle: ${JSON.stringify(routeState)}`);
+  }
+
+  return { ...frames, ...routeState, ...support };
+}
+
 async function runFrameSample(client, interaction) {
   return evaluate(
     client,
@@ -318,7 +364,9 @@ try {
       ? { diagramScroll: await measureMemxDiagrams(client) }
       : motionScenario === "about-career"
         ? { careerScroll: await measureAboutCareer(client) }
-        : { careerThread: await measureHomeCareer(client) };
+        : motionScenario === "career-navigation"
+          ? { careerNavigation: await measureCareerNavigation(client) }
+          : { careerThread: await measureHomeCareer(client) };
   const result = {
     chrome: await evaluate(client, "navigator.userAgent"),
     reducedMotion: await evaluate(

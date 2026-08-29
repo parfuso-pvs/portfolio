@@ -1,9 +1,20 @@
 import Link from "next/link";
 
-export function BackToJourney({ tone = "light" }: { tone?: "dark" | "light" }) {
+import type { ProjectId } from "@/content/projects";
+
+export function BackToJourney({
+  projectId,
+  tone = "light",
+}: {
+  projectId?: ProjectId;
+  tone?: "dark" | "light";
+}) {
+  const href = projectId ? `/#experience-${projectId}` : "/#experience";
+
   return (
     <Link
-      href="/#experience"
+      href={href}
+      transitionTypes={projectId ? ["career-return"] : undefined}
       className={`type-label group inline-flex min-h-11 items-center gap-3 rounded-control px-1 py-3 active:translate-y-px ${
         tone === "dark"
           ? "text-paper-raised hover:text-accent-on-dark focus-visible:text-accent-on-dark"

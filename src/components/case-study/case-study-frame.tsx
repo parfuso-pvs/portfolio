@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { BackToJourney } from "@/components/layout/back-to-journey";
+import { CareerChapterTitle } from "@/components/motion/career-chapter-title";
 import type { FeaturedProjectRecord } from "@/content/projects";
 
 type CaseStudyFrameProps = {
@@ -26,7 +27,7 @@ export function CaseStudyFrame({ children, project }: CaseStudyFrameProps) {
         <div className="mx-auto w-full max-w-[90rem]">
           <header className="flex items-center justify-between gap-6">
             <p className="type-label text-ink">Phil Arfuso</p>
-            <BackToJourney />
+            <BackToJourney projectId={project.id} />
           </header>
 
           <div className="mt-[clamp(4rem,9vw,8rem)] grid gap-16 lg:grid-cols-12 lg:gap-6">
@@ -35,12 +36,14 @@ export function CaseStudyFrame({ children, project }: CaseStudyFrameProps) {
               <p className="type-label text-accent">
                 {project.discipline} / {project.role}
               </p>
-              <h1
-                id="case-study-title"
-                className="type-display text-ink mt-7 max-w-[9ch] text-balance"
-              >
-                {project.name}
-              </h1>
+              <CareerChapterTitle projectId={project.id}>
+                <h1
+                  id="case-study-title"
+                  className="type-display text-ink mt-7 max-w-[9ch] text-balance"
+                >
+                  {project.name}
+                </h1>
+              </CareerChapterTitle>
               <p className="type-heading text-ink mt-10 max-w-[16ch] text-pretty">
                 {project.summary}
               </p>

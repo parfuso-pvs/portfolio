@@ -39,10 +39,10 @@ test("detail pages provide a real return link to the career journey", async () =
     readFile("src/components/case-study/case-study-frame.tsx", "utf8"),
   ]);
 
-  assert.match(backLink, /href="\/#experience"/);
+  assert.match(backLink, /projectId \? `\/#experience-\$\{projectId\}` : "\/#experience"/);
   assert.match(backLink, /Back to the journey/);
   assert.match(backLink, /min-h-11/);
-  assert.match(frame, /<BackToJourney \/>/);
+  assert.match(frame, /<BackToJourney projectId=\{project\.id\} \/>/);
 });
 
 test("standalone legacy routes retain a route back to the homepage journey", async () => {

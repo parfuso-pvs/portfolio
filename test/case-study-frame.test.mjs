@@ -42,6 +42,6 @@ test("the frame has responsive composition and an accessible journey return", as
   const frame = await readFile(framePath, "utf8");
 
   assert.match(frame, /lg:grid-cols-12/);
-  assert.match(frame, /<BackToJourney \/>/);
+  assert.match(frame, /<BackToJourney projectId=\{project\.id\} \/>/);
   assert.doesNotMatch(frame, /Back to work index/);
 });
