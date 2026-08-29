@@ -1,0 +1,91 @@
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(site-header) {
+  z-index: 100;
+  animation: none;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@keyframes route-exit-forward {
+  to {
+    opacity: 0;
+    transform: translate3d(-1.5rem, 0, 0);
+  }
+}
+
+@keyframes route-enter-forward {
+  from {
+    opacity: 0;
+    transform: translate3d(1.5rem, 0, 0);
+  }
+}
+
+@keyframes route-exit-back {
+  to {
+    opacity: 0;
+    transform: translate3d(1.5rem, 0, 0);
+  }
+}
+
+@keyframes route-enter-back {
+  from {
+    opacity: 0;
+    transform: translate3d(-1.5rem, 0, 0);
+  }
+}
+
+@keyframes route-exit-switch {
+  to {
+    opacity: 0;
+    transform: translate3d(0, -0.375rem, 0);
+  }
+}
+
+@keyframes route-enter-switch {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.375rem, 0);
+  }
+}
+
+::view-transition-old(.route-forward) {
+  animation: 120ms ease-in both route-exit-forward;
+}
+
+::view-transition-new(.route-forward) {
+  animation: 220ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both route-enter-forward;
+}
+
+::view-transition-old(.route-back) {
+  animation: 120ms ease-in both route-exit-back;
+}
+
+::view-transition-new(.route-back) {
+  animation: 220ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both route-enter-back;
+}
+
+::view-transition-old(.route-switch) {
+  animation: 100ms ease-in both route-exit-switch;
+}
+
+::view-transition-new(.route-switch) {
+  animation: 200ms cubic-bezier(0.16, 1, 0.3, 1) 50ms both route-enter-switch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

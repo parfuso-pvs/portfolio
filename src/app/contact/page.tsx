@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ContactNarrative } from "@/components/contact/contact-narrative";
+import { RouteViewTransition } from "@/components/motion/route-view-transition";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactNarrative />;
+  return (
+    <RouteViewTransition>
+      <ContactNarrative />
+    </RouteViewTransition>
+  );
 }

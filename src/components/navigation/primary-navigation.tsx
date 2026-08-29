@@ -69,6 +69,9 @@ function PathAwareNavigation({ pathname }: { pathname: string }) {
               <Link
                 key={item.href}
                 href={item.href}
+                transitionTypes={
+                  pathname.startsWith(`${item.href}/`) ? ["route-back"] : ["route-switch"]
+                }
                 aria-current={current ? "page" : undefined}
                 className={`${desktopLinkClass} ${styles.desktopTab} ${current ? `${styles.currentDesktopTab} bg-accent text-paper-raised hover:bg-accent-strong` : "hover:bg-paper-deep"}`}
               >
@@ -119,6 +122,9 @@ function PathAwareNavigation({ pathname }: { pathname: string }) {
                 ref={index === 0 ? firstLinkRef : undefined}
                 key={item.href}
                 href={item.href}
+                transitionTypes={
+                  pathname.startsWith(`${item.href}/`) ? ["route-back"] : ["route-switch"]
+                }
                 aria-current={current ? "page" : undefined}
                 className={`${mobileLinkClass} ${styles.mobileLink} ${current ? "bg-paper-deep" : ""}`}
                 onClick={() => setIsOpen(false)}

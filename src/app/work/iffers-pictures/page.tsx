@@ -5,6 +5,7 @@ import { CaseStudyNavigation } from "@/components/case-study/case-study-navigati
 import { IffersPicturesMedia } from "@/components/case-study/iffers-pictures-media";
 import { IffersPicturesNarrative } from "@/components/case-study/iffers-pictures-narrative";
 import { IffersPicturesPublicProof } from "@/components/case-study/iffers-pictures-public-proof";
+import { RouteViewTransition } from "@/components/motion/route-view-transition";
 import { getProject } from "@/content/projects";
 
 const project = getProject("iffers-pictures");
@@ -17,11 +18,13 @@ export const metadata: Metadata = {
 
 export default function IffersPicturesPage() {
   return (
-    <CaseStudyFrame project={project}>
-      <IffersPicturesNarrative project={project} />
-      <IffersPicturesMedia />
-      <IffersPicturesPublicProof project={project} />
-      <CaseStudyNavigation currentProject={project} nextProject={nextProject} />
-    </CaseStudyFrame>
+    <RouteViewTransition>
+      <CaseStudyFrame project={project}>
+        <IffersPicturesNarrative project={project} />
+        <IffersPicturesMedia />
+        <IffersPicturesPublicProof project={project} />
+        <CaseStudyNavigation currentProject={project} nextProject={nextProject} />
+      </CaseStudyFrame>
+    </RouteViewTransition>
   );
 }

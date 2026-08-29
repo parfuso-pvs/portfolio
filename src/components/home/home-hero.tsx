@@ -94,6 +94,7 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
 
             <Link
               href={featuredProject.href}
+              transitionTypes={["route-forward"]}
               className="group material-vellum mt-9 block max-w-xl px-5 py-5 transition-transform duration-300 ease-out hover:-translate-y-1 focus-visible:-translate-y-1 active:translate-y-0 sm:px-6"
             >
               <span className="type-label text-muted">Selected work</span>
@@ -114,12 +115,14 @@ export function HomeHero({ featuredProject }: HomeHeroProps) {
             >
               <Link
                 href="/work"
+                transitionTypes={["route-switch"]}
                 className="type-label text-ink min-h-11 border-b border-ink py-3 transition-colors hover:text-accent focus-visible:text-accent active:text-accent-strong"
               >
                 View work index
               </Link>
               <Link
                 href="/contact"
+                transitionTypes={["route-switch"]}
                 className="type-label text-muted min-h-11 border-b border-line-strong py-3 transition-colors hover:text-accent focus-visible:text-accent active:text-accent-strong"
               >
                 Start a conversation

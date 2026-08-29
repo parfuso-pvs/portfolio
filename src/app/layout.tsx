@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/site-header";
 
 import "./globals.css";
+import "@/styles/route-transitions.css";
 
 const instrumentSans = Instrument_Sans({
   axes: ["wdth"],

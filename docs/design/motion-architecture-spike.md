@@ -81,8 +81,9 @@ A non-blocking cobalt route trace was prototyped in the root template. It added 
 to Contact before any page-specific animation. That cost was not justified by a decorative signal,
 so the template and global boundary were removed.
 
-Page transitions remain a later, independent ticket. They must preserve native navigation, focus,
-history, and scroll behavior and earn any global bundle cost through measured value.
+PORT-906 evaluates page transitions as an independent progressive enhancement. It adopts React View
+Transitions rather than the global Motion trace, preserving native navigation and adding no global
+animation runtime.
 
 ### CSS and hand-written observers only — not selected as the primary engine
 
@@ -117,5 +118,5 @@ requirement Motion cannot cover. It must not be added alongside Motion.
   Component content.
 - PORT-905 migrates the About career chronology from bespoke scroll scheduling to route-local Motion
   values while preserving its milestone-center and page-end behavior.
-- Page transitions require a focused progressive-enhancement spike; the global route trace is not
-  part of the selected architecture.
+- PORT-906 adopts typed React View Transitions for route hierarchy with a zero-duration
+  reduced-motion result; the rejected global Motion trace remains outside the architecture.

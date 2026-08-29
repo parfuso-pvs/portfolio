@@ -5,6 +5,7 @@ import { CaseStudyNavigation } from "@/components/case-study/case-study-navigati
 import { DomaniNarrative } from "@/components/case-study/domani-narrative";
 import { DomaniProductMedia } from "@/components/case-study/domani-product-media";
 import { DomaniProductionEvidence } from "@/components/case-study/domani-production-evidence";
+import { RouteViewTransition } from "@/components/motion/route-view-transition";
 import { getProject } from "@/content/projects";
 
 const project = getProject("domani");
@@ -17,11 +18,13 @@ export const metadata: Metadata = {
 
 export default function DomaniPage() {
   return (
-    <CaseStudyFrame project={project}>
-      <DomaniNarrative project={project} />
-      <DomaniProductMedia />
-      <DomaniProductionEvidence project={project} />
-      <CaseStudyNavigation currentProject={project} nextProject={nextProject} />
-    </CaseStudyFrame>
+    <RouteViewTransition>
+      <CaseStudyFrame project={project}>
+        <DomaniNarrative project={project} />
+        <DomaniProductMedia />
+        <DomaniProductionEvidence project={project} />
+        <CaseStudyNavigation currentProject={project} nextProject={nextProject} />
+      </CaseStudyFrame>
+    </RouteViewTransition>
   );
 }

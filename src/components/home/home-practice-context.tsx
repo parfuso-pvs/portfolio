@@ -67,6 +67,7 @@ export function HomePracticeContext({ projects }: HomePracticeContextProps) {
             <p className="type-mono text-muted">Concise by design / context, not case studies</p>
             <Link
               href="/about"
+              transitionTypes={["route-switch"]}
               className="type-label text-ink min-h-11 self-start border-b border-ink py-3 transition-colors hover:text-accent focus-visible:text-accent active:text-accent-strong sm:self-auto"
             >
               Read the full profile

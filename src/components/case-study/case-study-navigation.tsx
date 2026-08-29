@@ -42,6 +42,7 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
               <p className="type-mono text-accent-on-dark">Next / {nextProject.indexLabel}</p>
               <Link
                 href={nextProject.href}
+                transitionTypes={["route-switch"]}
                 className="border-media-foreground/25 hover:border-accent-on-dark focus-visible:border-accent-on-dark active:border-accent-on-dark group mt-5 grid min-h-11 gap-8 border-b pb-7 transition-colors sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"
               >
                 <span>
@@ -63,6 +64,7 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
 
             <Link
               href="/work"
+              transitionTypes={["route-back"]}
               className="type-label border-media-foreground/45 text-media-foreground hover:border-accent-on-dark hover:text-accent-on-dark focus-visible:border-accent-on-dark focus-visible:text-accent-on-dark active:text-media-foreground/70 mt-8 inline-flex min-h-11 items-center border-b py-3 transition-colors"
             >
               Return to work index

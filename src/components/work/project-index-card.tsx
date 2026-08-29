@@ -135,6 +135,7 @@ export function ProjectIndexCard({ project, sequence }: ProjectIndexCardProps) {
     >
       <Link
         href={project.href}
+        transitionTypes={["route-forward"]}
         className="grid h-full min-h-[34rem] grid-rows-[minmax(16rem,1fr)_auto] focus-visible:outline focus-visible:-outline-offset-4 lg:min-h-[38rem]"
         aria-label={`View ${project.name} case study`}
         aria-describedby={artifactDescriptionId}

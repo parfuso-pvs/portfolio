@@ -37,6 +37,7 @@ export function HomeContactClose() {
             <div className="border-media-foreground/20 mt-12 flex flex-col gap-4 border-t pt-7 sm:mt-16 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
               <Link
                 href="/contact"
+                transitionTypes={["route-switch"]}
                 className="type-label text-media-foreground hover:bg-media-foreground focus-visible:bg-media-foreground group flex min-h-11 w-full items-center justify-between gap-8 bg-accent px-5 py-3.5 transition-colors hover:text-ink focus-visible:text-ink active:bg-paper-deep active:text-ink sm:w-auto sm:min-w-64"
               >
                 Start a conversation
@@ -50,6 +51,7 @@ export function HomeContactClose() {
 
               <Link
                 href="/about"
+                transitionTypes={["route-switch"]}
                 className="type-label border-media-foreground/45 text-media-foreground active:text-media-foreground/70 hover:border-accent-on-dark hover:text-accent-on-dark focus-visible:border-accent-on-dark focus-visible:text-accent-on-dark min-h-11 self-start border-b py-3 transition-colors sm:self-auto"
               >
                 Read the profile

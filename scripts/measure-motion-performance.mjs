@@ -10,7 +10,7 @@ const chromePath =
   process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
-if (!new Set(["home", "memx-diagrams", "about-career"]).has(motionScenario)) {
+if (!new Set(["home", "memx-diagrams", "about-career", "route-navigation"]).has(motionScenario)) {
   throw new Error(`Unknown motion scenario: ${motionScenario}`);
 }
 
@@ -235,6 +235,49 @@ async function measureAboutCareer(client) {
   return { ...frames, ...journeyState };
 }
 
+async function measureRouteNavigation(client) {
+  await evaluate(client, "window.scrollTo(0, 0)");
+  const support = await evaluate(
+    client,
+    `({
+      viewTransitionApi: typeof document.startViewTransition === 'function',
+      transitionTypes: CSS.supports('view-transition-class: route-switch'),
+    })`,
+  );
+  const frames = await runFrameSample(
+    client,
+    `if (frame === 0) {
+       const link = document.querySelector('nav[aria-label="Homepage actions"] a[href="/work"]');
+       if (!link) throw new Error('Expected the homepage Work transition link.');
+       link.click();
+     }`,
+  );
+
+  await delay(300);
+  const routeState = await evaluate(
+    client,
+    `(() => ({
+      activeNavigation: document.querySelector('nav[aria-label="Primary"] a[aria-current="page"]')?.textContent?.trim() ?? null,
+      heading: document.querySelector('h1')?.textContent?.trim() ?? null,
+      mainLandmarks: document.querySelectorAll('main#main-content').length,
+      pathname: window.location.pathname,
+      siteHeaders: document.querySelectorAll('[data-site-header]').length,
+    }))()`,
+  );
+
+  if (
+    routeState.pathname !== "/work" ||
+    routeState.heading !== "Work Index" ||
+    routeState.mainLandmarks !== 1 ||
+    routeState.siteHeaders !== 1 ||
+    routeState.activeNavigation !== "Work"
+  ) {
+    throw new Error(`Route transition did not settle: ${JSON.stringify(routeState)}`);
+  }
+
+  return { ...frames, ...routeState, ...support };
+}
+
 async function runFrameSample(client, interaction) {
   return evaluate(
     client,
@@ -318,7 +361,9 @@ try {
       ? { diagramScroll: await measureMemxDiagrams(client) }
       : motionScenario === "about-career"
         ? { careerScroll: await measureAboutCareer(client) }
-        : { pointer: await measurePointer(client), scroll: await measureScroll(client) };
+        : motionScenario === "route-navigation"
+          ? { routeNavigation: await measureRouteNavigation(client) }
+          : { pointer: await measurePointer(client), scroll: await measureScroll(client) };
   const result = {
     chrome: await evaluate(client, "navigator.userAgent"),
     reducedMotion: await evaluate(

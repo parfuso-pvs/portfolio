@@ -47,3 +47,6 @@ The route files currently provide factual introductory compositions. Their compl
 - The menu uses no focus-trap dependency or animation library. PORT-903 adds colocated CSS motion for
   desktop tab registration and the mobile sheet entrance; its two-line icon continues to use
   transform-only transitions. Every sequence honors the global reduced-motion rule.
+- PORT-906 keeps the header as the fixed spatial anchor during typed React View Transitions. Links
+  remain native Next.js links, the transition overlay passes pointer events through, and reduced
+  motion receives an immediate route swap.

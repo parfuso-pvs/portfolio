@@ -51,6 +51,7 @@ export function HomeFeaturedWork({ projects }: HomeFeaturedWorkProps) {
           <p className="type-mono text-muted">More context / process / outcomes</p>
           <Link
             href="/work"
+            transitionTypes={["route-switch"]}
             className="type-label text-ink min-h-11 self-start border-b border-ink py-3 transition-colors hover:text-accent focus-visible:text-accent active:text-accent-strong sm:self-auto"
           >
             Open the full work index

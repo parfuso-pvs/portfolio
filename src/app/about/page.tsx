@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { AboutNarrative } from "@/components/about/about-narrative";
+import { RouteViewTransition } from "@/components/motion/route-view-transition";
 import { getProject } from "@/content/projects";
 
 export const metadata: Metadata = {
@@ -17,5 +18,9 @@ const workingContexts = [
 ];
 
 export default function AboutPage() {
-  return <AboutNarrative projects={workingContexts} />;
+  return (
+    <RouteViewTransition>
+      <AboutNarrative projects={workingContexts} />
+    </RouteViewTransition>
+  );
 }

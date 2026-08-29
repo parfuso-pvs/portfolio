@@ -33,6 +33,7 @@ export function CaseStudyFrame({ children, project }: CaseStudyFrameProps) {
             <p className="type-mono text-muted">Case file / {caseNumber}</p>
             <Link
               href="/work"
+              transitionTypes={["route-back"]}
               className="type-label text-ink min-h-11 border-b border-ink py-3 transition-colors hover:text-accent focus-visible:text-accent active:text-accent-strong"
             >
               Back to work index
