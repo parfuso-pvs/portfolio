@@ -38,13 +38,10 @@ test("the shared frame remains semantic and server rendered", async () => {
   assert.match(frame, /aria-labelledby="case-study-title"/);
 });
 
-test("the frame has responsive composition and an accessible work-index return", async () => {
+test("the frame has responsive composition and an accessible journey return", async () => {
   const frame = await readFile(framePath, "utf8");
 
   assert.match(frame, /lg:grid-cols-12/);
-  assert.match(frame, /href="\/work"/);
-  assert.match(frame, /min-h-11/);
-  assert.match(frame, /hover:text-accent/);
-  assert.match(frame, /focus-visible:text-accent/);
-  assert.match(frame, /active:text-accent-strong/);
+  assert.match(frame, /<BackToJourney \/>/);
+  assert.doesNotMatch(frame, /Back to work index/);
 });

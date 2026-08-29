@@ -48,10 +48,11 @@ test("the closing navigation uses centralized project paths and semantic labels"
   assert.match(component, /nextProject\.name/);
   assert.match(component, /nextProject\.summary/);
   assert.match(component, /currentProject\.indexLabel/);
-  assert.match(component, /href="\/work"/);
+  assert.match(component, /href="\/#experience"/);
   assert.match(component, /aria-labelledby=\{headingId\}/);
   assert.match(component, /<h2/);
   assert.match(component, /One case complete\. Another story ahead\./);
+  assert.match(component, /Return to the journey/);
 });
 
 test("the closing navigation supports responsive and keyboard interaction states", async () => {

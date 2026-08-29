@@ -3,21 +3,20 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const packagePath = "package.json";
-const motionPath = "src/components/motion/home-assembly-motion.tsx";
-const motionStylesPath = "src/components/motion/home-assembly-motion.module.css";
+const motionPath = "src/components/home/career-thread-motion.tsx";
+const motionStylesPath = "src/components/home/career-thread.module.css";
 const featuresPath = "src/components/motion/dom-animation-features.ts";
 const performancePath = "scripts/measure-motion-performance.mjs";
 
-test("Motion is the single versioned animation dependency", async () => {
-  const packageSource = await readFile(packagePath, "utf8");
-  const packageJson = JSON.parse(packageSource);
+test("Motion remains the single versioned animation dependency", async () => {
+  const packageJson = JSON.parse(await readFile(packagePath, "utf8"));
 
   assert.equal(packageJson.dependencies.motion, "13.1.1");
   assert.equal(packageJson.dependencies.gsap, undefined);
   assert.equal(packageJson.dependencies["framer-motion"], undefined);
 });
 
-test("the prototype loads a route-local feature bundle", async () => {
+test("the career thread isolates scroll enhancement in a small client leaf", async () => {
   const [motion, features] = await Promise.all([
     readFile(motionPath, "utf8"),
     readFile(featuresPath, "utf8"),
@@ -28,53 +27,34 @@ test("the prototype loads a route-local feature bundle", async () => {
   assert.match(motion, /import\("@\/components\/motion\/dom-animation-features"\)/);
   assert.match(motion, /<MotionConfig reducedMotion="user">/);
   assert.match(features, /domAnimation/);
+  assert.doesNotMatch(motion, /<h[1-6]|<Link/);
+  assert.match(motion, /\{children\}/);
 });
 
-test("pointer and scroll values bypass React render state", async () => {
-  const motion = await readFile(motionPath, "utf8");
-
-  assert.match(motion, /useMotionValue/);
-  assert.match(motion, /useScroll/);
-  assert.match(motion, /useTransform/);
-  assert.match(motion, /event\.pointerType !== "mouse"/);
-  assert.match(motion, /shouldReduceMotion/);
-  assert.doesNotMatch(motion, /useState/);
-  assert.doesNotMatch(motion, /addEventListener/);
-});
-
-test("pointer tracking measures layout once per pointer entry", async () => {
-  const motion = await readFile(motionPath, "utf8");
-
-  assert.match(motion, /pointerBoundsRef/);
-  assert.match(motion, /onPointerEnter=\{capturePointerBounds\}/);
-  assert.equal(motion.match(/getBoundingClientRect\(\)/g)?.length, 1);
-  assert.match(motion, /const bounds = pointerBoundsRef\.current/);
-});
-
-test("the hero sequence keeps server-rendered primary content in its final position", async () => {
-  const [motion, motionStyles] = await Promise.all([
+test("the thread maps scroll progress directly to the decorative path", async () => {
+  const [motion, styles] = await Promise.all([
     readFile(motionPath, "utf8"),
     readFile(motionStylesPath, "utf8"),
   ]);
 
-  assert.match(motion, /home-assembly-name \$\{styles\.identity\}/);
-  assert.match(motion, /home-assembly-sheet-settle \$\{styles\.sheet\}/);
-  assert.doesNotMatch(motion, /initial=.*?\{ y: (?:10|14) \}/);
-  assert.match(motionStyles, /@media \(prefers-reduced-motion: no-preference\)/);
-  assert.match(motionStyles, /\.identity[\s\S]*?animation: settle/);
-  assert.match(motionStyles, /\.sheet[\s\S]*?animation: settle/);
-  assert.doesNotMatch(motionStyles, /opacity/);
+  assert.match(motion, /useScroll\(\{/);
+  assert.match(motion, /target: containerRef/);
+  assert.match(motion, /style=\{\{ pathLength: shouldReduceMotion \? 1 : scrollYProgress \}\}/);
+  assert.match(motion, /preserveAspectRatio="none"/);
+  assert.doesNotMatch(motion, /useState|addEventListener|requestAnimationFrame/);
+  assert.match(styles, /vector-effect: non-scaling-stroke/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.doesNotMatch(styles, /animation-iteration-count:\s*infinite/);
 });
 
-test("the production motion probe records animation frames and long tasks", async () => {
-  const [packageSource, performanceSource] = await Promise.all([
-    readFile(packagePath, "utf8"),
+test("the production motion probe records the career thread", async () => {
+  const [packageJson, performanceSource] = await Promise.all([
+    readFile(packagePath, "utf8").then(JSON.parse),
     readFile(performancePath, "utf8"),
   ]);
-  const packageJson = JSON.parse(packageSource);
 
   assert.equal(packageJson.scripts["measure:motion"], `node ${performancePath}`);
   assert.match(performanceSource, /requestAnimationFrame/);
   assert.match(performanceSource, /PerformanceObserver/);
-  assert.match(performanceSource, /Input\.dispatchMouseEvent/);
+  assert.match(performanceSource, /data-career-thread/);
 });

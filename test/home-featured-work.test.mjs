@@ -2,41 +2,44 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const homePagePath = "src/app/page.tsx";
-const featuredWorkPath = "src/components/home/home-featured-work.tsx";
+const careerPath = "src/components/home/career-thread.tsx";
+const experiencePath = "src/content/experience.ts";
 
-test("the homepage selects its two secondary featured projects from the registry", async () => {
-  const [homePage, featuredWork] = await Promise.all([
-    readFile(homePagePath, "utf8"),
-    readFile(featuredWorkPath, "utf8"),
+test("EarthCam and MEMX remain separate chronological company chapters", async () => {
+  const experienceModule = await import("../src/content/experience.ts");
+
+  assert.deepEqual(
+    experienceModule.employmentHistory.map(({ projectId }) => projectId),
+    ["earthcam", "memx"],
+  );
+  assert.equal(experienceModule.employmentHistory[0].roles.at(-1).end.dateTime, "2019-12");
+  assert.equal(experienceModule.employmentHistory[1].roles[0].start.dateTime, "2019-12");
+});
+
+test("each company contains visible, non-interactive role chapters", async () => {
+  const [career, experience] = await Promise.all([
+    readFile(careerPath, "utf8"),
+    readFile(experiencePath, "utf8"),
   ]);
 
-  assert.match(homePage, /getProject\("domani"\)/);
-  assert.match(homePage, /getProject\("iffers-pictures"\)/);
-  assert.doesNotMatch(homePage, /Domani|Iffer's Pictures/);
-  assert.match(featuredWork, /\{projects\[0\]\.name\}/);
-  assert.match(featuredWork, /\{projects\[1\]\.name\}/);
-  assert.doesNotMatch(featuredWork, />\s*Domani|Iffer(?:&apos;|')s Pictures/);
+  assert.match(career, /<ol className=\{styles\.roleList\}/);
+  assert.match(career, /company\.roles\.map/);
+  assert.match(career, /<h4/);
+  assert.match(career, /<Period start=\{role\.start\} end=\{role\.end\}/);
+  [
+    "Junior Front-End Developer",
+    "Lead Front-End Developer",
+    "Front-End Engineer",
+    "Senior Full Stack Engineer",
+  ].forEach((role) => assert.match(experience, new RegExp(role)));
 });
 
-test("the featured-work sequence remains semantic and server rendered", async () => {
-  const featuredWork = await readFile(featuredWorkPath, "utf8");
+test("company chapters use real registry-backed detail routes", async () => {
+  const career = await readFile(careerPath, "utf8");
 
-  assert.doesNotMatch(featuredWork, /"use client"/);
-  assert.match(featuredWork, /<section/);
-  assert.match(featuredWork, /<h2/);
-  assert.match(featuredWork, /<ProjectIndexCard/);
-  assert.match(featuredWork, /projects\.map/);
-});
-
-test("the section provides responsive composition and a work-index path", async () => {
-  const featuredWork = await readFile(featuredWorkPath, "utf8");
-
-  assert.match(featuredWork, /grid-cols-1/);
-  assert.match(featuredWork, /lg:grid-cols-12/);
-  assert.match(featuredWork, /href="\/work"/);
-  assert.match(featuredWork, /min-h-11/);
-  assert.match(featuredWork, /hover:text-accent/);
-  assert.match(featuredWork, /focus-visible:text-accent/);
-  assert.match(featuredWork, /active:text-accent-strong/);
+  assert.match(career, /getProject\("earthcam"\)/);
+  assert.match(career, /getProject\("memx"\)/);
+  assert.match(career, /href=\{project\.href\}/);
+  assert.match(career, /aria-label=\{`Read more about \$\{project\.name\}`\}/);
+  assert.match(career, /min-h-11/);
 });

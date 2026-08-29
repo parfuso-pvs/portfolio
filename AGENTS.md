@@ -20,6 +20,24 @@ The selected visual direction is **Human Assembly**:
 
 Do not replace this direction with generic SaaS cards, purple gradients, glassmorphism, terminal styling, or an unrelated dark developer aesthetic.
 
+### Current homepage expression
+
+The approved homepage is a navigation-free, career-led landing experience called the **Living
+Career Thread**. It intentionally narrows the earlier Human Assembly vocabulary:
+
+- use one gently curved cobalt chronology thread instead of blueprint grids, registration marks,
+  or repeated decorative rules;
+- keep MarketView, EarthCam, and MEMX in one clear chronological reading order;
+- nest role changes inside their company chapter and never overlap company entries;
+- show PixelVerse Studios, Domani, and Iffer's Pictures as work built alongside the later full-time
+  chronology;
+- link company and project chapters to real detail routes while keeping `/` as the primary index;
+- do not add a conventional global navigation bar.
+
+The existing colors, typography, content safeguards, and restrained paper materiality remain in
+force. Older design documents remain historical implementation records rather than authority for
+the current homepage composition.
+
 ## Sources of truth
 
 Before beginning work, read:

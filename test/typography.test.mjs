@@ -4,7 +4,7 @@ import test from "node:test";
 
 const layoutPath = "src/app/layout.tsx";
 const globalCssPath = "src/app/globals.css";
-const homePath = "src/components/home/home-hero.tsx";
+const homePath = "src/components/home/home-introduction.tsx";
 const documentationPath = "docs/design/typography.md";
 
 const fontFamilies = ["Instrument_Sans", "Newsreader", "IBM_Plex_Mono"];
@@ -44,10 +44,10 @@ test("the stylesheet exposes the complete semantic type-role contract", async ()
   assert.match(globalCss, /font-variant-numeric: tabular-nums slashed-zero/);
 });
 
-test("the homepage proves the primary display, heading, label, and mono roles", async () => {
+test("the homepage proves the primary heading, body, label, and mono roles", async () => {
   const home = await readFile(homePath, "utf8");
 
-  ["type-display", "type-heading", "type-label", "type-mono"].forEach((role) =>
+  ["type-heading", "type-body", "type-label", "type-mono"].forEach((role) =>
     assert.match(home, new RegExp(`className="[^"]*${role}`)),
   );
   assert.doesNotMatch(home, /font-family\s*:/);

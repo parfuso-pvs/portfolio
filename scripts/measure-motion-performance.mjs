@@ -92,46 +92,46 @@ async function evaluate(client, expression) {
   return result.result.value;
 }
 
-async function measurePointer(client) {
-  const bounds = await evaluate(
+async function measureHomeCareer(client) {
+  const range = await evaluate(
     client,
     `(() => {
-      const rect = document.querySelector('[data-motion-probe="home-assembly"]').getBoundingClientRect();
-      return { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+      const thread = document.querySelector('[data-career-thread]');
+      if (!thread) throw new Error('Expected the homepage career thread.');
+      const top = thread.getBoundingClientRect().top + window.scrollY;
+      const bottom = thread.getBoundingClientRect().bottom + window.scrollY;
+      const maximumScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      return {
+        start: Math.max(0, top - window.innerHeight * 0.72),
+        end: Math.min(maximumScroll, bottom - window.innerHeight * 0.62),
+      };
     })()`,
   );
 
-  await client.send("Input.dispatchMouseEvent", {
-    type: "mouseMoved",
-    x: bounds.left + bounds.width * 0.1,
-    y: bounds.top + bounds.height * 0.5,
-  });
-
-  return runFrameSample(
-    client,
-    `const stage = document.querySelector('[data-motion-probe="home-assembly"]');
-     const progress = frame / (frameCount - 1);
-     stage.dispatchEvent(new PointerEvent("pointermove", {
-       bubbles: true,
-       clientX: ${bounds.left} + ${bounds.width} * (0.1 + progress * 0.8),
-       clientY: ${bounds.top} + ${bounds.height} * (0.5 + Math.sin(progress * Math.PI * 4) * 0.3),
-       pointerType: "mouse",
-     }));`,
-  );
-}
-
-async function measureScroll(client) {
-  await evaluate(client, "window.scrollTo(0, 0)");
-  const maximumScroll = await evaluate(
-    client,
-    "Math.max(0, document.documentElement.scrollHeight - window.innerHeight)",
-  );
-
-  return runFrameSample(
+  await evaluate(client, `window.scrollTo(0, ${range.start})`);
+  const frames = await runFrameSample(
     client,
     `const progress = frame / (frameCount - 1);
-     window.scrollTo(0, ${maximumScroll} * progress);`,
+     window.scrollTo(0, ${range.start} + (${range.end} - ${range.start}) * progress);`,
   );
+
+  const threadState = await evaluate(
+    client,
+    `(() => {
+      const thread = document.querySelector('[data-career-thread]');
+      const paths = thread ? [...thread.querySelectorAll('svg path')] : [];
+      return {
+        careerThreadPresent: Boolean(thread),
+        pathCount: paths.length,
+      };
+    })()`,
+  );
+
+  if (!threadState.careerThreadPresent || threadState.pathCount !== 2) {
+    throw new Error(`Homepage career thread did not render: ${JSON.stringify(threadState)}`);
+  }
+
+  return { ...frames, ...threadState };
 }
 
 async function measureMemxDiagrams(client) {
@@ -318,7 +318,7 @@ try {
       ? { diagramScroll: await measureMemxDiagrams(client) }
       : motionScenario === "about-career"
         ? { careerScroll: await measureAboutCareer(client) }
-        : { pointer: await measurePointer(client), scroll: await measureScroll(client) };
+        : { careerThread: await measureHomeCareer(client) };
   const result = {
     chrome: await evaluate(client, "navigator.userAgent"),
     reducedMotion: await evaluate(

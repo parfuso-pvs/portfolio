@@ -12,17 +12,8 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
 
   return (
     <section className="px-page-gutter pb-page-gutter" aria-labelledby={headingId}>
-      <div className="bg-media-backdrop text-media-foreground relative mx-auto w-full max-w-[90rem] overflow-hidden px-6 py-9 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-15 [background-image:linear-gradient(color-mix(in_srgb,var(--paper-raised)_18%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_srgb,var(--paper-raised)_18%,transparent)_1px,transparent_1px)] [background-size:4rem_4rem]"
-          aria-hidden="true"
-        />
-        <span
-          className="bg-accent absolute top-0 left-[12%] h-2 w-24 sm:left-[18%] sm:w-36"
-          aria-hidden="true"
-        />
-
-        <div className="relative grid gap-14 lg:grid-cols-12 lg:gap-6">
+      <div className="bg-media-backdrop text-media-foreground mx-auto w-full max-w-[90rem] overflow-hidden rounded-[clamp(2rem,6vw,5rem)] px-6 py-9 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-6">
           <header className="lg:col-span-3">
             <p className="type-label text-accent-on-dark">Case file complete</p>
             <p className="type-mono text-media-foreground/55 mt-3">
@@ -62,10 +53,10 @@ export function CaseStudyNavigation({ currentProject, nextProject }: CaseStudyNa
             </div>
 
             <Link
-              href="/work"
+              href="/#experience"
               className="type-label border-media-foreground/45 text-media-foreground hover:border-accent-on-dark hover:text-accent-on-dark focus-visible:border-accent-on-dark focus-visible:text-accent-on-dark active:text-media-foreground/70 mt-8 inline-flex min-h-11 items-center border-b py-3 transition-colors"
             >
-              Return to work index
+              Return to the journey
             </Link>
           </div>
         </div>

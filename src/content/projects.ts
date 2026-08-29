@@ -56,7 +56,7 @@ export type FeaturedProject = ProjectFoundation & {
 
 export type SupportingProject = ProjectFoundation & {
   caseStudyStatus: "supporting-only";
-  href: null;
+  href: `/work/${string}` | null;
   prominence: "supporting";
 };
 
@@ -279,7 +279,7 @@ export const projects = [
     name: "EarthCam",
     prominence: "supporting",
     caseStudyStatus: "supporting-only",
-    href: null,
+    href: "/work/earthcam",
     indexLabel: "Support 02",
     discipline: "Earlier Career",
     role: "Frontend Developer & Team Lead",
