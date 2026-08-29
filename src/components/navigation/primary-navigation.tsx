@@ -14,6 +14,8 @@ const mobileLinkClass =
   "type-label text-ink relative flex min-h-11 items-center justify-between border-b border-line px-5 py-3 last:border-b-0 hover:bg-paper-deep focus-visible:z-10 focus-visible:outline-offset-[-3px]";
 
 function isCurrentPath(pathname: string, href: string) {
+  if (href.startsWith("/#")) return pathname === "/";
+
   return pathname === href;
 }
 
@@ -72,9 +74,7 @@ function PathAwareNavigation({ pathname }: { pathname: string }) {
                 aria-current={current ? "page" : undefined}
                 className={`${desktopLinkClass} ${styles.desktopTab} ${current ? `${styles.currentDesktopTab} bg-accent text-paper-raised hover:bg-accent-strong` : "hover:bg-paper-deep"}`}
               >
-                <span className={`${styles.tabLabel} relative z-10`}>
-                  {"shortLabel" in item ? item.shortLabel : item.label}
-                </span>
+                <span className={`${styles.tabLabel} relative z-10`}>{item.label}</span>
                 <span
                   className={`${styles.tabRegistration} ${current ? "bg-accent-strong" : "bg-accent"} absolute inset-x-3 bottom-0 z-10 h-0.5`}
                   aria-hidden="true"

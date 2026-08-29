@@ -3,64 +3,68 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const homePagePath = "src/app/page.tsx";
-const heroPath = "src/components/home/home-hero.tsx";
-const heroMotionPath = "src/components/motion/home-assembly-motion.tsx";
+const introPath = "src/components/home/career-led-intro.tsx";
+const careerMapPath = "src/components/home/career-map.tsx";
+const experiencePath = "src/content/experience.ts";
 
-test("the homepage hero selects MEMX from the project registry", async () => {
+test("the homepage composes the career-led experiment from project records", async () => {
   const homePage = await readFile(homePagePath, "utf8");
 
-  assert.match(homePage, /getProject\("memx"\)/);
-  assert.match(homePage, /featuredProject=\{getProject\("memx"\)\}/);
-  assert.doesNotMatch(homePage, /MEMX|\/work\/memx/);
+  assert.match(homePage, /<CareerLedIntro \/>/);
+  assert.match(homePage, /<CareerMap projects=\{careerProjects\} \/>/);
+  assert.match(homePage, /<SimpleContact \/>/);
+  ["memx", "domani", "iffers-pictures", "pixelverse-studios", "earthcam"].forEach((projectId) =>
+    assert.match(homePage, new RegExp(`getProject\\("${projectId}"\\)`)),
+  );
+  assert.doesNotMatch(homePage, /<HomeHero|<HomeAssemblyMotion/);
 });
 
-test("the homepage hero remains a server-rendered semantic composition", async () => {
-  const hero = await readFile(heroPath, "utf8");
+test("the introduction is plain, semantic, and server rendered", async () => {
+  const intro = await readFile(introPath, "utf8");
 
-  assert.doesNotMatch(hero, /"use client"/);
-  assert.match(hero, /<section/);
-  assert.match(hero, /<h1/);
-  assert.match(hero, /<figure/);
-  assert.match(hero, /<figcaption/);
-  assert.match(hero, /min-h-\[100dvh\]/);
+  assert.doesNotMatch(intro, /"use client"|motion\/react|HomeAssemblyMotion/);
+  assert.match(intro, /<section/);
+  assert.match(intro, /<h1/);
+  assert.match(intro, /I started in frontend and gradually took on more of the stack/);
+  assert.match(intro, /most recently as a Senior Full/);
+  assert.doesNotMatch(intro, /min-h-\[100dvh\]|material-blueprint|RegistrationMark/);
 });
 
-test("the homepage exposes its three approved navigation paths", async () => {
-  const hero = await readFile(heroPath, "utf8");
+test("the introduction leads directly to experience and contact", async () => {
+  const intro = await readFile(introPath, "utf8");
 
-  assert.match(hero, /href=\{featuredProject\.href\}/);
-  assert.match(hero, /href="\/work"/);
-  assert.match(hero, /href="\/contact"/);
-  assert.match(hero, /aria-label="Homepage actions"/);
+  assert.match(intro, /href="#experience"/);
+  assert.match(intro, /href="\/contact"/);
+  assert.match(intro, /aria-label="Introduction actions"/);
+  assert.equal(intro.match(/min-h-11/g)?.length, 2);
 });
 
-test("the MEMX diagram uses registry content and preserves confidentiality", async () => {
-  const hero = await readFile(heroPath, "utf8");
-
-  assert.match(hero, /project\.approvedFeatures\.slice\(0, 4\)/);
-  assert.match(hero, /Original diagram of four connected MEMX platform layers/);
-  assert.doesNotMatch(hero, /private screenshot|order book|matching engine|fake exchange data/i);
-});
-
-test("primary homepage actions cover hover, focus, active, and touch sizing", async () => {
-  const hero = await readFile(heroPath, "utf8");
-
-  assert.match(hero, /hover:-translate-y-1/);
-  assert.match(hero, /focus-visible:-translate-y-1/);
-  assert.match(hero, /active:translate-y-0/);
-  assert.equal(hero.match(/min-h-11/g)?.length, 2);
-  assert.doesNotMatch(hero, /aria-describedby="featured-project-summary"/);
-});
-
-test("the motion leaf never gates or takes ownership of primary hero content", async () => {
-  const [hero, motion] = await Promise.all([
-    readFile(heroPath, "utf8"),
-    readFile(heroMotionPath, "utf8"),
+test("career companies contain visible nested role chapters", async () => {
+  const [careerMap, experience] = await Promise.all([
+    readFile(careerMapPath, "utf8"),
+    readFile(experiencePath, "utf8"),
   ]);
 
-  assert.match(hero, /<HomeAssemblyMotion[\s\S]*?identityRail=/);
-  assert.match(motion, /\{identityRail\}/);
-  assert.match(motion, /\{children\}/);
-  assert.equal((motion.match(/<m\.div/g) ?? []).length, 2);
-  assert.doesNotMatch(motion, /<h1|<Link|MaterialSurface/);
+  assert.match(careerMap, /<ol className=/);
+  assert.match(careerMap, /company\.roles\.map/);
+  assert.match(careerMap, /<h4/);
+  assert.match(experience, /Junior Front-End Developer/);
+  assert.match(experience, /Lead Front-End Developer/);
+  assert.match(experience, /Front-End Engineer/);
+  assert.match(experience, /Senior Full Stack Engineer/);
+  assert.match(experience, /August 2026/);
+});
+
+test("the career map preserves the verified origin and parallel-work context", async () => {
+  const [careerMap, experience] = await Promise.all([
+    readFile(careerMapPath, "utf8"),
+    readFile(experiencePath, "utf8"),
+  ]);
+
+  assert.match(experience, /Online Project Supervisor/);
+  assert.match(experience, /CSS and JavaScript/);
+  assert.match(experience, /Built outside full-time work/);
+  assert.match(careerMap, /Parallel track/);
+  assert.match(careerMap, /project\("iffers-pictures"\)/);
+  assert.doesNotMatch(careerMap, /"use client"|motion\/react/);
 });

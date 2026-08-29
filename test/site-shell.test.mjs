@@ -39,10 +39,11 @@ test("navigation destinations are centralized and every approved route exists", 
   ["/work", "/about", "/contact"].forEach((href) =>
     assert.match(navigationData, new RegExp(`href: "${href}"`)),
   );
+  assert.match(navigationData, /href: "\/#experience"/);
   ["/work/memx", "/work/domani", "/work/iffers-pictures"].forEach((href) =>
     assert.match(projectData, new RegExp(`href: "${href}"`)),
   );
-  assert.match(navigationData, /featuredProjects\.map/);
+  assert.doesNotMatch(navigationData, /featuredProjects|\/work\/memx|\/work\/domani/);
   await Promise.all(routeFiles.map((file) => access(file)));
 });
 

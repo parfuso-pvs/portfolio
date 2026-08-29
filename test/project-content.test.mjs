@@ -62,7 +62,7 @@ test("Iffer's and PixelVerse attribution remain explicit", () => {
   assert.match(pixelverse.attribution, /Iffer's Pictures is the exception/);
 });
 
-test("navigation and featured routes consume the project registry", async () => {
+test("featured routes consume the project registry without occupying primary navigation", async () => {
   const [navigation, memxPage, domaniPage, iffersPage] = await Promise.all([
     readFile("src/content/navigation.ts", "utf8"),
     readFile("src/app/work/memx/page.tsx", "utf8"),
@@ -70,8 +70,11 @@ test("navigation and featured routes consume the project registry", async () => 
     readFile("src/app/work/iffers-pictures/page.tsx", "utf8"),
   ]);
 
-  assert.match(navigation, /import \{ featuredProjects \} from "@\/content\/projects"/);
-  assert.doesNotMatch(navigation, /href: "\/work\/(?:memx|domani|iffers-pictures)"/);
+  assert.match(navigation, /href: "\/#experience"/);
+  assert.doesNotMatch(
+    navigation,
+    /featuredProjects|href: "\/work\/(?:memx|domani|iffers-pictures)"/,
+  );
   [memxPage, domaniPage, iffersPage].forEach((page) => {
     assert.match(page, /getProject\(/);
     assert.match(page, /title: project\.name/);
