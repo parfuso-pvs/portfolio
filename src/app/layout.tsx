@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, Instrument_Sans, Newsreader } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "./globals.css";
+import "@/styles/career-chapter-transitions.css";
 
 const instrumentSans = Instrument_Sans({
   axes: ["wdth"],

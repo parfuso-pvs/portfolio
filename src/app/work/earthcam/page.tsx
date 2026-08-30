@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { BackToJourney } from "@/components/layout/back-to-journey";
+import { CareerChapterTitle } from "@/components/motion/career-chapter-title";
 import { employmentHistory } from "@/content/experience";
 import { getProject } from "@/content/projects";
 
@@ -26,7 +27,7 @@ export default function EarthcamPage() {
         <div className="mx-auto w-full max-w-[90rem]">
           <header className="flex min-h-11 items-center justify-between gap-6">
             <p className="type-label text-ink">Phil Arfuso</p>
-            <BackToJourney />
+            <BackToJourney projectId={project.id} />
           </header>
 
           <div className="mt-[clamp(4rem,9vw,8rem)] grid gap-14 lg:grid-cols-12 lg:gap-6">
@@ -39,9 +40,11 @@ export default function EarthcamPage() {
               </p>
             </div>
             <div className="lg:col-span-7 lg:col-start-5">
-              <h1 className="type-heading text-ink max-w-[10ch] text-[clamp(4rem,9vw,8rem)]">
-                {project.name}
-              </h1>
+              <CareerChapterTitle projectId={project.id}>
+                <h1 className="type-heading text-ink max-w-[10ch] text-[clamp(4rem,9vw,8rem)]">
+                  {project.name}
+                </h1>
+              </CareerChapterTitle>
               <p className="type-heading text-ink mt-8 max-w-[15ch] text-[clamp(2.25rem,4vw,4rem)] text-pretty">
                 My first engineering role—and my first opportunity to lead a frontend team.
               </p>
@@ -119,7 +122,7 @@ export default function EarthcamPage() {
                 {project.attribution}
               </p>
               <div className="mt-10">
-                <BackToJourney tone="dark" />
+                <BackToJourney projectId={project.id} tone="dark" />
               </div>
             </div>
           </div>

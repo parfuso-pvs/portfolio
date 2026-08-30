@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { CareerThreadMotion } from "@/components/home/career-thread-motion";
 import styles from "@/components/home/career-thread.module.css";
+import { CareerChapterTitle } from "@/components/motion/career-chapter-title";
 import { careerOrigin, employmentHistory, independentPractice } from "@/content/experience";
 import { getProject } from "@/content/projects";
 
@@ -91,7 +92,11 @@ export function CareerThread() {
               if (!firstRole || !finalRole || !project.href) return null;
 
               return (
-                <li key={company.projectId} className={`${styles.entry} ${styles.entryLarge}`}>
+                <li
+                  key={company.projectId}
+                  id={`experience-${company.projectId}`}
+                  className={`${styles.entry} ${styles.entryLarge} scroll-mt-8`}
+                >
                   <span className={styles.marker} aria-hidden="true" />
                   <div className={styles.meta}>
                     <Period start={firstRole.start} end={finalRole.end} />
@@ -103,12 +108,15 @@ export function CareerThread() {
                     </p>
                     <Link
                       href={project.href}
+                      transitionTypes={["career-detail"]}
                       className="group mt-4 block rounded-control focus-visible:outline-offset-8"
                       aria-label={`Read more about ${project.name}`}
                     >
-                      <span className="type-heading text-ink group-hover:text-accent group-focus-visible:text-accent block text-[clamp(3.25rem,7vw,6.5rem)] transition-colors motion-reduce:transition-none">
-                        {project.name}
-                      </span>
+                      <CareerChapterTitle projectId={project.id}>
+                        <span className="type-heading text-ink group-hover:text-accent group-focus-visible:text-accent block text-[clamp(3.25rem,7vw,6.5rem)] transition-colors motion-reduce:transition-none">
+                          {project.name}
+                        </span>
+                      </CareerChapterTitle>
                       <span className="type-body-small text-muted mt-4 block max-w-[58ch]">
                         {project.summary}
                       </span>
@@ -150,16 +158,23 @@ export function CareerThread() {
                             const sideProject = entry.projectId === "domani" ? domani : pixelverse;
 
                             return (
-                              <article key={entry.projectId}>
+                              <article
+                                key={entry.projectId}
+                                id={`experience-${entry.projectId}`}
+                                className="scroll-mt-8"
+                              >
                                 <Period start={entry.start} />
                                 {sideProject.href ? (
                                   <Link
                                     href={sideProject.href}
+                                    transitionTypes={["career-detail"]}
                                     className="group mt-3 block rounded-control focus-visible:outline-offset-6"
                                   >
-                                    <h5 className="type-heading text-ink group-hover:text-accent group-focus-visible:text-accent text-[clamp(2rem,3vw,3rem)] transition-colors motion-reduce:transition-none">
-                                      {sideProject.name}
-                                    </h5>
+                                    <CareerChapterTitle projectId={sideProject.id}>
+                                      <h5 className="type-heading text-ink group-hover:text-accent group-focus-visible:text-accent text-[clamp(2rem,3vw,3rem)] transition-colors motion-reduce:transition-none">
+                                        {sideProject.name}
+                                      </h5>
+                                    </CareerChapterTitle>
                                     <p className="type-label text-ink mt-3 leading-[1.5]">
                                       {entry.role}
                                     </p>
@@ -187,13 +202,19 @@ export function CareerThread() {
                             );
                           })}
                         </div>
-                        <p className="type-body-small text-muted mt-8">
+                        <p
+                          id={`experience-${iffers.id}`}
+                          className="type-body-small text-muted mt-8 scroll-mt-8"
+                        >
                           Related client work:{" "}
                           <Link
                             href={iffers.href}
+                            transitionTypes={["career-detail"]}
                             className="text-ink underline decoration-line-strong underline-offset-4 hover:text-accent focus-visible:text-accent active:text-accent-strong"
                           >
-                            {iffers.name}
+                            <CareerChapterTitle projectId={iffers.id}>
+                              {iffers.name}
+                            </CareerChapterTitle>
                           </Link>
                           , where I owned discovery, copy, visual design, implementation, and client
                           collaboration.

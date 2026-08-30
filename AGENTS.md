@@ -32,6 +32,8 @@ Career Thread**. It intentionally narrows the earlier Human Assembly vocabulary:
 - show PixelVerse Studios, Domani, and Iffer's Pictures as work built alongside the later full-time
   chronology;
 - link company and project chapters to real detail routes while keeping `/` as the primary index;
+- limit route continuity to the selected chapter name and project-specific return anchor; do not
+  restore global page slides, route overlays, or delayed navigation;
 - do not add a conventional global navigation bar.
 
 The existing colors, typography, content safeguards, and restrained paper materiality remain in
