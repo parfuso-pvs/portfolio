@@ -38,7 +38,7 @@ test("both figures provide visible context and registry-backed text equivalents"
   assert.match(diagrams, /aria-labelledby="memx-realtime-title"/);
   assert.match(diagrams, /aria-describedby="memx-realtime-summary memx-realtime-description"/);
   assert.match(diagrams, /className="sr-only"/);
-  assert.equal((diagrams.match(/aria-hidden="true"/g) ?? []).length, 3);
+  assert.equal((diagrams.match(/aria-hidden="true"/g) ?? []).length, 2);
 });
 
 test("diagram content preserves ownership and confidentiality boundaries", async () => {
@@ -64,7 +64,8 @@ test("diagram layouts collapse from horizontal flows to vertical mobile paths", 
   assert.match(diagrams, /lg:grid-cols-5/);
   assert.match(diagrams, /lg:grid-cols-3/);
   assert.match(diagrams, /border-l border-accent/);
-  assert.match(diagrams, /text-accent-on-dark/);
+  assert.match(diagrams, /bg-paper-raised/);
+  assert.doesNotMatch(diagrams, /material-blueprint|bg-media-backdrop|background-image:/);
 });
 
 test("diagram drawing stays decorative and route-local", async () => {

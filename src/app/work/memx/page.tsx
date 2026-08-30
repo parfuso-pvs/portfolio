@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { CaseStudyFrame } from "@/components/case-study/case-study-frame";
 import { CaseStudyNavigation } from "@/components/case-study/case-study-navigation";
+import { MemxChapterIntro } from "@/components/case-study/memx-chapter-intro";
 import { MemxNarrative } from "@/components/case-study/memx-narrative";
 import { MemxSystemDiagrams } from "@/components/case-study/memx-system-diagrams";
 import { getProject } from "@/content/projects";
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 
 export default function MemxPage() {
   return (
-    <CaseStudyFrame project={project}>
+    <main id="main-content" tabIndex={-1} className="overflow-hidden">
+      <MemxChapterIntro project={project} />
       <MemxNarrative />
       <MemxSystemDiagrams />
-      <CaseStudyNavigation currentProject={project} nextProject={nextProject} />
-    </CaseStudyFrame>
+      <CaseStudyNavigation currentProject={project} nextProject={nextProject} tone="quiet" />
+    </main>
   );
 }
