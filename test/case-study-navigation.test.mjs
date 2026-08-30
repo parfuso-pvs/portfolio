@@ -16,7 +16,7 @@ test("the completed MEMX story closes with shared case-study navigation", async 
   assert.match(route, /const nextProject = getProject\("domani"\)/);
   assert.match(
     route,
-    /<CaseStudyNavigation currentProject=\{project\} nextProject=\{nextProject\} \/>/,
+    /<CaseStudyNavigation currentProject=\{project\} nextProject=\{nextProject\} tone="quiet" \/>/,
   );
   assert.doesNotMatch(component, /"use client"/);
 });
@@ -68,4 +68,7 @@ test("the closing navigation supports responsive and keyboard interaction states
   assert.match(component, /group-active:text-accent-on-dark/);
   assert.match(component, /group-active:translate-x-1/);
   assert.match(component, /active:text-media-foreground\/70/);
+  assert.match(component, /tone\?: "dark" \| "quiet"/);
+  assert.match(component, /bg-paper-deep text-ink/);
+  assert.match(component, /hover:border-accent/);
 });

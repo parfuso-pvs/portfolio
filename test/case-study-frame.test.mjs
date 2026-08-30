@@ -3,13 +3,9 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const framePath = "src/components/case-study/case-study-frame.tsx";
-const routePaths = [
-  "src/app/work/memx/page.tsx",
-  "src/app/work/domani/page.tsx",
-  "src/app/work/iffers-pictures/page.tsx",
-];
+const routePaths = ["src/app/work/domani/page.tsx", "src/app/work/iffers-pictures/page.tsx"];
 
-test("featured routes share one registry-driven case-study frame", async () => {
+test("remaining project-led routes share one registry-driven case-study frame", async () => {
   const [frame, ...routes] = await Promise.all([
     readFile(framePath, "utf8"),
     ...routePaths.map((path) => readFile(path, "utf8")),
@@ -25,6 +21,13 @@ test("featured routes share one registry-driven case-study frame", async () => {
   assert.match(frame, /project\.ownership/);
   assert.match(frame, /project\.attribution/);
   assert.match(frame, /project\.artifactCopy/);
+});
+
+test("the career-led MEMX route intentionally owns a quieter chapter frame", async () => {
+  const route = await readFile("src/app/work/memx/page.tsx", "utf8");
+
+  assert.match(route, /<MemxChapterIntro project=\{project\} \/>/);
+  assert.doesNotMatch(route, /CaseStudyFrame/);
 });
 
 test("the shared frame remains semantic and server rendered", async () => {

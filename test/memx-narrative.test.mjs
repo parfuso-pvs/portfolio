@@ -3,18 +3,27 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const contentPath = "src/content/case-studies/memx.ts";
+const introPath = "src/components/case-study/memx-chapter-intro.tsx";
 const narrativePath = "src/components/case-study/memx-narrative.tsx";
 const pagePath = "src/app/work/memx/page.tsx";
 
-test("the MEMX route composes its dedicated narrative inside the shared frame", async () => {
-  const [page, narrative] = await Promise.all([
+test("the MEMX route composes a dedicated career-led chapter", async () => {
+  const [page, intro, narrative] = await Promise.all([
     readFile(pagePath, "utf8"),
+    readFile(introPath, "utf8"),
     readFile(narrativePath, "utf8"),
   ]);
 
-  assert.match(page, /<CaseStudyFrame project=\{project\}>/);
+  assert.match(page, /<main id="main-content"/);
+  assert.match(page, /<MemxChapterIntro project=\{project\} \/>/);
   assert.match(page, /<MemxNarrative \/>/);
+  assert.doesNotMatch(page, /CaseStudyFrame/);
+  assert.doesNotMatch(intro, /"use client"/);
   assert.doesNotMatch(narrative, /"use client"/);
+  assert.match(intro, /employmentHistory/);
+  assert.match(intro, /<CareerChapterTitle projectId=\{project\.id\}>/);
+  assert.match(intro, /<BackToJourney projectId=\{project\.id\} \/>/);
+  assert.match(intro, /experience\.roles\.map/);
   assert.match(narrative, /memxCaseStudy/);
   assert.match(narrative, /<h2/);
   assert.match(narrative, /<h3/);
@@ -46,10 +55,15 @@ test("the narrative avoids confidential and unsupported exchange claims", async 
 });
 
 test("the narrative recomposes its asymmetric sections for small screens", async () => {
-  const narrative = await readFile(narrativePath, "utf8");
+  const [intro, narrative] = await Promise.all([
+    readFile(introPath, "utf8"),
+    readFile(narrativePath, "utf8"),
+  ]);
 
   assert.match(narrative, /lg:grid-cols-12/);
-  assert.match(narrative, /sm:grid-cols-\[5rem_minmax\(0,1fr\)\]/);
-  assert.match(narrative, /text-accent-on-dark/);
-  assert.match(narrative, /bg-media-backdrop/);
+  assert.match(narrative, /sm:grid-cols-\[4rem_minmax\(0,1fr\)\]/);
+  assert.match(intro, /sm:grid-cols-\[minmax\(0,1fr\)_auto\]/);
+  assert.match(narrative, /bg-paper-raised/);
+  assert.match(narrative, /bg-accent/);
+  assert.doesNotMatch(narrative, /material-blueprint|bg-media-backdrop|background-image:/);
 });
