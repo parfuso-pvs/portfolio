@@ -16,14 +16,17 @@ import {
   shouldEnableSiteBehaviour,
   siteBehaviourSecret,
 } from "@/lib/sitebehaviour";
+import { normalizeSiteUrl } from "@/lib/site-url";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = normalizeSiteUrl(
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+);
 const siteBehaviourEnabled = shouldEnableSiteBehaviour({
   nodeEnv: process.env.NODE_ENV,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteUrl,
   title: {
     default: "Phil Arfuso — Full-stack developer",
     template: "%s — Phil Arfuso",
