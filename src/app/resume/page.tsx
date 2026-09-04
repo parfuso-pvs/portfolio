@@ -77,7 +77,11 @@ export default function ResumePage() {
             <article className="resume-company" data-reveal-group data-reveal-stagger="70" key={company.company}>
               <header data-reveal="left">
                 <h3>{company.company}</h3>
-                <p>{company.location}</p>
+                <p className="resume-company-location">{company.location}</p>
+                <p className="resume-company-tenure">
+                  <span>Total tenure</span>
+                  {company.tenure}
+                </p>
               </header>
 
               <div className="resume-role-list" data-reveal-group data-reveal-stagger="80">

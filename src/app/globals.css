@@ -2478,9 +2478,28 @@ summary:focus-visible {
   text-transform: uppercase;
 }
 
-.resume-company > header p {
+.resume-company-location {
   margin: 22px 0 0;
   color: var(--accent-dark);
+}
+
+.resume-company-tenure {
+  display: grid;
+  margin: 30px 0 0;
+  color: var(--ink);
+  font-size: 0.9rem;
+  gap: 8px;
+  letter-spacing: 0.035em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.resume-company-tenure span {
+  color: color-mix(in srgb, var(--ink) 56%, transparent);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .resume-role + .resume-role {
@@ -5044,6 +5063,32 @@ summary:focus-visible {
   .resume-company {
     display: block;
     padding: 64px 0;
+  }
+
+  .resume-company > header {
+    display: grid;
+    align-items: end;
+    column-gap: 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .resume-company > header h3 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .resume-company-location {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .resume-company-tenure {
+    align-self: end;
+    margin: 0 0 4px;
+    gap: 4px;
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
   }
 
   .resume-role-list {

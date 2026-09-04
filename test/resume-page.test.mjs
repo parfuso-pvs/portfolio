@@ -38,6 +38,14 @@ test("web resume includes the supplied experience and technologies", () => {
   assert.match(page, /resume\.ventures\.map/);
 });
 
+test("multi-role companies show their complete tenure", () => {
+  assert.match(content, /tenure: "6 yrs 10 mos"/);
+  assert.match(content, /tenure: "1 yr 10 mos"/);
+  assert.match(page, /className="resume-company-tenure"/);
+  assert.match(page, /<span>Total tenure<\/span>/);
+  assert.match(css, /\.resume-company-tenure/);
+});
+
 test("resume keeps a valid downloadable PDF", () => {
   assert.equal(pdf.subarray(0, 4).toString(), "%PDF");
   assert.match(page, /href="\/resume\.pdf"/);
@@ -49,4 +57,8 @@ test("resume layout has desktop and mobile treatments", () => {
   assert.match(css, /\.resume-technology-grid/);
   assert.match(css, /\.resume-company/);
   assert.match(css, /@media \(max-width: 760px\)/);
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)[\s\S]*?\.resume-company-tenure\s*\{[\s\S]*?grid-column: 2;[\s\S]*?grid-row: 1;/,
+  );
 });

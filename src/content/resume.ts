@@ -74,6 +74,7 @@ export const resumeContent = {
     {
       company: "MEMX",
       location: "New Jersey",
+      tenure: "6 yrs 10 mos",
       roles: [
         {
           title: "Senior Full Stack Engineer",
@@ -105,6 +106,7 @@ export const resumeContent = {
     {
       company: "EarthCam, Inc.",
       location: "New Jersey",
+      tenure: "1 yr 10 mos",
       roles: [
         {
           title: "Lead Front-End Developer",
