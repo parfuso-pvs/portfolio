@@ -78,6 +78,7 @@ test("hero artwork uses layered editorial objects and restrained parallax", () =
   assert.match(heroArtwork, /desk-edge-ghost/);
   assert.match(heroArtwork, /desk-edge-secondary/);
   assert.match(heroArtwork, /artwork-chessboard/);
+  assert.doesNotMatch(heroArtwork, /artwork-mobile-chess/);
   assert.match(heroArtwork, /artwork-notepad/);
   assert.match(heroArtwork, /artwork-brush-oval/);
   assert.match(heroArtwork, /boardSquares/);
@@ -89,6 +90,8 @@ test("hero artwork uses layered editorial objects and restrained parallax", () =
     /FRONTEND|BACKEND|DATA|SHIP|P\/01|F\/02|A\.0\.02/,
   );
   assert.match(css, /\.artwork-chessboard/);
+  assert.match(css, /mobile-chess-sculpture-clean\.webp/);
+  assert.match(css, /\.hero-stage::before/);
   assert.match(css, /\.brush-stroke/);
   assert.doesNotMatch(css, /\.artwork-panel-signals polygon/);
   assert.doesNotMatch(css, /\.node-connector-signal/);

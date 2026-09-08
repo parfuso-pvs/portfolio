@@ -56,15 +56,27 @@ type PieceProps = {
   transform: string;
 };
 
+// Font Awesome Free 7.3.1 — chess-knight (CC BY 4.0)
+// https://fontawesome.com/license/free
+const chessKnightPath =
+  "M192-32c106 0 192 86 192 192v133.5c0 17-6.8 33.2-18.7 45.2L320 384l50.8 50.7c8.5 8.5 13.2 20 13.2 32 0 25-20.3 45.2-45.2 45.3H45.3C20.3 512 .1 491.7.1 466.7c0-12 4.8-23.5 13.2-32L64 384v-34.6c0-18.7 8.2-36.4 22.3-48.6L176 224h-48l-12.1 12.1c-12.7 12.7-30 19.9-48 19.9C30.4 256 0 225.6 0 188.1v-8.7c0-22.8 8.2-44.9 23.1-62.3L96 32V0c0-17.7 14.3-32 32-32h64zM160 72a24 24 0 1 0 0 48 24 24 0 1 0 0-48z";
+
 function Pawn({ className = "", tone, transform }: PieceProps) {
   return (
     <g className={`chess-piece chess-piece-${tone} ${className}`} transform={transform}>
-      <ellipse className="piece-shadow" cx="0" cy="1" rx="12" ry="4" />
-      <path className="piece-fill" d="M-10-2Q0-8 10-2L8 2H-8Z" />
-      <path className="piece-fill" d="M-6-3C-4-13-3-20 0-23c3 3 4 10 6 20Z" />
-      <circle className="piece-fill" cx="0" cy="-28" r="6" />
-      <path className="piece-ink" d="M-10-2Q0-8 10-2M-6-3C-4-13-3-20 0-23M6-3C4-13 3-20 0-23M-4-24a6 6 0 1 1 8 0" />
-      <path className="piece-wear" d="M-4-7 4-9M-3-29 1-31" />
+      <ellipse className="piece-shadow" cx="0" cy="1" rx="13" ry="4" />
+      <path className="piece-base-dark" d="m-12-2 3-5H9l3 5-4 4H-8Z" />
+      <path className="piece-base-light" d="m-9-7 2-5H7l2 5Z" />
+      <path className="piece-rim" d="m-7-12 2-4H5l2 4Z" />
+      <path className="piece-fill" d="M-5-16c2-5 3-9 3-13h4c0 4 1 8 3 13Z" />
+      <path className="piece-plane-light" d="M-5-16c2-5 3-9 3-13h2c-1 6-1 10 0 13Z" />
+      <path className="piece-plane-dark" d="M0-16c1-5 1-9 0-13h2c0 4 1 8 3 13Z" />
+      <path className="piece-rim" d="m-4-29-1-3H5l-1 3Z" />
+      <circle className="piece-fill" cx="0" cy="-38" r="6.5" />
+      <path className="piece-plane-light" d="M-5-42a6.5 6.5 0 0 0 3 10 7 7 0 0 1 2-12 6.5 6.5 0 0 0-5 2Z" />
+      <path className="piece-plane-dark" d="M2-44a6.5 6.5 0 0 1 2 11 7 7 0 0 0 0-10Z" />
+      <path className="piece-detail" d="M-9-7H9M-7-12H7M-5-16H5M-5-32H5" />
+      <path className="piece-etch" d="m-2-20 3-2m-4-16 4-2" />
     </g>
   );
 }
@@ -72,31 +84,46 @@ function Pawn({ className = "", tone, transform }: PieceProps) {
 function Rook({ className = "", tone, transform }: PieceProps) {
   return (
     <g className={`chess-piece chess-piece-${tone} ${className}`} transform={transform}>
-      <ellipse className="piece-shadow" cx="0" cy="1" rx="14" ry="4" />
-      <path className="piece-fill" d="M-12-2Q0-8 12-2L10 2H-10Z" />
-      <path className="piece-fill" d="M-8-5-6-31H6L8-5Z" />
-      <path className="piece-fill" d="M-9-31v-10h5v5h8v-5h5v10Z" />
-      <path className="piece-ink" d="M-12-2Q0-8 12-2M-8-5-6-31H6L8-5M-9-31v-10h5v5h8v-5h5v10M-7-29Q0-25 7-29" />
-      <path className="piece-wear" d="M-3-10 4-12M-4-33 1-32" />
+      <ellipse className="piece-shadow" cx="0" cy="1" rx="15" ry="4.5" />
+      <path className="piece-base-dark" d="m-14-2 3-6h22l3 6-4 4h-20Z" />
+      <path className="piece-base-light" d="m-11-8 3-5H8l3 5Z" />
+      <path className="piece-rim" d="m-9-13 2-4H7l2 4Z" />
+      <path className="piece-fill" d="M-7-17c2-9 3-17 2-24H5c-1 7 0 15 2 24Z" />
+      <path className="piece-plane-light" d="M-7-17c2-9 3-17 2-24h4c-1 10-1 18-1 24Z" />
+      <path className="piece-plane-dark" d="M2-17c1-9 1-17 0-24h3c-1 7 0 15 2 24Z" />
+      <path className="piece-rim" d="m-6-41-3-4H9l-3 4Z" />
+      <path className="piece-fill" d="M-9-45v-11h4v4h3v-4h4v4h3v-4h4v11Z" />
+      <path className="piece-plane-light" d="M-9-45v-11h3v8l3 3Z" />
+      <path className="piece-plane-dark" d="M5-52v-4h4v11H4l2-3Z" />
+      <path className="piece-detail" d="M-9-45H9M-6-41H6M-7-17H7M-9-13H9M-11-8h22" />
+      <path className="piece-etch" d="m-3-23 5-3m-4-8 4-2m-6-13 3 1" />
     </g>
   );
 }
 
 function Knight({ className = "", tone, transform }: PieceProps) {
+  const clipId = `hero-knight-${tone}-clip`;
+
   return (
     <g className={`chess-piece chess-piece-${tone} ${className}`} transform={transform}>
-      <ellipse className="piece-shadow" cx="0" cy="1" rx="15" ry="4" />
-      <path className="piece-fill" d="M-13-2Q0-8 13-2L10 2H-10Z" />
-      <path
-        className="piece-fill"
-        d="M-8-5c5-10 5-18 3-25l-6-8 11-9 4 6c8 3 12 10 10 18-1 5-6 8-12 9l5 9Z"
-      />
-      <path
-        className="piece-ink"
-        d="M-13-2Q0-8 13-2M-8-5c5-10 5-18 3-25l-6-8 11-9 4 6c8 3 12 10 10 18-1 5-6 8-12 9l5 9M-7-37l8 3"
-      />
-      <circle className="piece-eye" cx="3" cy="-37" r="1.5" />
-      <path className="piece-wear" d="M-4-11 5-13M5-29l5 1" />
+      <ellipse className="piece-shadow" cx="0" cy="1" rx="20" ry="4.5" />
+      <defs>
+        <clipPath id={clipId}>
+          <path d={chessKnightPath} />
+        </clipPath>
+      </defs>
+      <g transform="translate(-18 -61) scale(.095 .12)">
+        <path className="piece-knight-body" d={chessKnightPath} />
+        <g clipPath={`url(#${clipId})`}>
+          <path className="piece-knight-light" d="M-12-48h172l82 570H-12Z" />
+          <path className="piece-knight-dark" d="M258-48h148v580H315L176 182Z" />
+          <path className="piece-knight-facet" d="m96 32 80 192-90 77-22 48 129-103 65 266H128L64 384v-35l22-48 90-77h-48l-12 12-48 20Z" />
+        </g>
+        <path className="piece-knight-outline" d={chessKnightPath} />
+        <circle className="piece-knight-eye-surface" cx="160" cy="96" r="24" />
+        <circle className="piece-knight-eye" cx="160" cy="96" r="9" />
+        <path className="piece-knight-detail" d="m96 32 80 192-90 77M176 224l82 288M64 384h256M13 435h358" />
+      </g>
     </g>
   );
 }
