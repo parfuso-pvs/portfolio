@@ -15,7 +15,8 @@ export function SiteHeader({ current, tone = "dark" }: SiteHeaderProps) {
   return (
     <header className={`site-header site-header-${tone}`} data-reveal="soft">
       <Link className="wordmark" href="/" aria-label="Phil Arfuso, home">
-        Phil Arfuso
+        <span>Phil Arfuso</span>
+        <span className="wordmark-role">Full-stack developer</span>
       </Link>
 
       <nav className="desktop-nav" aria-label="Primary navigation">

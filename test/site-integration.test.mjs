@@ -62,8 +62,13 @@ test("the homepage ends with a useful next step", () => {
 test("browser identity and missing-page treatment are branded", () => {
   assert.match(layout, /openGraph:/);
   assert.match(layout, /twitter:/);
+  assert.match(layout, /Full-Stack Developer for Web & Mobile/);
+  assert.match(layout, /software that works well and feels good to use/);
+  assert.doesNotMatch(layout, /Frontend roots|building useful things/);
   assert.match(icon, /ImageResponse/);
-  assert.match(openGraphImage, /Building useful things from messy problems/);
+  assert.match(openGraphImage, /I build software that works well and feels good to use/);
+  assert.match(openGraphImage, /Full-stack developer/);
+  assert.match(openGraphImage, /Web &amp; mobile/);
   assert.match(notFound, /Looks like this one wandered off/);
   assert.match(css, /\.not-found-page/);
 });

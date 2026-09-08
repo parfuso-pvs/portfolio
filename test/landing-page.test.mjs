@@ -29,10 +29,14 @@ const resume = await readFile(
 );
 
 test("landing page uses the approved conversational copy", () => {
-  assert.match(page, /Hey, I’m Phil/);
-  assert.match(page, /full-stack developer who likes solving messy problems and/);
-  assert.match(page, /building useful things\./);
-  assert.match(page, /I try to have a good time doing it\./);
+  assert.match(page, /Hey, I’m Phil\./);
+  assert.match(page, /Full-stack developer/);
+  assert.match(page, /web &amp; mobile/);
+  assert.match(page, /I build software that works well and feels good to use\./);
+  assert.match(page, /And I have a good time doing it\./);
+  assert.match(page, /Explore my work/);
+  assert.match(page, /Résumé/);
+  assert.doesNotMatch(page, /solving messy problems|I try to/);
 });
 
 test("landing page keeps selected work centralized and linked", () => {

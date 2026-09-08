@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Phil Arfuso — Full-stack developer";
+export const alt = "Phil Arfuso, full-stack developer for web and mobile";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,17 +34,17 @@ export default function OpenGraphImage() {
 
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 23, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>
           <span>Phil Arfuso</span>
-          <span style={{ color: "#76b9da" }}>Portfolio / 2026</span>
+          <span style={{ color: "#76b9da" }}>Selected work</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 28, color: "#76b9da", fontSize: 22, fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase" }}>
-            <span>Frontend roots</span>
+            <span>Full-stack developer</span>
             <span style={{ width: 72, height: 2, background: "#3e8b6f" }} />
-            <span>Full-stack range</span>
+            <span>Web &amp; mobile</span>
           </div>
-          <div style={{ maxWidth: 1000, fontSize: 96, fontWeight: 900, letterSpacing: "-0.055em", lineHeight: 0.92, textTransform: "uppercase" }}>
-            Building useful things from messy problems.
+          <div style={{ maxWidth: 1040, fontSize: 82, fontWeight: 900, letterSpacing: "-0.045em", lineHeight: 0.94, textTransform: "uppercase" }}>
+            I build software that works well and feels good to use.
           </div>
         </div>
 

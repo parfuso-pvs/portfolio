@@ -28,25 +28,25 @@ const siteBehaviourEnabled = shouldEnableSiteBehaviour({
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "Phil Arfuso — Full-stack developer",
-    template: "%s — Phil Arfuso",
+    default: "Phil Arfuso | Full-Stack Developer for Web & Mobile",
+    template: "%s | Phil Arfuso",
   },
   description:
-    "Phil Arfuso is a full-stack developer with a frontend background who likes solving messy problems and building useful things.",
+    "Phil Arfuso is an experienced full-stack developer building web and mobile software that works well and feels good to use.",
   authors: [{ name: "Phil Arfuso" }],
   creator: "Phil Arfuso",
   openGraph: {
     type: "website",
     siteName: "Phil Arfuso",
-    title: "Phil Arfuso — Full-stack developer",
+    title: "Phil Arfuso | Full-Stack Developer for Web & Mobile",
     description:
-      "Frontend roots, full-stack range, and a practical approach to building useful things.",
+      "I build reliable, thoughtful software across web and mobile, from the interface to the systems behind it.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Phil Arfuso — Full-stack developer",
+    title: "Phil Arfuso | Full-Stack Developer for Web & Mobile",
     description:
-      "Frontend roots, full-stack range, and a practical approach to building useful things.",
+      "I build reliable, thoughtful software across web and mobile, from the interface to the systems behind it.",
   },
 };
 

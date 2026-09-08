@@ -4,7 +4,7 @@ export const iffersPicturesCaseStudy = {
     kicker: "Case study",
     title: "A portfolio for a photographer",
     lede:
-      "I made Iffer’s Pictures as a Christmas gift for my sister-in-law—and handled the project from the first conversation through the finished site.",
+      "I created Iffer’s Pictures as a Christmas gift for my sister-in-law and led the project from our first conversation through the finished site.",
     meta: [
       { label: "Role", value: "Designer & developer" },
       { label: "Ownership", value: "Discovery / Copy / Design / Code" },
@@ -15,28 +15,28 @@ export const iffersPicturesCaseStudy = {
     eyebrow: "A personal brief",
     title: "It started as a Christmas gift",
     body: [
-      "I worked directly with my sister-in-law to understand her photography, the clients she wanted to reach, and how she wanted the business to feel. From there, I created the brand, wrote the copy, designed the site, and built it.",
-      "This was an exception to the normal PixelVerse partnership. I owned the visual design as well as the discovery, copy, code, and client collaboration.",
+      "I worked directly with my sister-in-law to understand her photography, the clients she wanted to reach, and how she wanted the business to feel. From there, I built the brand, wrote the copy, designed the experience, and developed the site.",
+      "Unlike most PixelVerse Studios projects, I worked directly with the client and led the full creative and technical process.",
     ],
   },
   principles: [
     {
       title: "Build a brand that fits the work",
-      body: "I started with her color preference and developed the palette, typography, layout, and overall visual direction from there. The finished brand needed to feel like her photography without getting in its way.",
+      body: "I started with her color preference and built the palette, typography, layout, and visual direction around it. The brand needed to feel connected to her photography without competing with it.",
     },
     {
       title: "Find the voice together",
-      body: "The copy came out of direct conversations and was written to sound personal instead of like a photography template.",
+      body: "Our conversations shaped copy that sounds like her, not like a photography template.",
     },
     {
       title: "Make it work on every screen",
-      body: "I adjusted the gallery and supporting content for desktop and mobile instead of treating the smaller version as an afterthought.",
+      body: "I designed the gallery and supporting content for desktop and mobile so the smaller experience felt just as intentional.",
     },
   ],
   media: {
     eyebrow: "Selected photography",
-    title: "A gallery for different kinds of photography",
-    body: "The site presents portraits, detail shots, family sessions, and events without putting every image in the same kind of frame.",
+    title: "A gallery shaped around the photography",
+    body: "Portraits, details, family sessions, and events each have their own rhythm instead of being forced into the same frame.",
     images: [
       {
         id: "maternity",
@@ -72,12 +72,12 @@ export const iffersPicturesCaseStudy = {
       },
     ],
     sourceNote:
-      "Approved production photography from Iffer’s Pictures. The photography remains the client’s work; I designed and built the site that presents it.",
+      "Approved production photography from Iffer’s Pictures. The photography remains the client’s work. I designed and built the site that presents it.",
   },
   ownership: {
-    eyebrow: "Complete ownership",
-    title: "Building the brand from scratch",
-    body: "She had a color preference, but no existing brand system. I created the palette, typography, visual direction, and site design, then built the portfolio around her photography.",
+    eyebrow: "Project scope",
+    title: "From a color preference to a complete brand",
+    body: "She started with a color preference, but no existing brand system. I turned that starting point into the palette, typography, visual direction, and interface, then built the portfolio around her photography.",
     scope: [
       "Discovery",
       "Copy",

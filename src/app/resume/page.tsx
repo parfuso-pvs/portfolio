@@ -6,7 +6,7 @@ import { resumeContent as resume } from "@/content/resume";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Phil Arfuso's full-stack software engineering experience, technologies, products, and ventures.",
+    "Phil Arfuso's experience building full-stack web and mobile products, reusable platforms, and production systems.",
 };
 
 export default function ResumePage() {

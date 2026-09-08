@@ -5,7 +5,7 @@ import { profile } from "@/content/profile";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with Phil Arfuso about frontend and full-stack development work.",
+  description: "Contact Phil Arfuso about full-stack development for web and mobile products.",
 };
 
 const channels = [

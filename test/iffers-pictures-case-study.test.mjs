@@ -23,10 +23,10 @@ const approvedPhotos = [
 
 test("Iffer’s Pictures states the approved ownership and attribution", () => {
   assert.match(content, /Christmas gift for my sister-in-law/);
-  assert.match(content, /exception to the normal PixelVerse partnership/);
-  assert.match(content, /visual design as well as the discovery, copy, code/);
-  assert.match(content, /created the brand/);
-  assert.match(content, /palette, typography, visual direction, and site design/);
+  assert.match(content, /Unlike most PixelVerse Studios projects/);
+  assert.match(content, /led the full creative and technical process/);
+  assert.match(content, /built the brand, wrote the copy, designed the experience/);
+  assert.match(content, /palette, typography, visual direction, and interface/);
 });
 
 test("Iffer’s Pictures uses only the approved production photography", () => {

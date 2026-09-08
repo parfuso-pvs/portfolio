@@ -3,24 +3,24 @@ export const memxCaseStudy = {
     kicker: "Case study",
     title: "Exchange portal tools",
     lede:
-      "At MEMX, I work on the portal used by market operations teams and exchange members. I started on the frontend and now build across interfaces, backend services, databases, architecture, and production delivery.",
+      "At MEMX, I built portal tools used by market operations teams and exchange members. My role grew from frontend development into backend services, databases, architecture, and production delivery.",
     contributions: [
       {
         title: "Member and operations tools",
-        detail: "Onboarding, connectivity, risk, trading queries, access, and institution switching.",
+        detail: "Built onboarding, connectivity, risk, trading, access, and institution-management tools.",
       },
       {
         title: "Reusable frontend systems",
-        detail: "Shared fields, visibility, validation, and request handling across market implementations.",
+        detail: "Created shared systems for fields, visibility, validation, and request handling across multiple market implementations.",
       },
       {
         title: "APIs, data, and production delivery",
-        detail: "Backend services, database work, production fixes, and QA-supported releases.",
+        detail: "Worked across backend services, databases, production fixes, and QA-supported releases.",
       },
     ],
     meta: [
       { label: "Role", value: "Frontend developer → Full-stack developer" },
-      { label: "Time", value: "2019 — present" },
+      { label: "Time", value: "December 2019 to August 2026" },
       { label: "Focus", value: "Reusable UI / APIs + data / Production systems" },
     ],
   },
@@ -42,24 +42,24 @@ export const memxCaseStudy = {
   },
   context: {
     eyebrow: "The portal",
-    title: "Who uses it and why",
+    title: "One portal, different markets",
     body: [
-      "Market operations teams, trading firms, and exchange members use the portal to manage connectivity, firm and risk settings, trading queries, and user access.",
-      "Adding another market couldn’t mean copying the application again. Each one had different fields, rules, and features.",
+      "Market operations teams, trading firms, and exchange members used the portal to manage connectivity, firm and risk settings, trading queries, and user access.",
+      "Each market brought its own fields, rules, and features. Copying the application for every new market was never going to scale.",
     ],
   },
   portal: {
     eyebrow: "Portal tools",
-    title: "What I built in the portal",
-    body: "Over time, I built and maintained tools for onboarding, connectivity, firms, MPIDs, risk settings, trade queries, symbols, user access, and institution switching.",
+    title: "What I built",
+    body: "I built and maintained tools for onboarding, connectivity, firms, MPIDs, risk settings, trade queries, symbols, user access, and institution switching.",
     audiences: [
       {
         title: "Exchange members",
-        body: "Manage their firms, connectivity, users, risk settings, and trading information.",
+        body: "Managed firm details, connectivity, users, risk settings, and trading information.",
       },
       {
         title: "Market operations",
-        body: "Support member firms, switch between institutions, review configuration, and work across different markets.",
+        body: "Supported member firms, moved between institutions, reviewed configuration, and worked across different markets.",
       },
     ],
     groups: [
@@ -79,21 +79,21 @@ export const memxCaseStudy = {
   },
   phases: [
     {
-      title: "Build the frontend foundation",
-      body: "I started with onboarding and connectivity tools for ports, MPIDs, firms, risk settings, trade queries, symbols, and role-based access. I also built institution switching so market operations could support members without leaving the portal.",
+      title: "Built the frontend foundation",
+      body: "I started by building onboarding and connectivity tools for ports, MPIDs, firms, risk settings, trade queries, symbols, and role-based access. I also built institution switching so market operations could support members without leaving the portal.",
     },
     {
-      title: "Make it reusable",
-      body: "When the first market-technology customer arrived, my manager scaffolded a database-driven market architecture. I built the corresponding frontend configuration system: reusable fields, feature flags, market visibility, validation, and request sanitization.",
+      title: "Turned it into a reusable platform",
+      body: "When the first market technology customer came on board, my manager established the database-driven market architecture. I built the frontend system around it, including reusable fields, feature flags, market visibility, validation, and request sanitization.",
     },
     {
-      title: "Work across the full stack",
-      body: "My role expanded into database, server, and UI work, along with production support and issues found by customers or QA. Depending on the feature, I now contribute at one layer or own the path from data and validation through the interface and release.",
+      title: "Expanded across the stack",
+      body: "My role grew to include database, server, and UI work, along with production support and fixes surfaced by customers and QA. Depending on the feature, I either contributed at a specific layer or carried the work from data and validation through the interface and release.",
     },
   ],
   configuration: {
     eyebrow: "Frontend configuration",
-    title: "How the shared frontend worked",
-    body: "The active market selected database configuration and any rules that genuinely could not be shared. Those inputs became one platform context that reusable UI could turn into the correct fields, behavior, validation, and sanitized request.",
+    title: "How one frontend supported multiple markets",
+    body: "The selected market loaded its database configuration along with the few rules that could not be shared. Together, those inputs gave the frontend everything it needed to render the right fields, apply the right behavior, validate the data, and build a clean request.",
   },
 } as const;

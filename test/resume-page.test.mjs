@@ -39,8 +39,10 @@ test("web resume includes the supplied experience and technologies", () => {
 });
 
 test("multi-role companies show their complete tenure", () => {
-  assert.match(content, /tenure: "6 yrs 10 mos"/);
+  assert.match(content, /tenure: "6 yrs 9 mos"/);
   assert.match(content, /tenure: "1 yr 10 mos"/);
+  assert.match(content, /January 2023 to August 2026/);
+  assert.match(content, /December 2019 to December 2022/);
   assert.match(page, /className="resume-company-tenure"/);
   assert.match(page, /<span>Total tenure<\/span>/);
   assert.match(css, /\.resume-company-tenure/);

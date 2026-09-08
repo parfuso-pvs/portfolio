@@ -7,7 +7,7 @@ import { memxCaseStudy as study } from "@/content/case-studies/memx";
 export const metadata: Metadata = {
   title: "MEMX case study",
   description:
-    "How Phil Arfuso builds member and operations tools across reusable interfaces, APIs, data, and production systems at MEMX.",
+    "How Phil Arfuso built member and operations tools across reusable interfaces, APIs, data, and production systems at MEMX.",
 };
 
 export default function MemxCaseStudyPage() {
@@ -98,7 +98,7 @@ export default function MemxCaseStudyPage() {
       <section className="case-section case-progression" data-reveal-group data-reveal-stagger="100" aria-labelledby="progression-title">
         <div className="case-section-heading" data-reveal="left" data-reveal-group data-reveal-stagger="65">
           <p data-reveal="soft">Role progression</p>
-          <h2 id="progression-title" data-reveal="soft">Frontend first then the rest of the stack</h2>
+          <h2 id="progression-title" data-reveal="soft">From frontend ownership to full-stack delivery</h2>
         </div>
         <div className="case-phase-list" data-reveal-group data-reveal-stagger="80">
           {study.phases.map((phase) => (

@@ -8,7 +8,7 @@ import { iffersPicturesCaseStudy as study } from "@/content/case-studies/iffers-
 export const metadata: Metadata = {
   title: "Iffer’s Pictures case study",
   description:
-    "How Phil Arfuso handled discovery, copy, visual design, development, and client collaboration for the Iffer’s Pictures photography portfolio.",
+    "How Phil Arfuso led discovery, copy, visual design, development, and client collaboration for the Iffer’s Pictures photography portfolio.",
 };
 
 export default function IffersPicturesCaseStudyPage() {

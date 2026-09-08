@@ -7,7 +7,7 @@ import { portfolioProjects } from "@/content/projects";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "A growing collection of products, platforms, and client work by Phil Arfuso.",
+    "Selected web and mobile work by Phil Arfuso, including multi-market platforms, production apps, and client websites.",
 };
 
 export default function WorkPage() {
@@ -24,8 +24,8 @@ export default function WorkPage() {
           <p data-reveal="soft">Portfolio</p>
           <h1 id="work-page-title" data-reveal="left">Work</h1>
           <p data-reveal="right">
-            A growing collection of products, platforms, and client work—built
-            across frontend, backend, design, and everything between.
+            A selection of products, platforms, and client work that shows how
+            I think, build, and ship across web and mobile.
           </p>
         </div>
       </section>

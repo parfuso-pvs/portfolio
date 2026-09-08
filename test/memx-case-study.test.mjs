@@ -29,7 +29,7 @@ test("MEMX framing leads with the breadth of the work", () => {
 });
 
 test("MEMX case study explains the portal tools before the architecture", () => {
-  assert.match(content, /What I built in the portal/);
+  assert.match(content, /title: "What I built"/);
   assert.match(content, /Ports/);
   assert.match(content, /Risk settings/);
   assert.match(content, /Institution switching/);
@@ -41,9 +41,15 @@ test("MEMX case study explains the portal tools before the architecture", () => 
 test("MEMX case study attributes the shared architecture accurately", () => {
   assert.match(
     content,
-    /my manager scaffolded a database-driven market architecture/,
+    /my manager established the database-driven market architecture/,
   );
-  assert.match(content, /I built the corresponding frontend configuration system/);
+  assert.match(content, /I built the frontend system around it/);
+});
+
+test("MEMX case study reflects the completed tenure", () => {
+  assert.match(content, /December 2019 to August 2026/);
+  assert.match(content, /At MEMX, I built portal tools/);
+  assert.doesNotMatch(content, /2019.+present|I now|I work on the portal/);
 });
 
 test("MEMX diagrams explain real relationships without private market data", () => {

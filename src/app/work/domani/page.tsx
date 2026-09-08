@@ -170,7 +170,7 @@ export default function DomaniCaseStudyPage() {
           </div>
 
           <aside className="domani-evidence-limits" data-reveal="right" data-reveal-group data-reveal-stagger="60">
-            <p data-reveal="soft">Read these as an early product signal</p>
+            <p data-reveal="soft">These numbers show early, real product use</p>
             <ul data-reveal="soft">
               {study.evidence.caveats.map((caveat) => (
                 <li key={caveat}>{caveat}</li>

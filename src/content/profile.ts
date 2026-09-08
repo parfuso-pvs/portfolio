@@ -5,7 +5,7 @@ export const profile = {
   github: "https://github.com/parfuso-pvs",
   contact: {
     intro:
-      "If you’re looking for a frontend or full-stack developer, I’d be happy to hear what you’re working on.",
+      "Have a web or mobile project in mind? Tell me what you’re building and where you need help.",
     note: "You don’t need a formal pitch. Just send me a little context.",
   },
 } as const;

@@ -19,7 +19,7 @@ export const portfolioProjects = [
     discipline: "Full-stack",
     role: "Full-stack developer",
     summary:
-      "Member and operations tools built across reusable interfaces, APIs, data, and production systems.",
+      "A multi-market portal built to handle member operations, trading workflows, and complex configuration without duplicating the platform.",
     scope: ["Portal tooling", "Full-stack systems", "Production platform"],
     route: "/work/memx",
   },
@@ -32,7 +32,7 @@ export const portfolioProjects = [
     role: "Co-owner & full-stack developer",
     summary:
       "A focused planning app built to make tomorrow feel intentional instead of overwhelming.",
-    scope: ["App design", "Mobile development", "Release operations"],
+    scope: ["Technical architecture", "Mobile development", "Release operations"],
     route: "/work/domani",
   },
   {
@@ -43,7 +43,7 @@ export const portfolioProjects = [
     discipline: "Brand + web",
     role: "Designer & developer",
     summary:
-      "A photography portfolio shaped from discovery and copy through visual design and implementation.",
+      "A photography portfolio I shaped from early discovery and copy through visual design and development.",
     scope: ["Discovery", "Art direction", "Development"],
     route: "/work/iffers-pictures",
   },

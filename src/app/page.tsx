@@ -15,21 +15,22 @@ export default function Home() {
 
           <div className="hero-copy">
             <h1 id="hero-title" aria-label="Hey, I’m Phil">
-              <span aria-hidden="true">Hey, I’m</span>{" "}
-              <span aria-hidden="true">Phil</span>
+              <span aria-hidden="true">Hey, I’m Phil.</span>
             </h1>
-            <p className="hero-intro">
-              I’m a full-stack developer who likes solving messy problems and
-              building useful things.
+            <p className="hero-positioning">
+              Full-stack developer <span aria-hidden="true">·</span> web &amp; mobile
             </p>
-            <p className="hero-aside">I try to have a good time doing it.</p>
+            <p className="hero-intro">
+              I build software that works well and feels good to use.
+            </p>
+            <p className="hero-aside">And I have a good time doing it.</p>
 
             <div className="hero-actions" aria-label="Portfolio actions">
               <a className="primary-action" href="#work">
-                Explore work
+                Explore my work <span aria-hidden="true">→</span>
               </a>
               <a className="secondary-action" href="/resume.pdf" download>
-                Download resume <span aria-hidden="true">↗</span>
+                Résumé <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -66,8 +67,8 @@ export default function Home() {
             <span aria-hidden="true">something tricky</span>
           </h2>
           <p data-reveal="soft">
-            If you need a frontend or full-stack developer, tell me what you’re
-            working on.
+            I build polished web and mobile products from interface to
+            infrastructure. Tell me what you’re working on.
           </p>
           <Link className="primary-action" data-reveal="soft" href="/contact">
             Say hello

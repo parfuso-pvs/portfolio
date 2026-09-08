@@ -50,6 +50,12 @@ test("Domani route integrates its planning principles with real product media", 
 });
 
 test("Domani credits shared ownership accurately", () => {
+  assert.match(projects, /scope: \["Technical architecture", "Mobile development", "Release operations"\]/);
+  assert.doesNotMatch(projects, /App design/);
+  assert.match(content, /eyebrow: "Why we made it"/);
+  assert.match(content, /title: "We wanted planning to feel lighter"/);
+  assert.match(content, /Most productivity apps we tried/);
+  assert.doesNotMatch(content, /Why I made it|I wanted planning to feel lighter|Mobile development \/ Design/);
   assert.match(content, /friend who is a UX designer/);
   assert.match(content, /make the product and design decisions together/);
   assert.doesNotMatch(content, /Independent ownership|I conceived Domani/);

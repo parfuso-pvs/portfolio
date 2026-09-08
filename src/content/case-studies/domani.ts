@@ -8,15 +8,18 @@ export const domaniCaseStudy = {
       "Domani is a live iOS and Android app built around one small evening ritual: decide what matters tomorrow before the day begins.",
     meta: [
       { label: "Role", value: "Co-owner & full-stack developer" },
-      { label: "Work", value: "Mobile development / Design / Release operations" },
+      {
+        label: "Work",
+        value: "Mobile development / Technical architecture / Release operations",
+      },
       { label: "Status", value: "Live on iOS and Android" },
     ],
   },
   origin: {
-    eyebrow: "Why I made it",
-    title: "I wanted planning to feel lighter",
+    eyebrow: "Why we made it",
+    title: "We wanted planning to feel lighter",
     body: [
-      "Most productivity apps I tried came with a tradeoff: too much setup, an endless backlog, or a daily list that grew faster than it could be finished.",
+      "Most productivity apps we tried came with a tradeoff: too much setup, an endless backlog, or a daily list that grew faster than it could be finished.",
       "Domani started with a smaller idea. Plan tomorrow in the evening, choose the one thing that matters most, and make an active decision about anything that carries forward.",
     ],
   },
@@ -34,7 +37,7 @@ export const domaniCaseStudy = {
     {
       label: "Tomorrow",
       title: "Carry forward on purpose",
-      body: "Rollover is a choice, and progress analytics make patterns visible over time.",
+      body: "Tasks only carry forward when someone decides they still matter. Progress analytics make longer-term patterns easier to see.",
     },
   ],
   media: {
@@ -42,7 +45,7 @@ export const domaniCaseStudy = {
     title: "The Today screen",
     body: "The Today view keeps the hierarchy simple: overall progress, one visible top priority, and the rest of the day organized with category and priority cues.",
     alt: "Domani Today screen showing Thursday, January 8, a daily progress summary, a top-priority task, and three planned tasks with category and priority labels.",
-    note: "This is real public product media. The visible name, tasks, date, and values are demonstration content—not user records or portfolio analytics.",
+    note: "This is real public product media. The visible name, tasks, date, and values are demonstration content. They are not user records or portfolio analytics.",
     observations: [
       ["Daily progress", "Completed and remaining work share one summary."],
       ["Top priority", "The most important task stays distinct."],
@@ -81,13 +84,13 @@ export const domaniCaseStudy = {
       {
         value: "641",
         label: "current task records",
-        detail: "238 are completed, or 37.1% of the task rows that currently exist.",
+        detail: "238 are complete, representing 37.1% of current task records.",
         source: "Production Supabase",
       },
       {
         value: "31 / 9",
         label: "monthly / weekly active users",
-        detail: "Unique people with any event in the preceding rolling 30 / 7 days.",
+        detail: "Unique people who recorded at least one event during the previous rolling 30 or 7 days.",
         source: "PostHog",
       },
       {
