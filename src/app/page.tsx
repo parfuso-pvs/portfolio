@@ -30,7 +30,7 @@ export default function Home() {
                 Explore my work <span aria-hidden="true">→</span>
               </a>
               <a className="secondary-action" href="/resume.pdf" download>
-                Résumé <span aria-hidden="true">↗</span>
+                Resume <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>

@@ -35,7 +35,7 @@ test("landing page uses the approved conversational copy", () => {
   assert.match(page, /I build software that works well and feels good to use\./);
   assert.match(page, /And I have a good time doing it\./);
   assert.match(page, /Explore my work/);
-  assert.match(page, /Résumé/);
+  assert.match(page, /Resume/);
   assert.doesNotMatch(page, /solving messy problems|I try to/);
 });
 
