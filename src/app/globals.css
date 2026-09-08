@@ -5290,7 +5290,7 @@ summary:focus-visible {
     inset: 0;
     z-index: 1;
     background-image: url("/images/hero/mobile-chess-sculpture-clean.webp");
-    background-position: 61% calc(50% + 8px);
+    background-position: 74% calc(50% + 8px);
     background-repeat: no-repeat;
     background-size: 56% auto;
     content: "";
