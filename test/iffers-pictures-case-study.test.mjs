@@ -21,12 +21,14 @@ const approvedPhotos = [
   "baby-shower-details.jpg",
 ];
 
-test("Iffer’s Pictures states the approved ownership and attribution", () => {
-  assert.match(content, /Christmas gift for my sister-in-law/);
-  assert.match(content, /Unlike most PixelVerse Studios projects/);
-  assert.match(content, /led the full creative and technical process/);
-  assert.match(content, /built the brand, wrote the copy, designed the experience/);
-  assert.match(content, /palette, typography, visual direction, and interface/);
+test("Iffer’s Pictures explains the business problem and end-to-end delivery", () => {
+  assert.match(content, /open-ended brief to a live, responsive website/);
+  assert.match(content, /Turning business needs into a clear web experience/);
+  assert.match(content, /Turn requirements into structure/);
+  assert.match(content, /Create a reusable interface system/);
+  assert.match(content, /From requirements to a live production site/);
+  assert.doesNotMatch(content, /Christmas|sister-in-law|Unlike most PixelVerse Studios projects/);
+  assert.doesNotMatch(page, /Gift \/ collaboration \/ authorship/);
 });
 
 test("Iffer’s Pictures uses only the approved production photography", () => {
@@ -63,4 +65,6 @@ test("Iffer’s Pictures uses its project-scoped photographic theme", () => {
   assert.match(themes, /--case-ink: #302925/);
   assert.match(themes, /--case-highlight: #98563d/);
   assert.match(themes, /CONTACT SHEET \/ PRODUCTION PHOTOGRAPHY/);
+  assert.match(themes, /\.case-study-iffers \.iffers-process header\s*\{[\s\S]*?container-type: inline-size/);
+  assert.match(themes, /\.case-study-iffers \.iffers-process h2\s*\{[\s\S]*?12\.4cqi/);
 });

@@ -1,42 +1,42 @@
 export const iffersPicturesCaseStudy = {
   publicUrl: "https://ifferspictures.com",
   hero: {
-    kicker: "Case study",
-    title: "A portfolio for a photographer",
+    kicker: "Client project",
+    title: "A complete client website",
     lede:
-      "I created Iffer’s Pictures as a Christmas gift for my sister-in-law and led the project from our first conversation through the finished site.",
+      "I took Iffer’s Pictures from an open-ended brief to a live, responsive website—shaping its structure, content, visual system, and frontend implementation.",
     meta: [
       { label: "Role", value: "Designer & developer" },
-      { label: "Ownership", value: "Discovery / Copy / Design / Code" },
-      { label: "Collaboration", value: "Directly with the photographer" },
+      { label: "Scope", value: "Strategy / Content / UX / Frontend" },
+      { label: "Status", value: "Live production website" },
     ],
   },
   origin: {
-    eyebrow: "A personal brief",
-    title: "It started as a Christmas gift",
-    body: [
-      "I worked directly with my sister-in-law to understand her photography, the clients she wanted to reach, and how she wanted the business to feel. From there, I built the brand, wrote the copy, designed the experience, and developed the site.",
-      "Unlike most PixelVerse Studios projects, I worked directly with the client and led the full creative and technical process.",
-    ],
+    eyebrow: "Project framing",
+    title: "Turning business needs into a clear web experience",
+    body: "The photographer needed more than a gallery. The site had to explain her services, establish trust, and give local clients a clear path from discovering the work to making an inquiry.",
+    calloutLabel: "Delivery",
+    callout:
+      "I translated those needs into the site structure, content hierarchy, and interface, then carried the work through development and launch.",
   },
   principles: [
     {
-      title: "Build a brand that fits the work",
-      body: "I started with her color preference and built the palette, typography, layout, and visual direction around it. The brand needed to feel connected to her photography without competing with it.",
+      title: "Turn requirements into structure",
+      body: "I organized services, portfolio work, testimonials, investment details, FAQs, and inquiries into a clear path through the site.",
     },
     {
-      title: "Find the voice together",
-      body: "Our conversations shaped copy that sounds like her, not like a photography template.",
+      title: "Create a reusable interface system",
+      body: "Shared patterns keep image-led pages, service information, promotions, and supporting content consistent without making every page feel identical.",
     },
     {
-      title: "Make it work on every screen",
-      body: "I designed the gallery and supporting content for desktop and mobile so the smaller experience felt just as intentional.",
+      title: "Build for real devices",
+      body: "Responsive layouts, intentional image treatment, and clear navigation keep the experience usable across desktop and mobile.",
     },
   ],
   media: {
-    eyebrow: "Selected photography",
-    title: "A gallery shaped around the photography",
-    body: "Portraits, details, family sessions, and events each have their own rhythm instead of being forced into the same frame.",
+    eyebrow: "Content system in practice",
+    title: "A gallery designed for varied content",
+    body: "Landscape, portrait, detail, and event images need different proportions. The gallery preserves those differences while keeping the experience coherent across screen sizes.",
     images: [
       {
         id: "maternity",
@@ -72,24 +72,25 @@ export const iffersPicturesCaseStudy = {
       },
     ],
     sourceNote:
-      "Approved production photography from Iffer’s Pictures. The photography remains the client’s work. I designed and built the site that presents it.",
+      "Production photography provided by Iffer’s Pictures. The photography remains the client’s work; I designed and built the system that presents it.",
   },
   ownership: {
-    eyebrow: "Project scope",
-    title: "From a color preference to a complete brand",
-    body: "She started with a color preference, but no existing brand system. I turned that starting point into the palette, typography, visual direction, and interface, then built the portfolio around her photography.",
+    eyebrow: "End-to-end delivery",
+    title: "From requirements to a live production site",
+    body: "I was responsible for discovery, information architecture, copy, visual design, responsive implementation, and launch. That full-project view kept the business needs, content, and technical decisions aligned.",
     scope: [
-      "Discovery",
-      "Copy",
-      "Art direction",
+      "Requirements discovery",
+      "Information architecture",
+      "Content strategy",
       "Interface design",
-      "Development",
+      "Frontend development",
+      "Production launch",
     ],
   },
   proof: {
-    eyebrow: "The public result",
-    title: "See the live site",
-    body: "The full photography portfolio is live at ifferspictures.com.",
+    eyebrow: "Shipped product",
+    title: "Live in production",
+    body: "The finished website is serving Iffer’s Pictures across its portfolio, service, and inquiry pages.",
     linkLabel: "Visit Iffer’s Pictures",
   },
 } as const;

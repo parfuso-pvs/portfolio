@@ -8,7 +8,7 @@ import { iffersPicturesCaseStudy as study } from "@/content/case-studies/iffers-
 export const metadata: Metadata = {
   title: "Iffer’s Pictures case study",
   description:
-    "How Phil Arfuso led discovery, copy, visual design, development, and client collaboration for the Iffer’s Pictures photography portfolio.",
+    "How Phil Arfuso turned an open-ended business need into a complete production website for Iffer’s Pictures.",
 };
 
 export default function IffersPicturesCaseStudyPage() {
@@ -64,18 +64,18 @@ export default function IffersPicturesCaseStudyPage() {
           <div className="iffers-origin-sheet" data-reveal="left" data-reveal-group data-reveal-stagger="65">
             <p data-reveal="soft">{study.origin.eyebrow}</p>
             <h2 id="iffers-origin-title" data-reveal="soft">{study.origin.title}</h2>
-            <p data-reveal="soft">{study.origin.body[0]}</p>
+            <p data-reveal="soft">{study.origin.body}</p>
           </div>
-          <aside data-reveal="right" aria-label="Project attribution">
-            <p>Gift / collaboration / authorship</p>
-            <strong>{study.origin.body[1]}</strong>
+          <aside data-reveal="right" aria-label="Project delivery summary">
+            <p>{study.origin.calloutLabel}</p>
+            <strong>{study.origin.callout}</strong>
           </aside>
         </div>
 
         <div className="iffers-process" data-reveal-group data-reveal-stagger="100" aria-labelledby="iffers-process-title">
           <header data-reveal="left" data-reveal-group data-reveal-stagger="65">
-            <p>Designing the frame</p>
-            <h2 id="iffers-process-title">The site should support the work without competing with it</h2>
+            <p>Design and development</p>
+            <h2 id="iffers-process-title">From requirements to implementation</h2>
           </header>
           <ol data-reveal="right" data-reveal-group data-reveal-stagger="70">
             {study.principles.map((principle) => (

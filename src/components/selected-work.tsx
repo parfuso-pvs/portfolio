@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { featuredProjects, type FeaturedProject } from "@/content/projects";
 
@@ -71,16 +72,55 @@ function IffersArtwork({ reveal }: ArtworkProps) {
     <div
       className="work-art work-art-iffers"
       data-reveal={reveal}
-      aria-hidden="true"
+      role="img"
+      aria-label="Responsive desktop and mobile views of the live Iffer’s Pictures photography website."
     >
-      <div className="iffers-frame iffers-frame-one" />
-      <div className="iffers-frame iffers-frame-two" />
-      <div className="iffers-type">
-        <span>Light</span>
-        <span>Composition</span>
-        <span>Story</span>
+      <div className="iffers-site-preview" aria-hidden="true">
+        <div className="iffers-browser iffers-browser-desktop">
+          <div className="iffers-browser-bar">
+            <span className="iffers-browser-dots" />
+            <span>ifferspictures.com</span>
+          </div>
+          <div className="iffers-browser-page">
+            <Image
+              src="/images/iffers-pictures/maternity-session.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 760px) 76vw, 42vw"
+            />
+            <div className="iffers-browser-nav">
+              <strong>Iffer’s Pictures</strong>
+              <span>Sessions&nbsp;&nbsp; Portfolio&nbsp;&nbsp; Inquire</span>
+            </div>
+            <div className="iffers-browser-copy">
+              <span>Bergen County, NJ</span>
+              <strong>Heartfelt moments,<br />beautifully captured.</strong>
+              <i>Inquire</i>
+            </div>
+          </div>
+        </div>
+
+        <div className="iffers-browser iffers-browser-mobile">
+          <div className="iffers-mobile-bar">
+            <strong>IP</strong>
+            <span>Menu</span>
+          </div>
+          <div className="iffers-mobile-photo">
+            <Image
+              src="/images/iffers-pictures/family-session.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 760px) 30vw, 15vw"
+            />
+          </div>
+          <p>Sessions for every chapter.</p>
+          <span className="iffers-mobile-action">Explore sessions</span>
+        </div>
+
+        <p className="iffers-preview-caption">
+          Responsive client website <span>Live in production</span>
+        </p>
       </div>
-      <p>FULL OWNERSHIP / COPY · DESIGN · CODE</p>
     </div>
   );
 }
@@ -97,10 +137,10 @@ function ProjectArtwork({
 export function SelectedWork({
   anchorId = "work",
   description =
-    "A mix of work from my day job, a product I co-own, and a client site I designed and built.",
+    "Full-stack platforms, mobile products, and client websites—work spanning architecture, interface design, and production delivery.",
   projects = featuredProjects,
   showHeading = true,
-  title = "See my work",
+  title = "Selected work",
 }: SelectedWorkProps = {}) {
   const titleId = `${anchorId}-title`;
 

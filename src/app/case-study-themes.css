@@ -576,6 +576,14 @@
   font-size: clamp(4.6rem, 6.25vw, 7rem);
 }
 
+.case-study-iffers .iffers-process header {
+  container-type: inline-size;
+}
+
+.case-study-iffers .iffers-process h2 {
+  font-size: clamp(3rem, 12.4cqi, 5.6rem);
+}
+
 .case-study-iffers .iffers-process {
   display: grid;
   width: min(100%, 1500px);
@@ -745,9 +753,16 @@
   }
 
   .case-study-iffers .iffers-hero-layout,
-  .case-study-iffers .iffers-process,
   .case-study-iffers .iffers-ownership {
     gap: 58px;
+  }
+
+  .case-study-iffers .iffers-process {
+    display: block;
+  }
+
+  .case-study-iffers .iffers-process ol {
+    margin-top: 58px;
   }
 }
 
@@ -866,6 +881,12 @@
   .case-study-domani .domani-ledger article > strong {
     margin: 0;
     font-size: 4rem;
+  }
+
+  .case-study-domani .domani-ledger article > .domani-ledger-ratio {
+    font-size: 3.15rem;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
   }
 
   .case-study-domani .domani-evidence-secondary {

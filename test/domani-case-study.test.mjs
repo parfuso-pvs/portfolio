@@ -23,6 +23,8 @@ test("Domani evidence retains its snapshot and limitations", () => {
   assert.match(content, /641/);
   assert.match(content, /current task records/);
   assert.match(content, /31 \/ 9/);
+  assert.match(page, /domani-ledger-ratio/);
+  assert.match(themes, /\.domani-ledger-ratio[\s\S]*white-space: nowrap/);
   assert.match(content, /89/);
   assert.match(content, /recorded lifetime transactions/);
   assert.match(content, /not a recoverable lifetime creation total/);

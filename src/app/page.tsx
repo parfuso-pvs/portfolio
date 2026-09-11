@@ -21,9 +21,9 @@ export default function Home() {
               Full-stack developer <span aria-hidden="true">·</span> web &amp; mobile
             </p>
             <p className="hero-intro">
-              I build software that works well and feels good to use.
+              I enjoy building software, solving difficult problems, and
+              creating better experiences for the people using it.
             </p>
-            <p className="hero-aside">And I have a good time doing it.</p>
 
             <div className="hero-actions" aria-label="Portfolio actions">
               <a className="primary-action" href="#work">

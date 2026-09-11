@@ -32,8 +32,11 @@ test("landing page uses the approved conversational copy", () => {
   assert.match(page, /Hey, I’m Phil\./);
   assert.match(page, /Full-stack developer/);
   assert.match(page, /web &amp; mobile/);
-  assert.match(page, /I build software that works well and feels good to use\./);
-  assert.match(page, /And I have a good time doing it\./);
+  assert.match(
+    page,
+    /I enjoy building software, solving difficult problems, and[\s\S]*creating better experiences for the people using it\./,
+  );
+  assert.doesNotMatch(page, /works well and feels good to use|good time doing it/);
   assert.match(page, /Explore my work/);
   assert.match(page, /Resume/);
   assert.doesNotMatch(page, /solving messy problems|I try to/);
@@ -42,6 +45,12 @@ test("landing page uses the approved conversational copy", () => {
 test("landing page keeps selected work centralized and linked", () => {
   assert.match(page, /featuredProjects/);
   assert.match(page, /aria-label="Selected work"/);
+  assert.match(selectedWork, /title = "Selected work"/);
+  assert.match(
+    selectedWork,
+    /Full-stack platforms, mobile products, and client websites—work spanning architecture, interface design, and production delivery\./,
+  );
+  assert.doesNotMatch(selectedWork, /A mix of work from my day job/);
   assert.match(page, /className="project-rail-label"/);
   assert.match(page, /className="project-rail-divider"/);
   assert.doesNotMatch(page, /aria-hidden="true">\/<\/span>/);
@@ -50,6 +59,10 @@ test("landing page keeps selected work centralized and linked", () => {
   assert.match(projects, /Domani/);
   assert.match(projects, /Iffer’s Pictures/);
   assert.match(selectedWork, /ProjectArtwork/);
+  assert.match(selectedWork, /iffers-browser-desktop/);
+  assert.match(selectedWork, /iffers-browser-mobile/);
+  assert.match(selectedWork, /Responsive client website/);
+  assert.doesNotMatch(selectedWork, /Light[\s\S]*Composition[\s\S]*Story/);
   assert.doesNotMatch(selectedWork, /Full case study \/ next/);
   assert.doesNotMatch(selectedWork, /01 \/ Selected work/);
   assert.doesNotMatch(page, /04 \/ What’s next/);

@@ -143,7 +143,11 @@ export default function DomaniCaseStudyPage() {
             <div className="domani-ledger" data-reveal-group data-reveal-stagger="70" aria-label={`Primary production metrics as of ${domaniSnapshotDate}`}>
               {study.evidence.metrics.slice(0, 3).map((metric) => (
                 <article data-reveal="soft" key={metric.label}>
-                  <strong>{metric.value}</strong>
+                  <strong
+                    className={metric.value.includes("/") ? "domani-ledger-ratio" : undefined}
+                  >
+                    {metric.value}
+                  </strong>
                   <div>
                     <h3>{metric.label}</h3>
                     <p>{metric.detail}</p>
